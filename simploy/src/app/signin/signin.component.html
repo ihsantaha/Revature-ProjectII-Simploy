@@ -8,6 +8,8 @@
   </p>
 </div>
 
+<div [ngStyle]="{'background' : 'url(../assets/images/signin-header.gif)'}">
+
 <div class="container">
     
   <div class="row">
@@ -16,8 +18,9 @@
       <h3 class="text-center">Sign in</h3>
       <br />
       <div>
-      <button class="btn simploy-bgcolor simploy-tab" (click)="showLogin()">Login</button>
-      <button class="btn simploy-bgcolor simploy-tab" (click)="showRegister()">Register</button>
+      <button [ngStyle]="{backgroundColor: inLogin? 'rgb(50, 150, 125)' : 'rgb(205, 225, 215)'}" class="btn simploy-bgcolor simploy-tab" (click)="showLogin()"
+      >Login</button>
+      <button [ngStyle]="{backgroundColor: inLogin? 'rgb(205, 225, 215)' : 'rgb(50, 150, 125)'}" class="btn simploy-bgcolor simploy-tab" (click)="showRegister()">Register</button>
         <hr style="background-color: rgb(50, 150, 125); margin-top: 0px; border: none; height: 1px" />
     </div>
       <br />
@@ -26,4 +29,6 @@
     </div>
     <div class="col-xs-3"></div>
   </div>
+
 </div>
+<br /><br /><br />
