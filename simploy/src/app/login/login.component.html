@@ -1,7 +1,7 @@
 <label for username>Username</label>
-<input class="form-control" type="text" placeholder="Username" name="username">
+<input class="form-control" [(ngModel)]="email" type="text" placeholder="Username">
 <br />
 <label for login>Password</label>
-<input class="form-control" type="password" placeholder="Password" name="login">
+<input class="form-control" [(ngModel)]="password" type="password" placeholder="Password">
 <br />
-<button class="btn simploy-bgcolor">Login</button>
+<button (click)="login()" class="btn simploy-bgcolor">Login</button>
