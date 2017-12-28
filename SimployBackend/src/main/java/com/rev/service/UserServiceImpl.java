@@ -30,7 +30,10 @@ public class UserServiceImpl implements UserService {
 	}
 
 	public User findUserById(Integer id) {
-		return userRepo.findUserById(id);
+		return userRepo.findUserByUserId(id);
 	}
 
+	public User updateUser(User u) {
+		return userRepo.save(u);
+	}
 }

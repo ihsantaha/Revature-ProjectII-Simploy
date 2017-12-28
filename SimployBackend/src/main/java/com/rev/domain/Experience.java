@@ -19,10 +19,10 @@ import org.springframework.stereotype.Component;
 public class Experience {
 
 	@Id
-	@Column(name="exp_id")
+	@Column(name="expId")
 	@SequenceGenerator(allocationSize = 1, name = "expSeq", sequenceName = "EXP_SEQ")
 	@GeneratedValue(generator = "expSeq", strategy = GenerationType.SEQUENCE)
-	private Integer exp_id;
+	private Integer expId;
 	
 	@Column(name="company", nullable=false)
 	private String company;
@@ -37,7 +37,7 @@ public class Experience {
 	private String endYear;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "resume_id", nullable = false)
+    @JoinColumn(name = "resid", nullable = false)
     private Resume resume;
 
 	public Experience() {
@@ -53,9 +53,9 @@ public class Experience {
 		this.resume = resume;
 	}
 
-	public Experience(Integer exp_id, String company, String title, String startYear, String endYear, Resume resume) {
+	public Experience(Integer expId, String company, String title, String startYear, String endYear, Resume resume) {
 		super();
-		this.exp_id = exp_id;
+		this.expId = expId;
 		this.company = company;
 		this.title = title;
 		this.startYear = startYear;
@@ -63,12 +63,12 @@ public class Experience {
 		this.resume = resume;
 	}
 
-	public Integer getExp_id() {
-		return exp_id;
+	public Integer getexpId() {
+		return expId;
 	}
 
-	public void setExp_id(Integer exp_id) {
-		this.exp_id = exp_id;
+	public void setexpId(Integer expId) {
+		this.expId = expId;
 	}
 
 	public String getCompany() {
@@ -113,7 +113,7 @@ public class Experience {
 
 	@Override
 	public String toString() {
-		return "Experience [exp_id=" + exp_id + ", company=" + company + ", title=" + title + ", startYear=" + startYear
+		return "Experience [expId=" + expId + ", company=" + company + ", title=" + title + ", startYear=" + startYear
 				+ ", endYear=" + endYear + ", resume=" + resume + "]";
 	}
 	

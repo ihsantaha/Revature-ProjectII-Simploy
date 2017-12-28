@@ -19,10 +19,10 @@ import org.springframework.stereotype.Component;
 public class Certification {
 
 	@Id
-	@Column(name = "cert_id")
+	@Column(name = "certId")
 	@SequenceGenerator(allocationSize = 1, name = "certSeq", sequenceName = "CERT_SEQ")
 	@GeneratedValue(generator = "certSeq", strategy = GenerationType.SEQUENCE)
-	private Integer cert_id;
+	private Integer certId;
 
 	@Column(name = "title", nullable=false)
 	private String title;
@@ -30,7 +30,7 @@ public class Certification {
 	private String gotYear;
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "resume_id", nullable = false)
+	@JoinColumn(name = "resid", nullable = false)
 	private Resume resume;
 
 	public Certification() {
@@ -44,20 +44,20 @@ public class Certification {
 		this.resume = resume;
 	}
 
-	public Certification(Integer cert_id, String title, String gotYear, Resume resume) {
+	public Certification(Integer certId, String title, String gotYear, Resume resume) {
 		super();
-		this.cert_id = cert_id;
+		this.certId = certId;
 		this.title = title;
 		this.gotYear = gotYear;
 		this.resume = resume;
 	}
 
 	public Integer getCert_id() {
-		return cert_id;
+		return certId;
 	}
 
-	public void setCert_id(Integer cert_id) {
-		this.cert_id = cert_id;
+	public void setCert_id(Integer certId) {
+		this.certId = certId;
 	}
 
 	public String getTitle() {
@@ -86,7 +86,7 @@ public class Certification {
 
 	@Override
 	public String toString() {
-		return "Certification [cert_id=" + cert_id + ", title=" + title + ", gotYear=" + gotYear + ", resume=" + resume
+		return "Certification [certId=" + certId + ", title=" + title + ", gotYear=" + gotYear + ", resume=" + resume
 				+ "]";
 	}
 

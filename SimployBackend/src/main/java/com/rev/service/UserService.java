@@ -9,4 +9,5 @@ public interface UserService {
 	public List<User> findAllUsers();
 	public User findUserByEmail(String email);
 	public User findUserById(Integer id);
+	public User updateUser(User u);
 }

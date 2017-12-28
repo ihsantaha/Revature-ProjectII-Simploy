@@ -23,10 +23,10 @@ import org.springframework.stereotype.Component;
 public class User {
 	
 	@Id
-	@Column(name="user_id")
+	@Column(name="userId")
 	@SequenceGenerator(allocationSize = 1, name = "userSeq", sequenceName = "USER_SEQ")
 	@GeneratedValue(generator = "userSeq", strategy = GenerationType.SEQUENCE)
-	private Integer id;
+	private Integer userId;
 	
 	@Column(name="firstname", nullable=false)
 	private String firstName;
@@ -66,10 +66,10 @@ public class User {
 		this.role = role;
 	}
 
-	public User(Integer id, String firstName, String lastName, String email, String pnumber, String password,
+	public User(Integer userId, String firstName, String lastName, String email, String pnumber, String password,
 			Integer role) {
 		super();
-		this.id = id;
+		this.userId = userId;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.email = email;
@@ -79,11 +79,11 @@ public class User {
 	}
 
 	public Integer getId() {
-		return id;
+		return userId;
 	}
 
-	public void setId(Integer id) {
-		this.id = id;
+	public void setId(Integer userId) {
+		this.userId = userId;
 	}
 
 	public String getFirstName() {
@@ -136,7 +136,7 @@ public class User {
 
 	@Override
 	public String toString() {
-		return "User [user_id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", email=" + email
+		return "User [userId=" + userId + ", firstName=" + firstName + ", lastName=" + lastName + ", email=" + email
 				+ ", pnumber=" + pnumber + ", password=" + password + ", role=" + role + "]";
 	}
 

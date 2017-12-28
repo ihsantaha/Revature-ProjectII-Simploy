@@ -1,5 +1,6 @@
 package com.rev.domain;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -21,19 +22,19 @@ import org.springframework.stereotype.Component;
 public class Skill {
 
 	@Id
-	@Column(name = "skill_id")
+	@Column(name = "skillId")
 	@SequenceGenerator(allocationSize = 1, name = "skillSeq", sequenceName = "SKILL_SEQ")
 	@GeneratedValue(generator = "skillSeq", strategy = GenerationType.SEQUENCE)
-	private Integer skill_id;
+	private Integer skillId;
 
 	@Column(name = "title", nullable=false)
 	private String title;
 
 	@ManyToMany(fetch = FetchType.LAZY, cascade = { CascadeType.PERSIST, CascadeType.MERGE }, mappedBy = "skills")
-	private List<Job> jobs;
+	private List<Job> jobs=new ArrayList<>();
 
 	@ManyToMany(fetch = FetchType.LAZY, cascade = { CascadeType.PERSIST, CascadeType.MERGE }, mappedBy = "skills")
-	private List<Resume> resumes;
+	private List<Resume> resumes= new ArrayList<>();
 
 	public Skill() {
 		super();
@@ -46,20 +47,20 @@ public class Skill {
 		this.resumes = resumes;
 	}
 
-	public Skill(Integer skill_id, String title, List<Job> jobs, List<Resume> resumes) {
+	public Skill(Integer skillId, String title, List<Job> jobs, List<Resume> resumes) {
 		super();
-		this.skill_id = skill_id;
+		this.skillId = skillId;
 		this.title = title;
 		this.jobs = jobs;
 		this.resumes = resumes;
 	}
 
-	public Integer getSkill_id() {
-		return skill_id;
+	public Integer getskillId() {
+		return skillId;
 	}
 
-	public void setSkill_id(Integer skill_id) {
-		this.skill_id = skill_id;
+	public void setskillId(Integer skillId) {
+		this.skillId = skillId;
 	}
 
 	public String getTitle() {
@@ -88,7 +89,7 @@ public class Skill {
 
 	@Override
 	public String toString() {
-		return "Skill [skill_id=" + skill_id + ", title=" + title + ", jobs=" + jobs + ", resumes=" + resumes + "]";
+		return "Skill [skillId=" + skillId + ", title=" + title + ", jobs=" + jobs + ", resumes=" + resumes + "]";
 	}
 
 }

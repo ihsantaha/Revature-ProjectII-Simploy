@@ -75,7 +75,7 @@ public class UserController {
 		if(!check.getRole().equals(user.getRole()))
 			check.setRole(user.getRole());
 		System.out.println(check.toString());
-		//service.updateUser(check);
+		service.updateUser(check);
 		return check;
 	}
 	
