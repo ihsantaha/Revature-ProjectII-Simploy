@@ -26,24 +26,24 @@ public class User {
 	@Column(name="user_id")
 	@SequenceGenerator(allocationSize = 1, name = "userSeq", sequenceName = "USER_SEQ")
 	@GeneratedValue(generator = "userSeq", strategy = GenerationType.SEQUENCE)
-	private Integer user_id;
+	private Integer id;
 	
-	@Column(name="firstname")
+	@Column(name="firstname", nullable=false)
 	private String firstName;
 	
-	@Column(name="lastname")
+	@Column(name="lastname", nullable=false)
 	private String lastName;
 	
-	@Column(name="email")
+	@Column(name="email", nullable=false)
 	private String email;
 	
-	@Column(name="pnumber")
+	@Column(name="pnumber", nullable=false)
 	private String pnumber;
 	
-	@Column(name="password")
+	@Column(name="password", nullable=false)
 	private String password;
 	
-	@Column(name="role")
+	@Column(name="role", nullable=false)
 	private Integer role;
 	
 	@OneToOne(fetch = FetchType.LAZY, cascade =  CascadeType.ALL, mappedBy = "user")
@@ -66,10 +66,10 @@ public class User {
 		this.role = role;
 	}
 
-	public User(Integer user_id, String firstName, String lastName, String email, String pnumber, String password,
+	public User(Integer id, String firstName, String lastName, String email, String pnumber, String password,
 			Integer role) {
 		super();
-		this.user_id = user_id;
+		this.id = id;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.email = email;
@@ -78,12 +78,12 @@ public class User {
 		this.role = role;
 	}
 
-	public Integer getUser_id() {
-		return user_id;
+	public Integer getId() {
+		return id;
 	}
 
-	public void setUser_id(Integer user_id) {
-		this.user_id = user_id;
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 	public String getFirstName() {
@@ -136,7 +136,7 @@ public class User {
 
 	@Override
 	public String toString() {
-		return "User [user_id=" + user_id + ", firstName=" + firstName + ", lastName=" + lastName + ", email=" + email
+		return "User [user_id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", email=" + email
 				+ ", pnumber=" + pnumber + ", password=" + password + ", role=" + role + "]";
 	}
 

@@ -24,11 +24,11 @@ public class Education {
 	@GeneratedValue(generator = "eduSeq", strategy = GenerationType.SEQUENCE)
 	private Integer edu_id;
 
-	@Column(name = "school")
+	@Column(name = "school", nullable=false)
 	private String school;
-	@Column(name = "type")
+	@Column(name = "type", nullable=false)
 	private String type;
-	@Column(name = "gradYear")
+	@Column(name = "gradYear", nullable=false)
 	private Integer gradYear;
 
 	@ManyToOne(fetch = FetchType.LAZY)

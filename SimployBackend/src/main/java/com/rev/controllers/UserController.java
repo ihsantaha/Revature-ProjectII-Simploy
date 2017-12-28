@@ -55,5 +55,34 @@ public class UserController {
 			}
 		}
 	}
+	
+	@RequestMapping(value="/update", method = RequestMethod.POST, produces=MediaType.APPLICATION_JSON_VALUE)
+	public @ResponseBody User updateUser(@RequestBody User user){
+		Integer id = user.getId();
+		User check = service.findUserById(id);
+		System.out.println(check.toString());
+		System.out.println(user.toString());
+		if(!check.getFirstName().equals(user.getFirstName()))
+			check.setFirstName(user.getFirstName());
+		if(!check.getLastName().equals(user.getLastName()))
+			check.setLastName(user.getLastName());
+		if(!check.getPnumber().equals(user.getPnumber()))
+			check.setPnumber(user.getPnumber());
+		if(!check.getPassword().equals(user.getPassword()))
+			check.setPassword(user.getPassword());
+		if(!check.getEmail().equals(user.getEmail()))
+			check.setEmail(user.getEmail());
+		if(!check.getRole().equals(user.getRole()))
+			check.setRole(user.getRole());
+		System.out.println(check.toString());
+		//service.updateUser(check);
+		return check;
+	}
+	
+	@RequestMapping(value="/id", method = RequestMethod.POST, produces=MediaType.APPLICATION_JSON_VALUE)
+	public @ResponseBody User findById(@RequestBody User user){
+		Integer id = user.getId();
+		return service.findUserById(id);
+	}
 
 }

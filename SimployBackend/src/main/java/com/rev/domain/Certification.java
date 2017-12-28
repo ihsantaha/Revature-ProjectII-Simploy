@@ -24,9 +24,9 @@ public class Certification {
 	@GeneratedValue(generator = "certSeq", strategy = GenerationType.SEQUENCE)
 	private Integer cert_id;
 
-	@Column(name = "title")
+	@Column(name = "title", nullable=false)
 	private String title;
-	@Column(name = "gotyear")
+	@Column(name = "gotyear", nullable=false)
 	private String gotYear;
 
 	@ManyToOne(fetch = FetchType.LAZY)

@@ -29,22 +29,22 @@ public class Job {
 	@GeneratedValue(generator = "jobSeq", strategy = GenerationType.SEQUENCE)
 	private Integer job_id;
 
-	@Column(name = "description")
+	@Column(name = "description", nullable=false)
 	private String description;
 
-	@Column(name = "title")
+	@Column(name = "title", nullable=false)
 	private String title;
 
-	@Column(name = "location")
+	@Column(name = "location", nullable=false)
 	private String location;
 
-	@Column(name = "company")
+	@Column(name = "company", nullable=false)
 	private String company;
 
-	@Column(name = "website")
+	@Column(name = "website", nullable=false)
 	private String website;
 
-	@Column(name = "postdate")
+	@Column(name = "postdate", nullable=false)
 	private String postDate;
 
 	@ManyToOne(fetch = FetchType.LAZY)

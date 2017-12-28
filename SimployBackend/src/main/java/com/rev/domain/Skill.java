@@ -26,7 +26,7 @@ public class Skill {
 	@GeneratedValue(generator = "skillSeq", strategy = GenerationType.SEQUENCE)
 	private Integer skill_id;
 
-	@Column(name = "title")
+	@Column(name = "title", nullable=false)
 	private String title;
 
 	@ManyToMany(fetch = FetchType.LAZY, cascade = { CascadeType.PERSIST, CascadeType.MERGE }, mappedBy = "skills")

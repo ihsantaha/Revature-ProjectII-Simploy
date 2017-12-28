@@ -24,16 +24,16 @@ public class Experience {
 	@GeneratedValue(generator = "expSeq", strategy = GenerationType.SEQUENCE)
 	private Integer exp_id;
 	
-	@Column(name="company")
+	@Column(name="company", nullable=false)
 	private String company;
 	
-	@Column(name="title")
+	@Column(name="title", nullable=false)
 	private String title;
 	
-	@Column(name="startYear")
+	@Column(name="startYear", nullable=false)
 	private String startYear;
 	
-	@Column(name="endYear")
+	@Column(name="endYear", nullable=false)
 	private String endYear;
 	
 	@ManyToOne(fetch = FetchType.LAZY)

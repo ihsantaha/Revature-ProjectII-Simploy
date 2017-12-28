@@ -31,7 +31,7 @@ public class Resume {
 	@GeneratedValue(generator = "resumeSeq", strategy = GenerationType.SEQUENCE)
 	private Integer resume_id;
 
-	@Column(name = "description")
+	@Column(name = "description", nullable=false)
 	private String description;
 
 	@OneToOne(fetch = FetchType.LAZY)

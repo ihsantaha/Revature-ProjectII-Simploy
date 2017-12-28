@@ -26,11 +26,11 @@ public class Project {
 
 	@Column(name = "description")
 	private String description;
-	@Column(name = "startdate")
+	@Column(name = "startdate", nullable=false)
 	private String startDate;
 	@Column(name = "enddate")
 	private String endDate;
-	@Column(name = "title")
+	@Column(name = "title", nullable=false)
 	private String title;
 	@Column(name = "groupSize")
 	private Integer groupSize;
