@@ -4,8 +4,8 @@ import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import { SigninComponent } from './signin/signin.component';
-import { LoginComponent } from './login/login.component';
-import { RegisterComponent } from './register/register.component';
+import { LoginComponent } from './signin/login/login.component';
+import { RegisterComponent } from './signin/register/register.component';
 
 
 @NgModule({
