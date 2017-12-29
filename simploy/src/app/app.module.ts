@@ -22,6 +22,7 @@ import { SubmitjobComponent } from './submitjob/submitjob.component';
 import { SubmitresumeComponent } from './submitresume/submitresume.component';
 import { ProfileComponent } from './profile/profile.component';
 import { SimployinfoComponent } from './simployinfo/simployinfo.component';
+import { SkillsComponent } from './skills/skills.component';
 
 const routes: Routes = [
   { path: '', component: SigninComponent},
@@ -36,7 +37,8 @@ const routes: Routes = [
   { path: 'submitjob', component: SubmitjobComponent},
   { path: 'submitresume', component: SubmitresumeComponent},
   { path: 'profile', component: ProfileComponent},
-  { path: 'info', component: SimployinfoComponent}
+  { path: 'info', component: SimployinfoComponent},
+  { path: 'skills', component: SkillsComponent}
 ];
 
 @NgModule({
@@ -56,7 +58,8 @@ const routes: Routes = [
     EditjobComponent,
     EditresumeComponent,
     EditprofileComponent,
-    SimployinfoComponent
+    SimployinfoComponent,
+    SkillsComponent
   ],
   imports: [
     BrowserModule,
