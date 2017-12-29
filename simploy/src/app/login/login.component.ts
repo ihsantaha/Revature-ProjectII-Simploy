@@ -20,6 +20,7 @@ export class LoginComponent implements OnInit {
   login() {
     if (this.email.length > 0 && this.password.length) {
       this.loginService.login(this.email, this.password);
+      this.router.navigate(['http://localhost/profile']);
     }
   }
 
