@@ -17,6 +17,8 @@ import javax.persistence.Table;
 
 import org.springframework.stereotype.Component;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Component
 @Entity
 @Table(name="USERS")
@@ -45,12 +47,6 @@ public class User {
 	
 	@Column(name="role", nullable=false)
 	private Integer role;
-	
-	@OneToOne(fetch = FetchType.LAZY, cascade =  CascadeType.ALL, mappedBy = "user")
-	private Resume resume;
-	
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "user")
-	private List<Job> jobs=new ArrayList<>();
 	
 	public User() {
 		super();

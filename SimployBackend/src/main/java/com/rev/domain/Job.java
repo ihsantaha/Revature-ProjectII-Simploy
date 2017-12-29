@@ -19,6 +19,8 @@ import javax.persistence.Table;
 
 import org.springframework.stereotype.Component;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Component
 @Entity
 @Table(name = "JOB")
@@ -144,6 +146,7 @@ public class Job {
 		this.postDate = postDate;
 	}
 
+	@JsonIgnore
 	public User getUser() {
 		return user;
 	}
@@ -152,6 +155,7 @@ public class Job {
 		this.user = user;
 	}
 
+	@JsonIgnore
 	public List<Skill> getSkills() {
 		return skills;
 	}

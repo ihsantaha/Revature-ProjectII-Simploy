@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.rev.domain.Resume;
 import com.rev.domain.User;
 import com.rev.service.ResumeService;
+import com.rev.service.UserService;
 
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
@@ -22,6 +23,7 @@ public class ResumeController {
 	
 	@Autowired
 	ResumeService service;
+	UserService uService;
 	
 	@RequestMapping(method = RequestMethod.GET,  produces=MediaType.APPLICATION_JSON_VALUE)
 	public List<Resume> findAll() {
@@ -30,12 +32,23 @@ public class ResumeController {
 	
 	@RequestMapping(method=RequestMethod.POST)
 	public Resume addFC(@RequestBody Resume r){
+		System.out.println("INTEGER : " +r.getUser().getId().toString());
+		System.out.println("RESUME : "+ r.toString());
+		User u = uService.findUserById(r.getUser().getId());
+		System.out.println("USER : "+ u.toString());
+		r.setUser(u);
 		return service.addResume(r);
 	}
 	
 	@RequestMapping(value="/id", method = RequestMethod.POST, produces=MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody Resume findById(@RequestBody Resume r){
+		System.out.println("IN FINDBYID");
 		return service.findResumeByResId(r.getResId());
+	}
+	
+	public Resume findById2(Integer r) {
+		System.out.println("IN FINDBYID2");
+		return service.findResumeByResId(r);
 	}
 
 }

@@ -116,7 +116,6 @@ public class Project {
 		this.groupSize = groupSize;
 	}
 
-	@JsonIgnore
 	public Resume getResume() {
 		return resume;
 	}
