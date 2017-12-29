@@ -30,22 +30,22 @@ public class User {
 	@GeneratedValue(generator = "userSeq", strategy = GenerationType.SEQUENCE)
 	private Integer userId;
 	
-	@Column(name="firstname", nullable=false)
+	@Column(name="firstname")
 	private String firstName;
 	
-	@Column(name="lastname", nullable=false)
+	@Column(name="lastname")
 	private String lastName;
 	
-	@Column(name="email", nullable=false)
+	@Column(name="email")
 	private String email;
 	
-	@Column(name="pnumber", nullable=false)
+	@Column(name="pnumber")
 	private String pnumber;
 	
-	@Column(name="password", nullable=false)
+	@Column(name="password")
 	private String password;
 	
-	@Column(name="role", nullable=false)
+	@Column(name="role")
 	private Integer role;
 	
 	public User() {
@@ -72,6 +72,13 @@ public class User {
 		this.pnumber = pnumber;
 		this.password = password;
 		this.role = role;
+	}
+	
+	
+
+	public User(Integer userId) {
+		super();
+		this.userId = userId;
 	}
 
 	public Integer getId() {

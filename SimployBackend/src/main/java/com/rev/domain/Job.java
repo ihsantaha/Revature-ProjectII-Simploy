@@ -32,26 +32,26 @@ public class Job {
 	@GeneratedValue(generator = "jobSeq", strategy = GenerationType.SEQUENCE)
 	private Integer jobId;
 
-	@Column(name = "description", nullable=false)
+	@Column(name = "description")
 	private String description;
 
-	@Column(name = "title", nullable=false)
+	@Column(name = "title")
 	private String title;
 
-	@Column(name = "location", nullable=false)
+	@Column(name = "location")
 	private String location;
 
-	@Column(name = "company", nullable=false)
+	@Column(name = "company")
 	private String company;
 
-	@Column(name = "website", nullable=false)
+	@Column(name = "website")
 	private String website;
 
-	@Column(name = "postdate", nullable=false)
+	@Column(name = "postdate")
 	private String postDate;
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "userId", nullable = false)
+	@JoinColumn(name = "userId")
 	private User user;
 
 	@ManyToMany(fetch = FetchType.LAZY, cascade = { CascadeType.PERSIST, CascadeType.MERGE })

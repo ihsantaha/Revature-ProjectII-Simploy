@@ -26,20 +26,20 @@ public class Experience {
 	@GeneratedValue(generator = "expSeq", strategy = GenerationType.SEQUENCE)
 	private Integer expId;
 	
-	@Column(name="company", nullable=false)
+	@Column(name="company")
 	private String company;
 	
-	@Column(name="title", nullable=false)
+	@Column(name="title")
 	private String title;
 	
-	@Column(name="startYear", nullable=false)
+	@Column(name="startYear")
 	private String startYear;
 	
-	@Column(name="endYear", nullable=false)
+	@Column(name="endYear")
 	private String endYear;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "resid", nullable = false)
+    @JoinColumn(name = "resid")
     private Resume resume;
 
 	public Experience() {

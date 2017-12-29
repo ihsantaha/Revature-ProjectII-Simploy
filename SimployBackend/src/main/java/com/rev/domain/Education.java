@@ -26,15 +26,15 @@ public class Education {
 	@GeneratedValue(generator = "eduSeq", strategy = GenerationType.SEQUENCE)
 	private Integer eduId;
 
-	@Column(name = "school", nullable=false)
+	@Column(name = "school")
 	private String school;
-	@Column(name = "type", nullable=false)
+	@Column(name = "type")
 	private String type;
-	@Column(name = "gradYear", nullable=false)
+	@Column(name = "gradYear")
 	private Integer gradYear;
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "resid", nullable = false)
+	@JoinColumn(name = "resid")
 	private Resume resume;
 
 	public Education() {

@@ -32,11 +32,11 @@ public class Resume {
 	@GeneratedValue(generator = "resumeSeq", strategy = GenerationType.SEQUENCE)
 	private Integer resid;
 
-	@Column(name = "description", nullable = false)
+	@Column(name = "description")
 	private String description;
 
 	@OneToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "userId", nullable = false)
+	@JoinColumn(name = "userId")
 	private User user;
 
 	@ManyToMany(fetch = FetchType.LAZY, cascade = { CascadeType.PERSIST, CascadeType.MERGE })
@@ -79,7 +79,6 @@ public class Resume {
 		this.description = description;
 	}
 
-	@JsonIgnore
 	public User getUser() {
 		return user;
 	}

@@ -28,11 +28,11 @@ public class Project {
 
 	@Column(name = "description")
 	private String description;
-	@Column(name = "startdate", nullable=false)
+	@Column(name = "startdate")
 	private String startDate;
 	@Column(name = "enddate")
 	private String endDate;
-	@Column(name = "title", nullable=false)
+	@Column(name = "title")
 	private String title;
 	@Column(name = "groupSize")
 	private Integer groupSize;

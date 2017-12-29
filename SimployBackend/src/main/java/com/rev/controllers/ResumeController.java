@@ -32,11 +32,8 @@ public class ResumeController {
 	
 	@RequestMapping(method=RequestMethod.POST)
 	public Resume addFC(@RequestBody Resume r){
-		System.out.println("INTEGER : " +r.getUser().getId().toString());
 		System.out.println("RESUME : "+ r.toString());
-		User u = uService.findUserById(r.getUser().getId());
-		System.out.println("USER : "+ u.toString());
-		r.setUser(u);
+		System.out.println("INTEGER :"+r.getUser().getId());
 		return service.addResume(r);
 	}
 	
