@@ -29,4 +29,15 @@ public class UserServiceImpl implements UserService {
 		return userRepo.findUserByEmail(email);
 	}
 
+	public User findUserById(Integer id) {
+		return userRepo.findUserByUserId(id);
+	}
+
+	public User updateUser(User u) {
+		return userRepo.save(u);
+	}
+	
+	public void delete(Integer id) {
+		userRepo.delete(id);
+	}
 }

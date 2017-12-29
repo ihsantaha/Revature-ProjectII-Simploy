@@ -13,26 +13,28 @@ import javax.persistence.Table;
 
 import org.springframework.stereotype.Component;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Component
 @Entity
 @Table(name = "Education")
 public class Education {
 
 	@Id
-	@Column(name = "edu_id")
+	@Column(name = "eduId")
 	@SequenceGenerator(allocationSize = 1, name = "eduSeq", sequenceName = "EDU_SEQ")
 	@GeneratedValue(generator = "eduSeq", strategy = GenerationType.SEQUENCE)
-	private Integer edu_id;
+	private Integer eduId;
 
-	@Column(name = "school")
+	@Column(name = "school", nullable=false)
 	private String school;
-	@Column(name = "type")
+	@Column(name = "type", nullable=false)
 	private String type;
-	@Column(name = "gradYear")
+	@Column(name = "gradYear", nullable=false)
 	private Integer gradYear;
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "resume_id", nullable = false)
+	@JoinColumn(name = "resid", nullable = false)
 	private Resume resume;
 
 	public Education() {
@@ -47,9 +49,9 @@ public class Education {
 		this.resume = resume;
 	}
 
-	public Education(Integer edu_id, String school, String type, Integer gradYear, Resume resume) {
+	public Education(Integer eduId, String school, String type, Integer gradYear, Resume resume) {
 		super();
-		this.edu_id = edu_id;
+		this.eduId = eduId;
 		this.school = school;
 		this.type = type;
 		this.gradYear = gradYear;
@@ -57,11 +59,11 @@ public class Education {
 	}
 
 	public Integer getEdu_id() {
-		return edu_id;
+		return eduId;
 	}
 
-	public void setEdu_id(Integer edu_id) {
-		this.edu_id = edu_id;
+	public void setEdu_id(Integer eduId) {
+		this.eduId = eduId;
 	}
 
 	public String getSchool() {
@@ -88,6 +90,7 @@ public class Education {
 		this.gradYear = gradYear;
 	}
 
+	@JsonIgnore
 	public Resume getResume() {
 		return resume;
 	}
@@ -98,7 +101,7 @@ public class Education {
 
 	@Override
 	public String toString() {
-		return "Education [edu_id=" + edu_id + ", school=" + school + ", type=" + type + ", gradYear=" + gradYear
+		return "Education [eduId=" + eduId + ", school=" + school + ", type=" + type + ", gradYear=" + gradYear
 				+ ", resume=" + resume + "]";
 	}
 

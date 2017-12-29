@@ -1,3 +1,6 @@
+import { EditresumeComponent } from './editresume/editresume.component';
+import { EditjobComponent } from './editjob/editjob.component';
+import { NavbarComponent } from './navbar/navbar.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -10,10 +13,30 @@ import { RegisterComponent } from './register/register.component';
 import { LoginService } from './login.service';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule, Routes } from '@angular/router/';
+import { ViewsinglejobComponent } from './viewsinglejob/viewsinglejob.component';
+import { ViewsingleresumeComponent } from './viewsingleresume/viewsingleresume.component';
+import { ViewjobsComponent } from './viewjobs/viewjobs.component';
+import { ViewresumesComponent } from './viewresumes/viewresumes.component';
+import { EditprofileComponent } from './editprofile/editprofile.component';
+import { SubmitjobComponent } from './submitjob/submitjob.component';
+import { SubmitresumeComponent } from './submitresume/submitresume.component';
+import { ProfileComponent } from './profile/profile.component';
+import { SimployinfoComponent } from './simployinfo/simployinfo.component';
 
 const routes: Routes = [
-  { path: '', component: SigninComponent }
-
+  { path: '', component: SigninComponent},
+  { path: 'navbar', component: NavbarComponent},
+  { path: 'editjob', component: EditjobComponent},
+  { path: 'editprofile', component: EditprofileComponent},
+  { path: 'editresume', component: EditresumeComponent},
+  { path: 'viewjobs', component: ViewjobsComponent},
+  { path: 'viewsinglejob', component: ViewsinglejobComponent},
+  { path: 'viewresumes', component: ViewresumesComponent},
+  { path: 'viewsingleresume', component: ViewsingleresumeComponent},
+  { path: 'submitjob', component: SubmitjobComponent},
+  { path: 'submitresume', component: SubmitresumeComponent},
+  { path: 'profile', component: ProfileComponent},
+  { path: 'info', component: SimployinfoComponent}
 ];
 
 @NgModule({
@@ -21,7 +44,19 @@ const routes: Routes = [
     AppComponent,
     SigninComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    NavbarComponent,
+    ViewsinglejobComponent,
+    ViewsingleresumeComponent,
+    ViewjobsComponent,
+    ViewresumesComponent,
+    SubmitjobComponent,
+    SubmitresumeComponent,
+    ProfileComponent,
+    EditjobComponent,
+    EditresumeComponent,
+    EditprofileComponent,
+    SimployinfoComponent
   ],
   imports: [
     BrowserModule,

@@ -20,22 +20,24 @@ import javax.persistence.Table;
 
 import org.springframework.stereotype.Component;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Component
 @Entity
 @Table(name = "RESUME")
 public class Resume {
 
 	@Id
-	@Column(name = "resume_id")
+	@Column(name = "resid")
 	@SequenceGenerator(allocationSize = 1, name = "resumeSeq", sequenceName = "RESUME_SEQ")
 	@GeneratedValue(generator = "resumeSeq", strategy = GenerationType.SEQUENCE)
-	private Integer resume_id;
+	private Integer resid;
 
-	@Column(name = "description")
+	@Column(name = "description", nullable=false)
 	private String description;
 
 	@OneToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "user_id", nullable = false)
+	@JoinColumn(name = "userId", nullable = false)
 	private User user;
 
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "resume")
@@ -51,9 +53,9 @@ public class Resume {
 	private List<Certification> certifications = new ArrayList<>();
 
 	@ManyToMany(fetch = FetchType.LAZY, cascade = { CascadeType.PERSIST, CascadeType.MERGE })
-	@JoinTable(name = "resume_skills", joinColumns = { @JoinColumn(name = "resume_id") }, inverseJoinColumns = {
-			@JoinColumn(name = "skill_id") })
-	private List<Skill> skills;
+	@JoinTable(name = "resume_skills", joinColumns = { @JoinColumn(name = "resid") }, inverseJoinColumns = {
+			@JoinColumn(name = "skillId") })
+	private List<Skill> skills=new ArrayList<>();
 
 	public Resume() {
 		super();
@@ -71,11 +73,11 @@ public class Resume {
 		this.skills = skills;
 	}
 
-	public Resume(Integer resume_id, String description, User user, List<Education> educations,
+	public Resume(Integer resid, String description, User user, List<Education> educations,
 			List<Experience> experiences, List<Project> projects, List<Certification> certifications,
 			List<Skill> skills) {
 		super();
-		this.resume_id = resume_id;
+		this.resid = resid;
 		this.description = description;
 		this.user = user;
 		this.educations = educations;
@@ -85,12 +87,12 @@ public class Resume {
 		this.skills = skills;
 	}
 
-	public Integer getResume_id() {
-		return resume_id;
+	public Integer getResId() {
+		return resid;
 	}
 
-	public void setResume_id(Integer resume_id) {
-		this.resume_id = resume_id;
+	public void setResId(Integer resid) {
+		this.resid = resid;
 	}
 
 	public String getDescription() {
@@ -101,6 +103,7 @@ public class Resume {
 		this.description = description;
 	}
 
+	@JsonIgnore
 	public User getUser() {
 		return user;
 	}
@@ -148,10 +151,12 @@ public class Resume {
 	public void setSkills(List<Skill> skills) {
 		this.skills = skills;
 	}
+	
+	
 
 	@Override
 	public String toString() {
-		return "Resume [resume_id=" + resume_id + ", description=" + description + ", user=" + user + ", educations="
+		return "Resume [resume_id=" + resid + ", description=" + description + ", user=" + user + ", educations="
 				+ educations + ", experiences=" + experiences + ", projects=" + projects + ", certifications="
 				+ certifications + ", skills=" + skills + "]";
 	}
