@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { BehaviorSubject } from 'rxjs';
 import { User } from './user';
 
 @Injectable()
 export class LoginService {
+  currentUser: BehaviorSubject<User> = new BehaviorSubject(null);
 
-  currentUser: User;
   constructor(private http: HttpClient) { }
 
   login(email: string, password: string) {
@@ -13,11 +14,13 @@ export class LoginService {
       email: email,
       password: password
     })
-    .subscribe(
+      .subscribe(
       (data: User) => {
-        console.log(data);
-        alert(data.firstName);
+        if (data == null)
+          this.currentUser.next(data);
+        else
+          this.currentUser.next(data);
       }
-    );
+      );
   }
 }
