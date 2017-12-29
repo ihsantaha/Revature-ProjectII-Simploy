@@ -13,30 +13,32 @@ import javax.persistence.Table;
 
 import org.springframework.stereotype.Component;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Component
 @Entity
 @Table(name = "PROJECT")
 public class Project {
 
 	@Id
-	@Column(name = "pro_id")
+	@Column(name = "proId")
 	@SequenceGenerator(allocationSize = 1, name = "proSeq", sequenceName = "PRO_SEQ")
 	@GeneratedValue(generator = "proSeq", strategy = GenerationType.SEQUENCE)
-	private Integer pro_id;
+	private Integer proId;
 
 	@Column(name = "description")
 	private String description;
-	@Column(name = "startdate")
+	@Column(name = "startdate", nullable=false)
 	private String startDate;
 	@Column(name = "enddate")
 	private String endDate;
-	@Column(name = "title")
+	@Column(name = "title", nullable=false)
 	private String title;
 	@Column(name = "groupSize")
 	private Integer groupSize;
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "resume_id", nullable = false)
+	@JoinColumn(name = "resid", nullable = false)
 	private Resume resume;
 
 	public Project() {
@@ -54,10 +56,10 @@ public class Project {
 		this.resume = resume;
 	}
 
-	public Project(Integer pro_id, String description, String startDate, String endDate, String title,
+	public Project(Integer proId, String description, String startDate, String endDate, String title,
 			Integer groupSize, Resume resume) {
 		super();
-		this.pro_id = pro_id;
+		this.proId = proId;
 		this.description = description;
 		this.startDate = startDate;
 		this.endDate = endDate;
@@ -66,12 +68,12 @@ public class Project {
 		this.resume = resume;
 	}
 
-	public Integer getPro_id() {
-		return pro_id;
+	public Integer getproId() {
+		return proId;
 	}
 
-	public void setPro_id(Integer pro_id) {
-		this.pro_id = pro_id;
+	public void setproId(Integer proId) {
+		this.proId = proId;
 	}
 
 	public String getDescription() {
@@ -114,6 +116,7 @@ public class Project {
 		this.groupSize = groupSize;
 	}
 
+	@JsonIgnore
 	public Resume getResume() {
 		return resume;
 	}
@@ -124,7 +127,7 @@ public class Project {
 
 	@Override
 	public String toString() {
-		return "Project [pro_id=" + pro_id + ", description=" + description + ", startDate=" + startDate + ", endDate="
+		return "Project [proId=" + proId + ", description=" + description + ", startDate=" + startDate + ", endDate="
 				+ endDate + ", title=" + title + ", groupSize=" + groupSize + ", resume=" + resume + "]";
 	}
 
