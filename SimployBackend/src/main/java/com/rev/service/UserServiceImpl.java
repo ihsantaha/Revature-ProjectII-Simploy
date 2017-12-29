@@ -36,4 +36,8 @@ public class UserServiceImpl implements UserService {
 	public User updateUser(User u) {
 		return userRepo.save(u);
 	}
+	
+	public void delete(Integer id) {
+		userRepo.delete(id);
+	}
 }

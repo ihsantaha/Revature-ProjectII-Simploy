@@ -22,12 +22,14 @@ public class ResumeServiceImpl implements ResumeService {
 	}
 
 	public List<Resume> findAllResumes() {
-		System.out.println("LETS TRY THIS");
 		return resRepo.findAll();
 	}
 
 	public Resume findResumeByResId(Integer id) {
-		System.out.println(id);
-		return resRepo.findResumeByResid(id);
+		return resRepo.findOne(id);
+	}
+	
+	public void delete(Integer id) {
+		resRepo.delete(id);
 	}
 }

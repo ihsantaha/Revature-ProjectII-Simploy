@@ -20,6 +20,8 @@ import javax.persistence.Table;
 
 import org.springframework.stereotype.Component;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Component
 @Entity
 @Table(name = "RESUME")
@@ -101,6 +103,7 @@ public class Resume {
 		this.description = description;
 	}
 
+	@JsonIgnore
 	public User getUser() {
 		return user;
 	}

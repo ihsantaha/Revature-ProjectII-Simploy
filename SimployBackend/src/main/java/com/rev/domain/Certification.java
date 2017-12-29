@@ -13,6 +13,8 @@ import javax.persistence.Table;
 
 import org.springframework.stereotype.Component;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Component
 @Entity
 @Table(name = "CERTIFICATION")
@@ -76,6 +78,7 @@ public class Certification {
 		this.gotYear = gotYear;
 	}
 
+	@JsonIgnore
 	public Resume getResume() {
 		return resume;
 	}

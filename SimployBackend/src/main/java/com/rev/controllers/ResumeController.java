@@ -34,8 +34,8 @@ public class ResumeController {
 	}
 	
 	@RequestMapping(value="/id", method = RequestMethod.POST, produces=MediaType.APPLICATION_JSON_VALUE)
-	public @ResponseBody Resume findById(@RequestBody Integer id){
-		return service.findResumeByResId(id);
+	public @ResponseBody Resume findById(@RequestBody Resume r){
+		return service.findResumeByResId(r.getResId());
 	}
 
 }

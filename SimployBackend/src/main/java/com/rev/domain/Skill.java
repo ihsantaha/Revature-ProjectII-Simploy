@@ -16,6 +16,8 @@ import javax.persistence.Table;
 
 import org.springframework.stereotype.Component;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Component
 @Entity
 @Table(name = "SKILL")
@@ -78,7 +80,8 @@ public class Skill {
 	public void setJobs(List<Job> jobs) {
 		this.jobs = jobs;
 	}
-
+	
+	@JsonIgnore
 	public List<Resume> getResumes() {
 		return resumes;
 	}

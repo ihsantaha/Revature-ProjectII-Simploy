@@ -8,5 +8,4 @@ import com.rev.domain.Resume;
 @Repository
 public interface ResumeRepository extends JpaRepository<Resume, Integer> {
 
-	public Resume findResumeByResid(Integer id);
 }
