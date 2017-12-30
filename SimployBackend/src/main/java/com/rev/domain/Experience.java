@@ -105,7 +105,6 @@ public class Experience {
 		this.endYear = endYear;
 	}
 
-	@JsonIgnore
 	public Resume getResume() {
 		return resume;
 	}

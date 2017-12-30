@@ -30,6 +30,7 @@ public class ProController {
 	@CrossOrigin()
 	@RequestMapping(method=RequestMethod.POST)
 	public Project addFC(@RequestBody Project p){
+		System.out.println(p.toString());
 		return service.addProject(p);
 	}
 	

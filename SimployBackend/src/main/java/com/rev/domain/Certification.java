@@ -78,7 +78,6 @@ public class Certification {
 		this.gotYear = gotYear;
 	}
 
-	@JsonIgnore
 	public Resume getResume() {
 		return resume;
 	}

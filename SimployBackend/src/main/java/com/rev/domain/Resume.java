@@ -87,7 +87,6 @@ public class Resume {
 		this.user = user;
 	}
 
-	@JsonIgnore
 	public List<Skill> getSkills() {
 		return skills;
 	}

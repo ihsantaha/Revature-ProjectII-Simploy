@@ -146,7 +146,6 @@ public class Job {
 		this.postDate = postDate;
 	}
 
-	@JsonIgnore
 	public User getUser() {
 		return user;
 	}

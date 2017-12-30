@@ -90,7 +90,6 @@ public class Education {
 		this.gradYear = gradYear;
 	}
 
-	@JsonIgnore
 	public Resume getResume() {
 		return resume;
 	}
