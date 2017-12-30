@@ -1,5 +1,6 @@
 package com.rev.controllers;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.rev.domain.Project;
 import com.rev.domain.Resume;
 import com.rev.domain.User;
 import com.rev.service.ResumeService;
@@ -23,7 +25,6 @@ public class ResumeController {
 	
 	@Autowired
 	ResumeService service;
-	UserService uService;
 	
 	@RequestMapping(method = RequestMethod.GET,  produces=MediaType.APPLICATION_JSON_VALUE)
 	public List<Resume> findAll() {
@@ -32,8 +33,6 @@ public class ResumeController {
 	
 	@RequestMapping(method=RequestMethod.POST)
 	public Resume addFC(@RequestBody Resume r){
-		System.out.println("RESUME : "+ r.toString());
-		System.out.println("INTEGER :"+r.getUser().getId());
 		return service.addResume(r);
 	}
 	
@@ -46,6 +45,17 @@ public class ResumeController {
 	public Resume findById2(Integer r) {
 		System.out.println("IN FINDBYID2");
 		return service.findResumeByResId(r);
+	}
+	
+	@RequestMapping(value="/uid", method = RequestMethod.POST, produces=MediaType.APPLICATION_JSON_VALUE)
+	public @ResponseBody Resume findByUId(@RequestBody User u){
+		ArrayList<Resume> here=new ArrayList<>(); 
+		here=(ArrayList<Resume>) service.findAllResumes();
+		for(Resume r: here) {
+			if(r.getUser().getId()==u.getId())
+				return r;
+		}
+		return null;
 	}
 
 }

@@ -1,5 +1,6 @@
 package com.rev.controllers;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.rev.domain.Experience;
 import com.rev.domain.Project;
+import com.rev.domain.Resume;
 import com.rev.service.ExpService;
 
 @CrossOrigin(origins = "http://localhost:4200")
@@ -43,5 +45,17 @@ public class ExpController {
 	public @ResponseBody void delete(@RequestBody Experience e){
 		Integer id = e.getexpId();
 		service.delete(id);
+	}
+	
+	@RequestMapping(value="/resid", method = RequestMethod.POST, produces=MediaType.APPLICATION_JSON_VALUE)
+	public @ResponseBody ArrayList<Experience> findByResId(@RequestBody Resume r){
+		ArrayList<Experience> here=new ArrayList<>();  
+		ArrayList<Experience> test=new ArrayList<>();
+		here=(ArrayList<Experience>) service.findAllExperiences();
+		for(Experience e: here) {
+			if(e.getResume().getResId()==r.getResId())
+				test.add(e);
+		}
+		return test;
 	}
 }

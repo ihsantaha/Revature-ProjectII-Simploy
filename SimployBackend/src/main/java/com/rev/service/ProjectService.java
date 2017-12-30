@@ -34,9 +34,9 @@ public class ProjectService {
 		proRepo.delete(id);
 	}
 	
-	public <List>Project findProjectByResid(Resume r) {
-		return proRepo.findProjectByResume(r);
-	}
+	/*public <List>Project findProjectByResid(Integer i) {
+		return proRepo.findProjectByResid(i);
+	}*/
 	
 	public Project findProjectByTitle(String title) {
 		return proRepo.findProjectByTitle(title);

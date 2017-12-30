@@ -11,4 +11,5 @@ public interface ProRepository extends JpaRepository<Project, Integer> {
 
 	public <List>Project findProjectByResume(Resume r);
 	public Project findProjectByTitle(String title);
+	//public <List>Project findProjectByResid(Integer i);
 }

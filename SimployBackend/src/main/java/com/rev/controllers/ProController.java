@@ -49,11 +49,15 @@ public class ProController {
 	}
 	
 	@RequestMapping(value="/resid", method = RequestMethod.POST, produces=MediaType.APPLICATION_JSON_VALUE)
-	public @ResponseBody <List>Project findByResId(@RequestBody Resume r){
-		Resume b = resService.findResumeByResId(r.getResId());
-		System.out.println("RESUME " + b);
-		System.out.println("TEST1");
-		return service.findProjectByResid(b);
+	public @ResponseBody ArrayList<Project> findByResId(@RequestBody Resume r){
+		ArrayList<Project> here=new ArrayList<>();  
+		ArrayList<Project> test=new ArrayList<>();
+		here=(ArrayList<Project>) service.findAllProjects();
+		for(Project p: here) {
+			if(p.getResume().getResId()==r.getResId())
+				test.add(p);
+		}
+		return test;
 	}
 	
 	@RequestMapping(value="/title")

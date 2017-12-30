@@ -1,5 +1,6 @@
 package com.rev.controllers;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.rev.domain.Education;
 import com.rev.domain.Project;
+import com.rev.domain.Resume;
 import com.rev.service.EduService;
 
 @CrossOrigin(origins = "http://localhost:4200")
@@ -43,6 +45,18 @@ public class EduController {
 	public @ResponseBody void delete(@RequestBody Education e){
 		Integer id = e.getEdu_id();
 		service.delete(id);
+	}
+	
+	@RequestMapping(value="/resid", method = RequestMethod.POST, produces=MediaType.APPLICATION_JSON_VALUE)
+	public @ResponseBody ArrayList<Education> findByResId(@RequestBody Resume r){
+		ArrayList<Education> here=new ArrayList<>();  
+		ArrayList<Education> test=new ArrayList<>();
+		here=(ArrayList<Education>) service.findAllEducations();
+		for(Education e: here) {
+			if(e.getResume().getResId()==r.getResId())
+				test.add(e);
+		}
+		return test;
 	}
 
 }

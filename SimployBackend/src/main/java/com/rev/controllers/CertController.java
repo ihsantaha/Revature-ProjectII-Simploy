@@ -1,5 +1,6 @@
 package com.rev.controllers;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,6 +45,18 @@ public class CertController {
 	public @ResponseBody void delete(@RequestBody Certification c){
 		Integer id = c.getCert_id();
 		service.delete(id);
+	}
+	
+	@RequestMapping(value="/resid", method = RequestMethod.POST, produces=MediaType.APPLICATION_JSON_VALUE)
+	public @ResponseBody ArrayList<Certification> findByResId(@RequestBody Resume r){
+		ArrayList<Certification> here=new ArrayList<>();  
+		ArrayList<Certification> test=new ArrayList<>();
+		here=(ArrayList<Certification>) service.findAllCertifications();
+		for(Certification c: here) {
+			if(c.getResume().getResId()==r.getResId())
+				test.add(c);
+		}
+		return test;
 	}
 
 }
