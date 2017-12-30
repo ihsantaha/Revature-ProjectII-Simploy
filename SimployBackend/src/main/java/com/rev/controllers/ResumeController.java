@@ -18,7 +18,7 @@ import com.rev.domain.User;
 import com.rev.service.ResumeService;
 import com.rev.service.UserService;
 
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin()
 @RestController
 @RequestMapping(value = "/Resume")
 public class ResumeController {
@@ -26,27 +26,32 @@ public class ResumeController {
 	@Autowired
 	ResumeService service;
 	
+	@CrossOrigin()
 	@RequestMapping(method = RequestMethod.GET,  produces=MediaType.APPLICATION_JSON_VALUE)
 	public List<Resume> findAll() {
 		return service.findAllResumes();
 	}
 	
+	@CrossOrigin()
 	@RequestMapping(method=RequestMethod.POST)
 	public Resume addFC(@RequestBody Resume r){
 		return service.addResume(r);
 	}
 	
+	@CrossOrigin()
 	@RequestMapping(value="/id", method = RequestMethod.POST, produces=MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody Resume findById(@RequestBody Resume r){
 		System.out.println("IN FINDBYID");
 		return service.findResumeByResId(r.getResId());
 	}
 	
+	@CrossOrigin()
 	public Resume findById2(Integer r) {
 		System.out.println("IN FINDBYID2");
 		return service.findResumeByResId(r);
 	}
 	
+	@CrossOrigin()
 	@RequestMapping(value="/uid", method = RequestMethod.POST, produces=MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody Resume findByUId(@RequestBody User u){
 		ArrayList<Resume> here=new ArrayList<>(); 

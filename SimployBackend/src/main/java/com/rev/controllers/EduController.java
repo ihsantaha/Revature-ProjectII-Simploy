@@ -17,7 +17,7 @@ import com.rev.domain.Project;
 import com.rev.domain.Resume;
 import com.rev.service.EduService;
 
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin()
 @RestController
 @RequestMapping(value = "/Education")
 public class EduController {
@@ -25,28 +25,33 @@ public class EduController {
 	@Autowired
 	EduService service;
 	
+	@CrossOrigin()
 	@RequestMapping(method=RequestMethod.POST)
 	public Education addFC(@RequestBody Education e){
 		return service.addEdu(e);
 	}
 	
+	@CrossOrigin()
 	@RequestMapping(method = RequestMethod.GET,  produces=MediaType.APPLICATION_JSON_VALUE)
 	public List<Education> findAll() {
 		return service.findAllEducations();
 	}
 	
+	@CrossOrigin()
 	@RequestMapping(value="/id", method = RequestMethod.POST, produces=MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody Education findById(@RequestBody Education e){
 		Integer id = e.getEdu_id();
 		return service.findOne(id);
 	}
 	
+	@CrossOrigin()
 	@RequestMapping(value="/delete", method = RequestMethod.POST, produces=MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody void delete(@RequestBody Education e){
 		Integer id = e.getEdu_id();
 		service.delete(id);
 	}
 	
+	@CrossOrigin()
 	@RequestMapping(value="/resid", method = RequestMethod.POST, produces=MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody ArrayList<Education> findByResId(@RequestBody Resume r){
 		ArrayList<Education> here=new ArrayList<>();  

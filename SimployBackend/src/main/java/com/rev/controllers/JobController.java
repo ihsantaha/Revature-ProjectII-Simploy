@@ -15,7 +15,7 @@ import com.rev.domain.Job;
 import com.rev.domain.Project;
 import com.rev.service.JobService;
 
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin()
 @RestController
 @RequestMapping(value = "/Job")
 public class JobController {
@@ -23,22 +23,26 @@ public class JobController {
 	@Autowired
 	JobService service;
 	
+	@CrossOrigin()
 	@RequestMapping(method=RequestMethod.POST)
 	public Job addFC(@RequestBody Job j){
 		return service.addJob(j);
 	}
 	
+	@CrossOrigin()
 	@RequestMapping(method = RequestMethod.GET,  produces=MediaType.APPLICATION_JSON_VALUE)
 	public List<Job> findAll() {
 		return service.findAllJobs();
 	}
 	
+	@CrossOrigin()
 	@RequestMapping(value="/id", method = RequestMethod.POST, produces=MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody Job findById(@RequestBody Job j){
 		Integer id = j.getjobId();
 		return service.findOne(id);
 	}
 	
+	@CrossOrigin()
 	@RequestMapping(value="/delete", method = RequestMethod.POST, produces=MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody void delete(@RequestBody Job j){
 		Integer id = j.getjobId();

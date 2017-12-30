@@ -18,7 +18,7 @@ import com.rev.domain.User;
 import com.rev.service.ProjectService;
 import com.rev.service.ResumeService;
 
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin()
 @RestController
 @RequestMapping(value = "/Project")
 public class ProController {
@@ -27,27 +27,32 @@ public class ProController {
 	ProjectService service;
 	ResumeService resService;
 	
+	@CrossOrigin()
 	@RequestMapping(method=RequestMethod.POST)
 	public Project addFC(@RequestBody Project p){
 		return service.addProject(p);
 	}
 	
+	@CrossOrigin()
 	@RequestMapping(method = RequestMethod.GET,  produces=MediaType.APPLICATION_JSON_VALUE)
 	public List<Project> findAll() {
 		return service.findAllProjects();
 	}
 	
+	@CrossOrigin()
 	@RequestMapping(value="/id")
 	public @ResponseBody Project findById(@RequestBody Project p){
 		return service.findOne(p.getproId());
 	}
 	
+	@CrossOrigin()
 	@RequestMapping(value="/delete", method = RequestMethod.POST, produces=MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody void delete(@RequestBody Project p){
 		Integer id = p.getproId();
 		service.delete(id);
 	}
 	
+	@CrossOrigin()
 	@RequestMapping(value="/resid", method = RequestMethod.POST, produces=MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody ArrayList<Project> findByResId(@RequestBody Resume r){
 		ArrayList<Project> here=new ArrayList<>();  
@@ -60,6 +65,7 @@ public class ProController {
 		return test;
 	}
 	
+	@CrossOrigin()
 	@RequestMapping(value="/title")
 	public @ResponseBody Project findByTitle(@RequestBody String title){
 		return service.findProjectByTitle(title);
