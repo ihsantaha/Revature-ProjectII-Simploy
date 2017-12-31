@@ -42,7 +42,9 @@ public class ResumeController {
 	@CrossOrigin()
 	@RequestMapping(value="/update", method = RequestMethod.POST, produces=MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody Resume resumeUpdate(@RequestBody Resume r){
-		return service.addResume(r);
+		Resume e=service.findResumeByResId(r.getResId());
+		e.setDescription(r.getDescription());
+		return service.addResume(e);
 	}
 	
 	@CrossOrigin()
@@ -77,6 +79,20 @@ public class ResumeController {
 		List<Skill> here=new ArrayList<>(); 
 		here=x.getSkills();
 		here.add(r.getSkills().get(0));
+		x.setSkills(here);
+		return service.addResume(x);
+	}
+	
+	@CrossOrigin()
+	@RequestMapping(value="/deleteskill", method = RequestMethod.POST, produces=MediaType.APPLICATION_JSON_VALUE)
+	public @ResponseBody Resume deleteSkill(@RequestBody Resume r){
+		Resume x=service.findResumeByResId(r.getResId());
+		List<Skill> here=new ArrayList<>(); 
+		here=x.getSkills();
+		for(int i=0; i<here.size();i++) {
+			if(here.get(i).getSkillId()==r.getSkills().get(0).getSkillId())
+				here.remove(i);
+		}
 		x.setSkills(here);
 		return service.addResume(x);
 	}
