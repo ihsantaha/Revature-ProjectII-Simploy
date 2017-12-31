@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.rev.domain.Certification;
 import com.rev.domain.Project;
 import com.rev.domain.Resume;
+import com.rev.domain.Skill;
 import com.rev.service.CertService;
 
 @CrossOrigin()

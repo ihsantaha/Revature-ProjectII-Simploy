@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.rev.domain.Project;
 import com.rev.domain.Resume;
+import com.rev.domain.Skill;
 import com.rev.domain.User;
 import com.rev.service.ResumeService;
 import com.rev.service.UserService;
@@ -35,6 +36,12 @@ public class ResumeController {
 	@CrossOrigin()
 	@RequestMapping(method=RequestMethod.POST)
 	public Resume addFC(@RequestBody Resume r){
+		return service.addResume(r);
+	}
+	
+	@CrossOrigin()
+	@RequestMapping(value="/update", method = RequestMethod.POST, produces=MediaType.APPLICATION_JSON_VALUE)
+	public @ResponseBody Resume resumeUpdate(@RequestBody Resume r){
 		return service.addResume(r);
 	}
 	
@@ -61,6 +68,17 @@ public class ResumeController {
 				return r;
 		}
 		return null;
+	}
+	
+	@CrossOrigin()
+	@RequestMapping(value="/addskill", method = RequestMethod.POST, produces=MediaType.APPLICATION_JSON_VALUE)
+	public @ResponseBody Resume addSkill(@RequestBody Resume r){
+		Resume x=service.findResumeByResId(r.getResId());
+		List<Skill> here=new ArrayList<>(); 
+		here=x.getSkills();
+		here.add(r.getSkills().get(0));
+		x.setSkills(here);
+		return service.addResume(x);
 	}
 
 }
