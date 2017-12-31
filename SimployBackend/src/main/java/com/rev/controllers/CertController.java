@@ -47,9 +47,14 @@ public class CertController {
 	
 	@CrossOrigin()
 	@RequestMapping(value="/delete", method = RequestMethod.POST, produces=MediaType.APPLICATION_JSON_VALUE)
-	public @ResponseBody void delete(@RequestBody Certification c){
-		Integer id = c.getCert_id();
-		service.delete(id);
+	public @ResponseBody Certification delete(@RequestBody Certification c){
+		Certification j=service.findOne(c.getCert_id());
+		if(j==null)
+			return null;
+		if(j!=null) {
+			service.delete(c.getCert_id());
+		}
+		return j;
 	}
 	
 	@CrossOrigin()

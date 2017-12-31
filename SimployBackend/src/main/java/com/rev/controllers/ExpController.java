@@ -46,9 +46,14 @@ public class ExpController {
 	
 	@CrossOrigin()
 	@RequestMapping(value="/delete", method = RequestMethod.POST, produces=MediaType.APPLICATION_JSON_VALUE)
-	public @ResponseBody void delete(@RequestBody Experience e){
-		Integer id = e.getexpId();
-		service.delete(id);
+	public @ResponseBody Experience delete(@RequestBody Experience e){
+		Experience j=service.findOne(e.getexpId());
+		if(j==null)
+			return null;
+		if(j!=null) {
+			service.delete(e.getexpId());
+		}
+		return j;
 	}
 	
 	@CrossOrigin()

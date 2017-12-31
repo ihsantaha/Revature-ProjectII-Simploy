@@ -46,9 +46,14 @@ public class EduController {
 	
 	@CrossOrigin()
 	@RequestMapping(value="/delete", method = RequestMethod.POST, produces=MediaType.APPLICATION_JSON_VALUE)
-	public @ResponseBody void delete(@RequestBody Education e){
-		Integer id = e.getEdu_id();
-		service.delete(id);
+	public @ResponseBody Education delete(@RequestBody Education e){
+		Education j=service.findOne(e.getEdu_id());
+		if(j==null)
+			return null;
+		if(j!=null) {
+			service.delete(e.getEdu_id());
+		}
+		return j;
 	}
 	
 	@CrossOrigin()

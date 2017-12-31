@@ -48,9 +48,14 @@ public class JobController {
 	
 	@CrossOrigin()
 	@RequestMapping(value="/delete", method = RequestMethod.POST, produces=MediaType.APPLICATION_JSON_VALUE)
-	public @ResponseBody void delete(@RequestBody Job j){
-		Integer id = j.getjobId();
-		service.delete(id);
+	public @ResponseBody Job delete(@RequestBody Job x){
+		Job j=service.findOne(x.getjobId());
+		if(j==null)
+			return null;
+		if(j!=null) {
+			service.delete(x.getjobId());
+		}
+		return j;
 	}
 	
 	@CrossOrigin()

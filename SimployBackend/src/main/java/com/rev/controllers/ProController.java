@@ -48,9 +48,14 @@ public class ProController {
 	
 	@CrossOrigin()
 	@RequestMapping(value="/delete", method = RequestMethod.POST, produces=MediaType.APPLICATION_JSON_VALUE)
-	public @ResponseBody void delete(@RequestBody Project p){
-		Integer id = p.getproId();
-		service.delete(id);
+	public @ResponseBody Project delete(@RequestBody Project p){
+		Project j=service.findOne(p.getproId());
+		if(j==null)
+			return null;
+		if(j!=null) {
+			service.delete(p.getproId());
+		}
+		return j;
 	}
 	
 	@CrossOrigin()
