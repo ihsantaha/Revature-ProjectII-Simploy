@@ -3,7 +3,7 @@ export class User {
     email: string;
     password: string;
     firstName: string;
-    lastLame: string;
-    pnumber: string;
+    lastName: string;
+    phoneNumber: string;
     role: number;
 }

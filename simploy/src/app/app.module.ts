@@ -7,7 +7,7 @@ import { FormsModule } from '@angular/forms';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {MatCheckboxModule, MatTableModule} from '@angular/material';
 
-
+import { DataTablesModule } from 'angular-datatables';
 import { AppComponent } from './app.component';
 import { SigninComponent } from './signin/signin.component';
 import { LoginComponent } from './login/login.component';
@@ -70,7 +70,8 @@ const routes: Routes = [
     RouterModule.forRoot(routes),
     NgbModule.forRoot(),
     MatCheckboxModule,
-    MatTableModule
+    MatTableModule,
+    DataTablesModule
   ],
   providers: [LoginService],
   bootstrap: [AppComponent]
