@@ -51,9 +51,9 @@ export class RegisterComponent implements OnInit {
   register() {
 
     if (this.registerForm.form.value.role == 'Employee')
-      this.role = 1;
+      this.role = 0;
     else
-      this.role = 2;
+      this.role = 1;
 
     let pnumber: string;
 
