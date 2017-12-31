@@ -9,11 +9,15 @@ export class ViewjobsComponent implements OnInit
 {
   tableData:any[];
   viewResume:boolean=false;
+  viewJob:boolean = false;
   constructor(private http:HttpClient) { }
   Email:any;
   firstname:any;
   lastname:any;
   skill:any[];
+  role:number;
+  cert:any[];
+  projects:any[];
   ngOnInit() 
   {
     this.getTableData();
@@ -29,12 +33,18 @@ export class ViewjobsComponent implements OnInit
       }
     )
   }
-  getUserData(email:any,firstname:any,lastname:any,skills:any)
+  getUserData(email:any,firstname:any,lastname:any,skills:any,projects:any,certifications:any)
   {
-    this.viewResume=true;
+    this.role = 1;
+    if (this.role == 1)
+      this.viewResume=true;
+    else
+    this.viewJob=true;
     this.Email = email;
     this.firstname=firstname;
     this.lastname=lastname;
     this.skill=skills.split(" ");
+    this.projects= projects.split(" ");
+    this.cert=certifications.split(" ");
   }
 }

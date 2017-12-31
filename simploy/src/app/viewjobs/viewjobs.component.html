@@ -10,16 +10,16 @@
   <tbody>
     <tr *ngFor="let userdata of tableData">
       <!--use click to get the data-->
-      <td (mouseover)='getUserData(userdata["email"],userdata["first"],userdata["last"],userdata["skills"])'>
+      <td (mouseover)='getUserData(userdata["email"],userdata["first"],userdata["last"],userdata["skills"],userdata["projects"],userdata["certifications"])'>
         <i> {{userdata["email"]}}</i>
       </td>
-      <td (mouseover)='getUserData(userdata["email"],userdata["first"],userdata["last"],userdata["skills"])'>
+      <td (mouseover)='getUserData(userdata["email"],userdata["first"],userdata["last"],userdata["skills"],userdata["projects"],userdata["certifications"])'>
         {{userdata["first"]}}
       </td>
-      <td (mouseover)='getUserData(userdata["email"],userdata["first"],userdata["last"],userdata["skills"])'>
+      <td (mouseover)='getUserData(userdata["email"],userdata["first"],userdata["last"],userdata["skills"],userdata["projects"],userdata["certifications"])'>
         {{userdata["last"]}}
       </td>
-      <td (mouseover)='getUserData(userdata["email"],userdata["first"],userdata["last"],userdata["skills"])'>
+      <td (mouseover)='getUserData(userdata["email"],userdata["first"],userdata["last"],userdata["skills"],userdata["projects"],userdata["certifications"])'>
         {{userdata["skills"]}}
       </td>
     </tr>
@@ -33,13 +33,15 @@
       <h2>{{firstname|uppercase}} {{lastname|uppercase}}</h2>
       <h2>{{Email}}</h2>
       <ul>
+        <h1>SKILLS</h1>
         <li *ngFor="let skillData of skill">
           <h3>{{skillData}}</h3>
         </li>
       </ul>
     </div>
   </div>
-<!-- <div class="container" *ngIf="viewResume">
+</div>
+<!-- <div class="container" *ngIf="viewJobs">
   <div class="jumbotron">
     <h1>Resume</h1>
     <br>
@@ -52,5 +54,5 @@
         </li>
       </ul>
     </div>
-  </div> -->
-</div>
+  </div>
+</div> -->
