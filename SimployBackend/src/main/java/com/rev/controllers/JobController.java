@@ -1,5 +1,6 @@
 package com.rev.controllers;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.rev.domain.Job;
 import com.rev.domain.Project;
+import com.rev.domain.Resume;
+import com.rev.domain.Skill;
+import com.rev.domain.User;
 import com.rev.service.JobService;
 
 @CrossOrigin()
@@ -47,6 +51,26 @@ public class JobController {
 	public @ResponseBody void delete(@RequestBody Job j){
 		Integer id = j.getjobId();
 		service.delete(id);
+	}
+	
+	@CrossOrigin()
+	@RequestMapping(value="/addskill", method = RequestMethod.POST, produces=MediaType.APPLICATION_JSON_VALUE)
+	public @ResponseBody Job addSkill(@RequestBody Job j){
+		Job x=service.findOne(j.getjobId());
+		x.setSkills(j.getSkills());
+		return service.addJob(j);
+	}
+	
+	@CrossOrigin()
+	@RequestMapping(value="/uid", method = RequestMethod.POST, produces=MediaType.APPLICATION_JSON_VALUE)
+	public @ResponseBody Job findByUId(@RequestBody User u){
+		ArrayList<Job> here=new ArrayList<>(); 
+		here=(ArrayList<Job>) service.findAllJobs();
+		for(Job r: here) {
+			if(r.getUser().getId()==u.getId())
+				return r;
+		}
+		return null;
 	}
 
 }
