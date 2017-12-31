@@ -1,0 +1,47 @@
+{
+ "users":
+ [
+   {
+       "email": "ihsan_taha@yahoo.com",
+       "first": "Ihsan",
+       "last": "Taha",
+       "skills": "Hibernate Java Spring"
+   },
+   {
+       "email": "trent_smith@gmail.com",
+       "first": "Trent",
+       "last": "Smith",
+       "skills": "Java Spring"
+   },
+   {
+       "email": "marshall@hotmail.com",
+       "first": "Marshall",
+       "last": "Cargle",
+       "skills": "Spring"
+   },
+   {
+       "email": "morgan_worth@gmail.com",
+       "first": "Morgan",
+       "last": "Worthington",
+       "skills": "Spring"
+   },
+   {
+       "email": "david_sadboy@gmail.com",
+       "first": "David",
+       "last": "Argetsinger",
+       "skills": "Spring"
+   },
+   {
+       "email": "genesis_bonds@gmail.com",
+       "first": "Genesis",
+       "last": "Bonds",
+       "skills": "Java"
+   },
+   {
+       "email": "min_yao@yahoo.com",
+       "first": "Min",
+       "last": "Yao",
+       "skills": "Spring"
+   }
+  ]
+}
