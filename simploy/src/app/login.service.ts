@@ -23,4 +23,27 @@ export class LoginService {
       }
       );
   }
+
+  register(user: User) {
+
+    // Mock Data
+    if (user.email == 'test@t')
+      return user;
+    else
+      return null;
+    
+    // Preview Data
+    // this.http.post('http://localhost:8086/User/register', {
+    //   email: email
+    // })
+    //   .subscribe(
+    //   (data: User) => {
+    //     if (data == null)
+    //       this.currentUser.next(data);
+    //     else
+    //       this.currentUser.next(data);
+    //   }
+    //   );
+  }
+
 }

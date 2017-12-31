@@ -1,4 +1,4 @@
-input.ng-invalid.ng-touched {
+input.ng-invalid.ng-touched, input.ng-invalid.ng-dirty{
     border: solid 1px rgb(250, 100, 100);
     background-color: rgb(255, 253, 253);
 }

@@ -35,8 +35,10 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
-    if (this.email.length > 0 && this.password.length) {
-      this.loginService.login(this.email, this.password);
+    this.loginService.login(this.email, this.password);
+
+    if (this.validInput == false) {
+      this.loginForm.form.markAsUntouched();
     }
   }
 
