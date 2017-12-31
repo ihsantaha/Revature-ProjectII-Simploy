@@ -1,18 +1,19 @@
-Profile
-<br>
-<button class="accordion">Resume</button>
-<div>
-  <app-viewsingleresume></app-viewsingleresume>
-</div>
-<br>
-<button class="accordion">Jobs</button>
-<div>
-  <app-skills></app-skills>
-  <app-viewjobs></app-viewjobs>
-</div>
-<br>
-<button class="accordion">Resumes</button>
-<div>
-  <app-skills></app-skills>
-  <app-viewresumes></app-viewresumes>
-</div>
+<ngb-accordion #acc="ngbAccordion" activeIds="ngb-panel-0">
+  <ngb-panel title="Resume">
+    <ng-template ngbPanelContent>
+      <app-viewsingleresume></app-viewsingleresume>
+    </ng-template>
+  </ngb-panel>
+  <ngb-panel title="Jobs">
+    <ng-template ngbPanelContent>
+      <app-skills></app-skills>
+      <app-viewjobs></app-viewjobs>
+    </ng-template>
+  </ngb-panel>
+  <ngb-panel title="Resumes">
+    <ng-template ngbPanelContent>
+      <app-skills></app-skills>
+      <app-viewresumes></app-viewresumes>
+    </ng-template>
+  </ngb-panel>
+</ngb-accordion>
