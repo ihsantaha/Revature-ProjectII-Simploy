@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 @Component({
   selector: 'app-viewjobs',
   templateUrl: './viewjobs.component.html',
@@ -7,44 +8,55 @@ import { HttpClient } from '@angular/common/http';
 })
 export class ViewjobsComponent implements OnInit 
 {
+  
   tableData:any[];
   viewResume:boolean=false;
   viewJob:boolean = false;
-  constructor(private http:HttpClient) { }
-  Email:any;
+
+  id:number;
+  email:any;
   firstname:any;
   lastname:any;
-  skill:any[];
+  phone:any;
+  skills:any[];
   role:number;
-  cert:any[];
-  projects:any[];
+
+  constructor(private http:HttpClient) { }
+
   ngOnInit() 
   {
     this.getTableData();
   }
+
   getTableData()
   {
     this.http.get("http://localhost:3000/users")
     .subscribe(
       (data:any[])=>
       {
-          this.tableData =data;
-          console.log(this.tableData[0].skills);
+          this.tableData = data;
       }
     )
   }
-  getUserData(email:any,firstname:any,lastname:any,skills:any,projects:any,certifications:any)
+
+  getUserData(id:any,firstname:any,lastname:any,email:any,phone:any,skills:any)
   {
-    this.role = 1;
-    if (this.role == 1)
+    this.id = id;
+    
+    
+    this.role = 0;
+    if (this.role == 1) {
       this.viewResume=true;
-    else
-    this.viewJob=true;
-    this.Email = email;
+    }
+    else {
+      this.viewJob=true;
+    }
+    
+    this.id = id;
     this.firstname=firstname;
     this.lastname=lastname;
-    this.skill=skills.split(" ");
-    this.projects= projects.split(" ");
-    this.cert=certifications.split(" ");
+    this.email = email;
+    this.phone = phone;
+    this.skills=skills.split(" ");
   }
 }
