@@ -154,7 +154,6 @@ public class Job {
 		this.user = user;
 	}
 
-	@JsonIgnore
 	public List<Skill> getSkills() {
 		return skills;
 	}
