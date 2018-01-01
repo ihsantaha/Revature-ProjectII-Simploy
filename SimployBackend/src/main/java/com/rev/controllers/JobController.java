@@ -80,5 +80,18 @@ public class JobController {
 		}
 		return null;
 	}
+	
+	@CrossOrigin()
+	@RequestMapping(value="/uidjobs", method = RequestMethod.POST, produces=MediaType.APPLICATION_JSON_VALUE)
+	public @ResponseBody ArrayList<Job> findJobsByUId(@RequestBody User u){
+		ArrayList<Job> here=new ArrayList<>(); 
+		ArrayList<Job> test=new ArrayList<>();
+		here=(ArrayList<Job>) service.findAllJobs();
+		for(Job r: here) {
+			if(r.getUser().getId()==u.getId())
+				test.add(r);
+		}
+		return test;
+	}
 
 }
