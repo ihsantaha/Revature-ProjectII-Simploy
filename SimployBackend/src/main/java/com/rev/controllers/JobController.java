@@ -62,8 +62,11 @@ public class JobController {
 	@RequestMapping(value="/addskill", method = RequestMethod.POST, produces=MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody Job addSkill(@RequestBody Job j){
 		Job x=service.findOne(j.getjobId());
-		x.setSkills(j.getSkills());
-		return service.addJob(j);
+		List<Skill> here=new ArrayList<>();
+		here=x.getSkills();
+		here.add(j.getSkills().get(0));
+		x.setSkills(here);
+		return service.addJob(x);
 	}
 	
 	@CrossOrigin()
