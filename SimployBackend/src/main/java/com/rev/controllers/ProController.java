@@ -1,5 +1,6 @@
 package com.rev.controllers;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,36 +13,67 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.rev.domain.Project;
+import com.rev.domain.Resume;
 import com.rev.domain.User;
 import com.rev.service.ProjectService;
+import com.rev.service.ResumeService;
 
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin()
 @RestController
 @RequestMapping(value = "/Project")
 public class ProController {
 
 	@Autowired
 	ProjectService service;
+	ResumeService resService;
 	
+	@CrossOrigin()
 	@RequestMapping(method=RequestMethod.POST)
 	public Project addFC(@RequestBody Project p){
+		System.out.println(p.toString());
 		return service.addProject(p);
 	}
 	
+	@CrossOrigin()
 	@RequestMapping(method = RequestMethod.GET,  produces=MediaType.APPLICATION_JSON_VALUE)
 	public List<Project> findAll() {
 		return service.findAllProjects();
 	}
 	
-	@RequestMapping(value="/id", method = RequestMethod.POST, produces=MediaType.APPLICATION_JSON_VALUE)
+	@CrossOrigin()
+	@RequestMapping(value="/id")
 	public @ResponseBody Project findById(@RequestBody Project p){
-		Integer id = p.getproId();
-		return service.findOne(id);
+		return service.findOne(p.getproId());
 	}
 	
+	@CrossOrigin()
 	@RequestMapping(value="/delete", method = RequestMethod.POST, produces=MediaType.APPLICATION_JSON_VALUE)
-	public @ResponseBody void delete(@RequestBody Project p){
-		Integer id = p.getproId();
-		service.delete(id);
+	public @ResponseBody Project delete(@RequestBody Project p){
+		Project j=service.findOne(p.getproId());
+		if(j==null)
+			return null;
+		if(j!=null) {
+			service.delete(p.getproId());
+		}
+		return j;
+	}
+	
+	@CrossOrigin()
+	@RequestMapping(value="/resid", method = RequestMethod.POST, produces=MediaType.APPLICATION_JSON_VALUE)
+	public @ResponseBody ArrayList<Project> findByResId(@RequestBody Resume r){
+		ArrayList<Project> here=new ArrayList<>();  
+		ArrayList<Project> test=new ArrayList<>();
+		here=(ArrayList<Project>) service.findAllProjects();
+		for(Project p: here) {
+			if(p.getResume().getResId()==r.getResId())
+				test.add(p);
+		}
+		return test;
+	}
+	
+	@CrossOrigin()
+	@RequestMapping(value="/title")
+	public @ResponseBody Project findByTitle(@RequestBody String title){
+		return service.findProjectByTitle(title);
 	}
 }
