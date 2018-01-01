@@ -1,4 +1,84 @@
-<app-navbar></app-navbar>
+<div [ngStyle]="{'background' : 'url(../assets/images/signin-header.gif)'}">
+  <app-navbar></app-navbar>
+
+  <div class="container">
+
+    <div class="row">
+      <div class="text-center">
+        <h1>Profile</h1>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-xs-8 col-xs-offset-2 col-sm-6 col-sm-offset-3 simploy-outer-box">
+        <!-- <p> -->
+          <strong>Account Information:</strong>
+          <br><br>
+          <!-- <br> <strong>Email:</strong> {{user.email}}
+          <br> <strong>First Name:</strong> {{user.firstName}}
+          <br> <strong>Last Name:</strong> {{user.lastName}}
+          <br> <strong>Password:</strong> {{user.password}}
+          <br> <strong>Phone Number:</strong> {{user.pnumber}}
+          <br> -->
+          <table style="border: none">
+            <tr>
+              <td><strong>Email:</strong></td>
+              <td>{{user.email}}</td>
+            </tr>
+            <tr>
+              <td><strong>First Name:&emsp;</strong></td>
+              <td>{{user.firstName}}</td>
+            </tr>
+            <tr>
+              <td><strong>Last Name:</strong></td>
+              <td>{{user.lastName}}</td>
+            </tr>
+            <tr>
+              <td><strong>Password:</strong></td>
+              <td>{{user.password}}</td>
+            </tr>
+            <tr>
+              <td><strong>Phone:</strong></td>
+              <td>{{user.pnumber}}</td>
+            </tr>
+          </table>
+        <!-- </p> -->
+        <br>
+        <form (submit)="updateUser($event)">
+          <label>Email</label>
+          <input type="text" class="form-control">
+          <br>
+          <label>First Name</label>
+          <input type="text" class="form-control">
+          <br>
+          <label>Last Name</label>
+          <input type="text" class="form-control">
+          <br>
+          <label>Password</label>
+          <input type="password" class="form-control">
+          <br>
+          <label>Phone Number</label>
+          <input type="number" class="form-control">
+
+          <br>
+
+          <button class="btn btn-success" type="submit">Update</button>
+
+        </form>
+
+      </div>
+    </div>
+
+    <br>
+    <br>
+    <br>
+
+  </div>
+</div>
+
+
+
+
 <!-- <ngb-accordion #acc="ngbAccordion" activeIds="ngb-panel-0">
   <ngb-panel title="Resume">
     <ng-template ngbPanelContent>
@@ -16,47 +96,49 @@
     </ng-template>
   </ngb-panel>
 </ngb-accordion> -->
-<ngb-accordion #acc="ngbAccordion" activeIds="ngb-panel-0">
-    <ngb-panel title="Account">
-        <ng-template ngbPanelContent>
-        <form (submit)="updateUser($event)">
-            <p>
-                Account Information: <br>
-                email: {{user.email}}<br>
-                First Name: {{user.firstName}}<br>
-                Last Name: {{user.lastName}}<br>
-                Password: {{user.password}}<br>
-                Phone Number: {{user.pnumber}}<br>
-            </p>
-            <div class="input">
-                <label>email</label>
-                <input type="text">
-              </div>
-          <div class="input">
-              <label>First Name</label>
-              <input type="text">
-          </div>
-          <div class="input">
-              <label>Last Name</label>
-              <input type="text">
-          </div>
-          <div class="input">
-            <label>Password</label>
-            <input type="password">
-          </div>
-          <div class="input">
-            <label>Phone Number</label>
-            <input type="number">
-          </div>
-          <div class="input">
-            <input type="submit" value="Update">
-          </div>
-          </form>
-          </ng-template>
-    </ngb-panel>
-    <ngb-panel title="Skills">
-        <ng-template ngbPanelContent>
-          <app-skills></app-skills>
-        </ng-template>
-    </ngb-panel>
-</ngb-accordion>
+
+<!-- <ngb-accordion #acc="ngbAccordion" activeIds="ngb-panel-0 ">
+          <ngb-panel title="Account">
+            <ng-template ngbPanelContent> -->
+<!-- <form (submit)="updateUser($event)" style="color: white">
+                <p>
+                  Account Information:
+                  <br> Email: {{user.email}}
+                  <br> First Name: {{user.firstName}}
+                  <br> Last Name: {{user.lastName}}
+                  <br> Password: {{user.password}}
+                  <br> Phone Number: {{user.pnumber}}
+                  <br>
+                </p>
+                <div class="input">
+                  <label>Email</label>
+                  <input type="text">
+                </div>
+                <div class="input">
+                  <label>First Name</label>
+                  <input type="text">
+                </div>
+                <div class="input">
+                  <label>Last Name</label>
+                  <input type="text">
+                </div>
+                <div class="input">
+                  <label>Password</label>
+                  <input type="password">
+                </div>
+                <div class="input">
+                  <label>Phone Number</label>
+                  <input type="number">
+                </div>
+                <div class="input">
+                  <input type="submit" value="Update">
+                </div>
+              </form> -->
+<!-- </ng-template>
+          </ngb-panel>
+          <ngb-panel title="Skills">
+            <ng-template ngbPanelContent>
+              <app-skills></app-skills> -->
+<!-- </ng-template>
+          </ngb-panel>
+        </ngb-accordion> -->
