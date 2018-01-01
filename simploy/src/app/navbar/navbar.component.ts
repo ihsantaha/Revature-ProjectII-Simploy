@@ -9,8 +9,8 @@ import { User } from '../user';
 })
 export class NavbarComponent implements OnInit {
   user: User = JSON.parse(localStorage.getItem('user'));
-  isEmployer= this.user.role == 1;
-  isJobSeeker= this.user.role == 0;
+  //isEmployer= this.user.role == 1;
+  //isJobSeeker= this.user.role == 0;
 
   constructor(private router: Router) { }
 
