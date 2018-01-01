@@ -20,6 +20,8 @@ export class LoginService {
           this.currentUser.next(data);
         else
           this.currentUser.next(data);
+          //added user to local storage - MW
+          localStorage.setItem('user', JSON.stringify(data));
       }
       );
   }
