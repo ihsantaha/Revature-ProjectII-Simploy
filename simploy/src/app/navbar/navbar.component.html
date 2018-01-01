@@ -5,13 +5,13 @@
     </div>
     <div class="collapse navbar-collapse">
       <ul class="nav navbar-nav">
-        <li ><a routerLink="profile">Profile</a></li>
-        <li *ngIf="isEmployer"><a routerLink="viewresumes">Resumes</a></li>
-        <li *ngIf="isJobSeeker"><a routerLink="viewjobs">Jobs</a></li>
+        <li ><a routerLink="/profile">Profile</a></li>
+        <li *ngIf="isEmployer"><a routerLink="/viewresumes">Resumes</a></li>
+        <li *ngIf="isJobSeeker"><a routerLink="/viewjobs">Jobs</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li (click)="logout()">
-          <a routerLink="/">Logout</a>
+          <a routerLink="">Logout</a>
         </li>
       </ul>
     </div>

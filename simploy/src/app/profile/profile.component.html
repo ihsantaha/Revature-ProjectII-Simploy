@@ -16,36 +16,47 @@
     </ng-template>
   </ngb-panel>
 </ngb-accordion> -->
-<form (submit)="updateUser($event)">
-  <p>
-      Account Information: <br>
-      First Name: {{user.firstName}}<br>
-      Last Name: {{user.lastName}}<br>
-      email: {{user.email}}<br>
-      Password: {{user.password}}<br>
-      Phone Number: {{user.pnumber}}<br>
-  </p>
-<div class="input">
-    <label>First Name</label>
-    <input type="text">
-</div>
-<div class="input">
-    <label>Last Name</label>
-    <input type="text">
-</div>
-<div class="input">
-  <label>email</label>
-  <input type="text">
-</div>
-<div class="input">
-  <label>Password</label>
-  <input type="password">
-</div>
-<div class="input">
-  <label>Phone Number</label>
-  <input type="number">
-</div>
-<div class="input">
-  <input type="submit" value="Update">
-</div>
-</form>
+<ngb-accordion #acc="ngbAccordion" activeIds="ngb-panel-0">
+    <ngb-panel title="Account">
+        <ng-template ngbPanelContent>
+        <form (submit)="updateUser($event)">
+            <p>
+                Account Information: <br>
+                email: {{user.email}}<br>
+                First Name: {{user.firstName}}<br>
+                Last Name: {{user.lastName}}<br>
+                Password: {{user.password}}<br>
+                Phone Number: {{user.pnumber}}<br>
+            </p>
+            <div class="input">
+                <label>email</label>
+                <input type="text">
+              </div>
+          <div class="input">
+              <label>First Name</label>
+              <input type="text">
+          </div>
+          <div class="input">
+              <label>Last Name</label>
+              <input type="text">
+          </div>
+          <div class="input">
+            <label>Password</label>
+            <input type="password">
+          </div>
+          <div class="input">
+            <label>Phone Number</label>
+            <input type="number">
+          </div>
+          <div class="input">
+            <input type="submit" value="Update">
+          </div>
+          </form>
+          </ng-template>
+    </ngb-panel>
+    <ngb-panel title="Skills">
+        <ng-template ngbPanelContent>
+          <app-skills></app-skills>
+        </ng-template>
+    </ngb-panel>
+</ngb-accordion>
