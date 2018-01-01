@@ -20,7 +20,7 @@ export class NavbarComponent implements OnInit {
 
   logout() {
     localStorage.setItem('user', '');
-    this.router.navigate(['/']);
+    this.router.navigate(['../']);
   }
 
 }
