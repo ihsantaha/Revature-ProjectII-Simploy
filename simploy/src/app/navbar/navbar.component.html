@@ -8,8 +8,8 @@
         <li ><a routerLink="/profile">Profile</a></li>
         <li *ngIf="isEmployer"><a routerLink="/viewresumes">Resumes</a></li>
         <li *ngIf="isJobSeeker"><a routerLink="/viewjobs">Jobs</a></li>
-        <li *ngIf="isEmployer"><a routerLink="">Add Job</a></li>
-        <li *ngIf="isJobSeeker"><a routerLink="">Add Resume</a></li>
+        <li *ngIf="isEmployer"><a routerLink="/submitjob">Add Job</a></li>
+        <li *ngIf="isJobSeeker"><a routerLink="/submitresume">Add Resume</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li (click)="logout()">
