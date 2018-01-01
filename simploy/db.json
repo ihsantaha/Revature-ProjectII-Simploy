@@ -1,47 +1,133 @@
 {
- "users":
- [
-   {
-       "email": "ihsan_taha@yahoo.com",
-       "first": "Ihsan",
-       "last": "Taha",
-       "skills": "Hibernate Java Spring"
-   },
-   {
-       "email": "trent_smith@gmail.com",
-       "first": "Trent",
-       "last": "Smith",
-       "skills": "Java Spring"
-   },
-   {
-       "email": "marshall@hotmail.com",
-       "first": "Marshall",
-       "last": "Cargle",
-       "skills": "Spring"
-   },
-   {
-       "email": "morgan_worth@gmail.com",
-       "first": "Morgan",
-       "last": "Worthington",
-       "skills": "Spring"
-   },
-   {
-       "email": "david_sadboy@gmail.com",
-       "first": "David",
-       "last": "Argetsinger",
-       "skills": "Spring"
-   },
-   {
-       "email": "genesis_bonds@gmail.com",
-       "first": "Genesis",
-       "last": "Bonds",
-       "skills": "Java"
-   },
-   {
-       "email": "min_yao@yahoo.com",
-       "first": "Min",
-       "last": "Yao",
-       "skills": "Spring"
-   }
-  ]
+    "users": [
+        {
+            "id": 1,
+            "firstName": "Ihsan",
+            "lastName": "Taha",
+            "email": "ihsan_taha@yahoo.com",
+            "phoneNumber": "415-265-1234",
+            "role": 1
+        },
+        {
+            "id": 2,
+            "firstName": "Trent",
+            "lastName": "Smith",
+            "email": "trent_smith@gmail.com",
+            "phoneNumber": "415-265-5678",
+            "role": 1
+        },
+        {
+            "id": 3,
+            "firstName": "Marshall",
+            "lastName": "Cargle",
+            "email": "marshall@hotmail.com",
+            "phoneNumber": "510-139-1234",
+            "role": 1
+        },
+        {
+            "id": 4,
+            "firstName": "Morgan",
+            "lastName": "Worthington",
+            "email": "morgan_worth@gmail.com",
+            "phoneNumber": "510-200-0246",
+            "role": 1
+        },
+        {
+            "id": 5,
+            "firstName": "David",
+            "lastName": "Argetsinger",
+            "email": "david_sadboy@gmail.com",
+            "phoneNumber": "219-235-1221",
+            "role": 1
+        },
+        {
+            "id": 6,
+            "firstName": "Genesis",
+            "lastName": "Bonds",
+            "email": "genesis_bonds@gmail.com",
+            "phoneNumber": "415-551-5310",
+            "role": 1
+        },
+        {
+            "id": 7,
+            "firstName": "Min",
+            "lastName": "Yao",
+            "email": "min_yao@yahoo.com",
+            "phoneNumber": "415-265-1234",
+            "role": 1
+        }
+    ],
+    "jobs": [
+        {
+            "userid": 1,
+            "jobid": 1,
+            "description": "Ihsan Productions is looking for someone with experience in Java, Spring, and Hibernate.",
+            "title": "Full Stack Developer",
+            "location": "San Francisco",
+            "website": "www.ihsansdomain.com",
+            "postdate": "12/31/2017",
+            "company": "Ihsan Productions"
+        },
+        {
+            "userid": 2,
+            "jobid": 2,
+            "description": "Google is hiring new graduates to work with Spring and Hibernate.",
+            "title": "Back-end Developer",
+            "location": "Mountain View",
+            "website": "www.google.com",
+            "postdate": "12/15/2017",
+            "company": "Google"
+        },
+        {
+            "userid": 3,
+            "jobid": 3,
+            "description": "This season, Marshalls is in need for Spring developers to help build their databases.",
+            "title": "Back-end Programmer",
+            "location": "San Diego",
+            "website": "www.marshallsonline.com",
+            "postdate": "11/30/2017",
+            "company": "Marshalls"
+        },
+        {
+            "userid": 4,
+            "jobid": 4,
+            "description": "JP Morgan is looking for a sharp coder to help with the Spring team.",
+            "title": "Spring Engineer",
+            "location": "Columbus, Ohio",
+            "website": "https://am.jpmorgan.com",
+            "postdate": "12/01/2017",
+            "company": "JP Morgan"
+        },
+        {
+            "userid": 5,
+            "jobid": 5,
+            "description": "Yahoo has been struggling for a while and needs more Spring developers.",
+            "title": "Spring Programmer",
+            "location": "San Francisco",
+            "website": "www.yahoo.com",
+            "postdate": "10/05/2017",
+            "company": "Yahoo"
+        },
+        {
+            "userid": 6,
+            "jobid": 6,
+            "description": "Be a trainer at Revature for Java",
+            "title": "Java Trainer",
+            "location": "Reston, Virginia",
+            "website": "www.revature.com",
+            "postdate": "06/10/2017",
+            "company": "Revature"
+        },
+        {
+            "userid": 7,
+            "jobid": 7,
+            "description": "Help Ali Baba with trade algorithms usinh help from Spring",
+            "title": "Spring Programmer",
+            "location": "Chicago",
+            "website": "www.alibaba.com",
+            "postdate": "08/08/2017",
+            "company": "Ali Baba"
+        }
+
+    ]
 }
