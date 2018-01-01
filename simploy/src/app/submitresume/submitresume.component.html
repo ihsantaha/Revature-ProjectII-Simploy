@@ -1,6 +1,124 @@
-<p align="center">
-  Resume:<br>
-  <input type="text"><br>
-  <input type="button" value="Submit">
-</p>
+<div [ngStyle]="{'background' : 'url(../assets/images/signin-header.gif)'}">
+  <app-navbar></app-navbar>
+  <br>
 
+  <div class="container">
+
+    <div class="row">
+      <div class="text-center">
+        <h1>Resume</h1>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-xs-8 col-xs-offset-2 col-sm-6 col-sm-offset-3 simploy-outer-box">
+        <div style="width: 100px;">
+        <h4><strong>Summary</strong></h4>
+        <p>
+          {{summary}}
+        </p>
+        <br>
+      </div>
+
+        <form (ngSubmit)="updateSummary()" #summaryF="ngForm">
+          <label for="description">Edit</label>
+          <textarea  
+            id="description" 
+            name="description" 
+            class="form-control" 
+            rows="6" 
+            style="resize: none"
+            ngModel
+          ></textarea>
+          <br>
+          <button class="btn btn-success" type="submit" style="width:125px">Update</button>
+        </form>
+
+        <br>
+        <hr>  
+        <h4><strong>Certifications</strong></h4>
+
+        <table>
+        <tbody>
+        <div *ngFor="let certif of certifs; let i = index">
+          <tr>
+            <td>
+              {{certif.title}}&emsp;
+            </td>
+            <td>
+              {{certif.year}}&emsp;
+            </td>
+            <td>
+              <button class="btn btn-danger" (click)="deleteCert(i)" style="float: right">Remove</button>
+            </td>
+        </tr>
+        </div>
+        </tbody>
+        </table>
+
+        <br>
+        <label>Add New Certificate</label>
+        <form (ngSubmit)="updateCertificates()" #certF="ngForm">
+          <label for="projects">Title</label>
+          <input
+            type="text"
+            id="title" 
+            name="title" 
+            class="form-control" 
+            rows="6"
+            ngModel
+          >
+
+          <br>
+
+          <label for="year">Year</label>
+          <input
+          type="number"
+          id="year" 
+          name="year" 
+          class="form-control" 
+          rows="6" 
+          ngModel
+        >
+          <br>
+          <button class="btn btn-success" type="submit" style="width:125px">Add Certificate</button>
+        </form>
+
+        <br>
+        <hr>
+
+        <h4><strong>Skills</strong></h4>
+        <p>{{yourskills}}</p>
+        <br>
+
+        <label>Add New Skill</label>
+
+        <form (ngSubmit)="addSkill()" #addSkillF="ngForm">
+            <div class="radio" *ngFor="let skill of skills">
+            <label>
+              <input
+                type="radio"
+                id="newskill"
+                name="newskill"
+                [ngModel]="skills[0]"
+                [value]="skill">
+                {{skill}}
+              </label>
+            </div>
+
+            <button class="btn btn-success" type="submit" style="width:125px">Add SKill</button>
+        </form>
+
+        <br>
+
+      </div>
+    </div>
+
+
+  </div>
+
+  <br>
+  <br>
+  <br>
+
+</div>
