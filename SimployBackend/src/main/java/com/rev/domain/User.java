@@ -17,6 +17,8 @@ import javax.persistence.Table;
 
 import org.springframework.stereotype.Component;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Component
 @Entity
 @Table(name="USERS")
@@ -28,29 +30,23 @@ public class User {
 	@GeneratedValue(generator = "userSeq", strategy = GenerationType.SEQUENCE)
 	private Integer userId;
 	
-	@Column(name="firstname", nullable=false)
+	@Column(name="firstname")
 	private String firstName;
 	
-	@Column(name="lastname", nullable=false)
+	@Column(name="lastname")
 	private String lastName;
 	
-	@Column(name="email", nullable=false)
+	@Column(name="email")
 	private String email;
 	
-	@Column(name="pnumber", nullable=false)
+	@Column(name="pnumber")
 	private String pnumber;
 	
-	@Column(name="password", nullable=false)
+	@Column(name="password")
 	private String password;
 	
-	@Column(name="role", nullable=false)
+	@Column(name="role")
 	private Integer role;
-	
-	@OneToOne(fetch = FetchType.LAZY, cascade =  CascadeType.ALL, mappedBy = "user")
-	private Resume resume;
-	
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "user")
-	private List<Job> jobs=new ArrayList<>();
 	
 	public User() {
 		super();
@@ -76,6 +72,13 @@ public class User {
 		this.pnumber = pnumber;
 		this.password = password;
 		this.role = role;
+	}
+	
+	
+
+	public User(Integer userId) {
+		super();
+		this.userId = userId;
 	}
 
 	public Integer getId() {
@@ -117,7 +120,7 @@ public class User {
 	public void setPnumber(String pnumber) {
 		this.pnumber = pnumber;
 	}
-
+	
 	public String getPassword() {
 		return password;
 	}

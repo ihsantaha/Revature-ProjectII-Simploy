@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.rev.domain.User;
 import com.rev.service.UserService;
 
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin()
 @RestController
 @RequestMapping(value = "/User")
 public class UserController {
@@ -26,11 +26,13 @@ public class UserController {
 		System.out.println("in rest conroller");
 	}
 	
+	@CrossOrigin()
 	@RequestMapping(method = RequestMethod.GET,  produces=MediaType.APPLICATION_JSON_VALUE)
 	public List<User> findAll() {
 		return service.findAllUsers();
 	}
 	
+	@CrossOrigin()
 	@RequestMapping(method=RequestMethod.POST, consumes=MediaType.APPLICATION_JSON_VALUE)
 	public User addFC(@RequestBody User u){
 		User check=service.findUserByEmail(u.getEmail());
@@ -41,6 +43,7 @@ public class UserController {
 			return null;
 	}
 	
+	@CrossOrigin()
 	@RequestMapping(value="/login", method = RequestMethod.POST, produces=MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody User login(@RequestBody User user){
 		String email = user.getEmail();
@@ -56,6 +59,7 @@ public class UserController {
 		}
 	}
 	
+	@CrossOrigin()
 	@RequestMapping(value="/update", method = RequestMethod.POST, produces=MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody User updateUser(@RequestBody User user){
 		Integer id = user.getId();
@@ -79,6 +83,7 @@ public class UserController {
 		return check;
 	}
 	
+	@CrossOrigin()
 	@RequestMapping(value="/id", method = RequestMethod.POST, produces=MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody User findById(@RequestBody User user){
 		Integer id = user.getId();

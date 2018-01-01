@@ -33,4 +33,13 @@ public class ProjectService {
 	public void delete(Integer id) {
 		proRepo.delete(id);
 	}
+	
+	/*public <List>Project findProjectByResid(Integer i) {
+		return proRepo.findProjectByResid(i);
+	}*/
+	
+	public Project findProjectByTitle(String title) {
+		return proRepo.findProjectByTitle(title);
+	}
+
 }

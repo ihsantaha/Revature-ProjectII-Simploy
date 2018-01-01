@@ -26,13 +26,13 @@ public class Certification {
 	@GeneratedValue(generator = "certSeq", strategy = GenerationType.SEQUENCE)
 	private Integer certId;
 
-	@Column(name = "title", nullable=false)
+	@Column(name = "title")
 	private String title;
-	@Column(name = "gotyear", nullable=false)
+	@Column(name = "gotyear")
 	private String gotYear;
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "resid", nullable = false)
+	@JoinColumn(name = "resid")
 	private Resume resume;
 
 	public Certification() {
@@ -78,7 +78,6 @@ public class Certification {
 		this.gotYear = gotYear;
 	}
 
-	@JsonIgnore
 	public Resume getResume() {
 		return resume;
 	}

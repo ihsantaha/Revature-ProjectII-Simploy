@@ -29,39 +29,29 @@ public class Skill {
 	@GeneratedValue(generator = "skillSeq", strategy = GenerationType.SEQUENCE)
 	private Integer skillId;
 
-	@Column(name = "title", nullable=false)
+	@Column(name = "title")
 	private String title;
-
-	@ManyToMany(fetch = FetchType.LAZY, cascade = { CascadeType.PERSIST, CascadeType.MERGE }, mappedBy = "skills")
-	private List<Job> jobs=new ArrayList<>();
-
-	@ManyToMany(fetch = FetchType.LAZY, cascade = { CascadeType.PERSIST, CascadeType.MERGE }, mappedBy = "skills")
-	private List<Resume> resumes= new ArrayList<>();
 
 	public Skill() {
 		super();
 	}
 
-	public Skill(String title, List<Job> jobs, List<Resume> resumes) {
+	public Skill(String title) {
 		super();
 		this.title = title;
-		this.jobs = jobs;
-		this.resumes = resumes;
 	}
 
-	public Skill(Integer skillId, String title, List<Job> jobs, List<Resume> resumes) {
+	public Skill(Integer skillId, String title) {
 		super();
 		this.skillId = skillId;
 		this.title = title;
-		this.jobs = jobs;
-		this.resumes = resumes;
 	}
 
-	public Integer getskillId() {
+	public Integer getSkillId() {
 		return skillId;
 	}
 
-	public void setskillId(Integer skillId) {
+	public void setSkillId(Integer skillId) {
 		this.skillId = skillId;
 	}
 
@@ -73,26 +63,11 @@ public class Skill {
 		this.title = title;
 	}
 
-	public List<Job> getJobs() {
-		return jobs;
-	}
-
-	public void setJobs(List<Job> jobs) {
-		this.jobs = jobs;
-	}
-	
-	@JsonIgnore
-	public List<Resume> getResumes() {
-		return resumes;
-	}
-
-	public void setResumes(List<Resume> resumes) {
-		this.resumes = resumes;
-	}
-
 	@Override
 	public String toString() {
-		return "Skill [skillId=" + skillId + ", title=" + title + ", jobs=" + jobs + ", resumes=" + resumes + "]";
+		return "Skill [skillId=" + skillId + ", title=" + title + "]";
 	}
+
+	
 
 }
