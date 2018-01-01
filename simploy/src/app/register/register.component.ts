@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
@@ -28,7 +29,9 @@ export class RegisterComponent implements OnInit {
   validInput: boolean;
   validNumber: boolean;
 
-  constructor(private loginService: LoginService, private router: Router) { }
+  constructor(private loginService: LoginService, 
+              private router: Router,
+              private httpClient: HttpClient) { }
 
   ngOnInit() {
 
@@ -85,6 +88,23 @@ export class RegisterComponent implements OnInit {
         this.validInput = false;
         console.log(this.validInput);
       }
+
+      let json = {
+        firstName: this.user.firstName,
+        lastName: this.user.lastName,
+        email: this.user.email,
+        pnumber: this.user.phoneNumber,
+        password: this.user.password,
+        role: this.role
+      };
+
+      console.log(json);
+      this.httpClient.post('http://localhost:8088/User/', json).subscribe(
+        (data: any) => {
+          localStorage.setItem('user', JSON.stringify(data));
+          this.router.navigate(['/profile']);
+        }
+      );
 
       if (this.validInput == false) {
         this.registerForm.form.markAsUntouched();
