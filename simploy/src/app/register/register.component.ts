@@ -31,7 +31,6 @@ export class RegisterComponent implements OnInit {
   constructor(private loginService: LoginService, private router: Router) { }
 
   ngOnInit() {
-
     // Preview Data
     // this.loginService.currentUser
     // .subscribe(

@@ -10,32 +10,32 @@
     </div>
 
     <div class="simploy-tableData simploy-shadow">
-      <table datatable class="row-border hover">
+      <table datatable class="row-border hover responsive">
         <thead>
           <tr>
             <th>First name</th>
             <th>Last name</th>
             <th>Email</th>
-            <th>Skills</th>
+            <!-- <th>Skills</th> -->
             <th>Details</th>
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let userdata of tableData">
+          <tr *ngFor="let userdata of employers">
+            <td>
+              {{userdata["firstName"]}}
+            </td>
+            <td>
+              {{userdata["lastName"]}}
+            </td>
             <td>
               {{userdata["email"]}}
             </td>
-            <td>
-              {{userdata["first"]}}
-            </td>
-            <td>
-              {{userdata["last"]}}
-            </td>
-            <td>
+            <!-- <td>
               {{userdata["skills"]}}
-            </td>
+            </td> -->
             <td>
-              <button class="btn btn-success" (click)='getUserData(userdata["id"],userdata["first"],userdata["last"],userdata["email"],userdata["phone"],userdata["skills"])'>
+              <button class="btn btn-success" (click)='getUserData(userdata)'>
                 View Details
               </button>
             </td>
@@ -49,25 +49,25 @@
     <br />
 
     <div *ngIf="viewJob">
-      <div class="jumbotron detail-outer-box">
+      <div class="jumbotron detail-outer-box simploy-shadow">
         <h2 class="text-center">Title</h2>
         <br>
         <div Class="detail-inner-box">
-          <h3>Name: {{firstname}} {{lastname}}</h3>
-          <h3>Email: {{email}}</h3>
-          <h3>Phone: {{phone}}</h3>
-         
+          <h4><strong>Name:</strong>&emsp;&emsp; {{userFromServer.firstName}} {{userFromServer.lastName}}</h4>
+          <h4><strong>Email:</strong>&emsp;&emsp; {{userFromServer.email}}</h4>
+          <h4><strong>Phone:</strong>&emsp;&emsp;{{userFromServer.phoneNumber}}</h4>
+          <!-- <h4><strong>Skills:</strong></h4>
           <ul>
-            <h3>Skills</h3>
             <li *ngFor="let skillData of skills">
-              <h3>{{skillData}}</h3>
+              {{skillData}}
             </li>
-          </ul>
-
+          </ul> -->
         </div>
+        
+        <br />
+      
       </div>
     </div>
-
   </div>
 
   <br />
@@ -75,19 +75,3 @@
   <br />
 
 </div>
-
-<!-- <div class="container" *ngIf="viewJobs">
-  <div class="jumbotron">
-    <h1>Resume</h1>
-    <br>
-    <div class="jumbotron" style="background-color:rgb(104, 104, 221)">""
-      <h2>{{firstname|uppercase}} {{lastname|uppercase}}</h2>
-      <h2>{{Email}}</h2>
-      <ul>
-        <li *ngFor="let skillData of skill">
-          <h3>{{skillData}}</h3>
-        </li>
-      </ul>
-    </div>
-  </div>
-</div> -->

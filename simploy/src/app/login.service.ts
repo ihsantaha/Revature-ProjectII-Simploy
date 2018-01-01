@@ -21,7 +21,7 @@ export class LoginService {
         else
           this.currentUser.next(data);
       }
-      );
+    );
   }
 
   register(user: User) {

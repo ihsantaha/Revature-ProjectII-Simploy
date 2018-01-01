@@ -13,6 +13,8 @@ import { SigninComponent } from './signin/signin.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { LoginService } from './login.service';
+import { JobService } from './job.service';
+import { EmployersService } from './employers.service';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule, Routes } from '@angular/router/';
 import { ViewsinglejobComponent } from './viewsinglejob/viewsinglejob.component';
@@ -73,7 +75,7 @@ const routes: Routes = [
     MatTableModule,
     DataTablesModule
   ],
-  providers: [LoginService],
+  providers: [LoginService, JobService, EmployersService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
