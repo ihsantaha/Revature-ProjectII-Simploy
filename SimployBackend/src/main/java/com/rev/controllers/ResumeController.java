@@ -23,7 +23,7 @@ public class ResumeController {
 	@Autowired
 	ResumeService service;
 	
-	@RequestMapping(method = RequestMethod.GET,  produces=MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value="/all", method = RequestMethod.GET,  produces=MediaType.APPLICATION_JSON_VALUE)
 	public List<Resume> findAll() {
 		return service.findAllResumes();
 	}
