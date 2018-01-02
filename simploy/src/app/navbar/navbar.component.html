@@ -1,9 +1,14 @@
-<nav class="navbar navbar-default navbar-bgcolor">
+<nav class="navbar navbar-default navbar-toggleable-md navbar-bgcolor">
+
   <div class="container-fluid">
-    <div class="navbar-header">
-      <a href="/info" class="navbar-brand" style="color: white !important"><span style="color: rgb(0, 100, 75);"><strong>S</strong></span>imploy</a>
+    <div class="navbar-header navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" style="cursor: pointer">
+        
+      <div class="navbar-header">
+          <a class="navbar-brand" style="color: white !important"><span style="color: rgb(0, 100, 75);"><strong>S</strong></span>imploy</a>
+      </div>
     </div>
-    <div class="collapse navbar-collapse">
+    
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="nav navbar-nav">
         <li ><a routerLink="/profile">Profile</a></li>
         <li *ngIf="isEmployer"><a routerLink="/viewresumes">Resumes</a></li>
@@ -16,4 +21,5 @@
       </ul>
     </div>
   </div>
+  
 </nav>
