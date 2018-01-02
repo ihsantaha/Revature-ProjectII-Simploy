@@ -64,6 +64,7 @@
             </ul>
 <b>          Education</b>  
             <ul *ngFor="let e of eduDataArray">
+                  {{e.gradYear}}
                   {{e.school}}
                   {{e.type}}
                   {{e.gradYear}}
@@ -77,7 +78,7 @@
               </li>
             </ul>
             <br>
-<b>        Projects</b>    
+        <b>Projects</b>    
             <ul *ngFor="let p of ProjectDataArray">
          <h4>{{p.title}}</h4>  
                   {{p.startDate}}-{{p.endDate}}
