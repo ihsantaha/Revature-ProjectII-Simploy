@@ -56,29 +56,28 @@
             <div Class="detail-inner-box">
           <h2>{{title|uppercase}}</h2>
             <h3>{{first|uppercase}} {{last|uppercase}}</h3>
-            <i>Contact Information
+            <i>  <b>Contact Information</b>
             <ul>
                 phone:{{phone}}
 <br>
                 email:{{email}}
-
             </ul>
-            Education
+<b>          Education</b>  
             <ul *ngFor="let e of eduDataArray">
                   {{e.school}}
                   {{e.type}}
                   {{e.gradYear}}
-                  <br>
             </ul>
           </i>    
-            skills
+          <br>
+           <b> skills</b>
             <ul *ngFor="let skillData of skillsarray">
               <li>
                   {{skillData}}
               </li>
             </ul>
             <br>
-            Projects
+<b>        Projects</b>    
             <ul *ngFor="let p of ProjectDataArray">
          <h4>{{p.title}}</h4>  
                   {{p.startDate}}-{{p.endDate}}
@@ -89,13 +88,13 @@
             <br>
             </ul>
             <br>
-            Certifications
+       <b>  Certifications</b>
             <ul *ngFor="let c of certDataArray">
                     {{c.title}} {{c.gotYear}}
                     <br>
               </ul>
               <br>
-              Experience
+  <b>            Experience</b>
               <ul *ngFor="let exp of expDataArray">
                       {{exp.title}} 
                       <br>
