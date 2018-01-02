@@ -88,19 +88,21 @@
             <br>
             </ul>
             <br>
-       <b>  Certifications</b>
+          <b>Certifications</b>
             <ul *ngFor="let c of certDataArray">
                     {{c.title}} {{c.gotYear}}
                     <br>
               </ul>
               <br>
-  <b>            History</b>
+          <b>History</b>
               <ul *ngFor="let exp of expDataArray">
                       {{exp.title}} 
                       <br>
                       {{exp.company}}
                       <br>
                         {{exp.startYear}}-{{exp.endYear}}
+                        <br>
+                        <br>
                       </ul>
             </div>
     </div>
