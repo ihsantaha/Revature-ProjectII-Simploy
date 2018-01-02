@@ -1,13 +1,12 @@
-import { Skill } from "./Skill";
 import { User } from "./user";
-export class Job {
+export class JobTable {
     jobId: number;
     company: string;
     description: string;
     postDate: string;
     title: string;
-    skills: Skill[];
+    skills: string;
     location:string;
     user: User;
+    constructor (){};
 }
- 
