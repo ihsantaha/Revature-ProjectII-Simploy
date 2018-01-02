@@ -6,6 +6,7 @@
               <h1>Resume Postings</h1>
             </div>
           </div>
+      <div class="simploy-tableData simploy-shadow">    
     <table datatable class="row-border hover">
         <thead>
           <tr>
@@ -43,6 +44,7 @@
           </tr>
         </tbody>
       </table>
+      </div>
      </div>
       <br>
       <br>
@@ -51,11 +53,10 @@
         <div class="jumbotron detail-outer-box">
             <h2 class="text-center">User Selected</h2>
             <br>
-    
             <div Class="detail-inner-box">
-            <h2>{{title|uppercase}}</h2>
-            <h3>{{first}} {{last}}</h3>
-            Contact Information
+          <h2>{{title|uppercase}}</h2>
+            <h3>{{first|uppercase}} {{last|uppercase}}</h3>
+            <i>Contact Information
             <ul>
               <li>
                 phone:{{phone}}
@@ -63,7 +64,7 @@
               <li>
                 email:{{email}}
               </li>
-            </ul>
+            </ul></i>    
             skills
             <ul *ngFor="let skillData of skillsarray">
               <li>
@@ -74,13 +75,10 @@
             Projects
             <ul *ngFor="let p of ProjectDataArray">
               <li>
-                  {{p.startDate}}
-              </li>
+         <h4>{{p.title}}</h4>
+            </li>
               <li>
-                  {{p.endDate}}
-              </li>
-              <li>
-                  {{p.title}}
+                  {{p.startDate}}-{{p.endDate}}
               </li>
               <li>
                   {{p.description}}
