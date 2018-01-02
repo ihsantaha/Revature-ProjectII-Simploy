@@ -34,6 +34,105 @@
           <button class="btn btn-success" type="submit" style="width:125px">Update</button>
         </form>
 
+        <!-- *********************************************** -->
+        <br>
+        <hr>
+        <h4><strong>Skills</strong></h4>
+ 
+        <p>{{yourskills}}</p>
+        <br>
+ 
+        <label>Add New Skill</label>
+ 
+        <form (ngSubmit)="addSkill()" #addSkillF="ngForm">
+          <div class="radio" *ngFor="let skill of skills">
+            <label>
+            <input
+              type="radio"
+              id="newskill"
+              name="newskill"
+              [ngModel]="skills[0]"
+              [value]="skill"
+            >
+              {{skill}}
+            </label>
+          </div>
+ 
+          <button class="btn btn-success" type="submit" style="width:125px">Add SKill</button>
+        </form>
+ 
+        <!-- *********************************************** -->
+        <br>
+        <hr>  
+        <h4><strong>Education</strong></h4>
+
+        <table>
+        <tbody>
+        <div *ngFor="let edu of educations; let i = index">
+          <tr>
+            <td>
+              {{edu.school}}&emsp;
+            </td>
+            <td>
+              {{edu.gradyear}}&emsp;
+            </td>
+            <td>
+              {{edu.edutype}}&emsp;
+            </td>            
+            <td>
+              <button class="btn btn-danger" (click)="deleteEducation(i)" style="float: right">Remove</button>
+            </td>
+        </tr>
+        <br>
+        </div>
+        </tbody>
+        </table>
+
+        <br>
+        <label>Add New Education</label>
+        <form (ngSubmit)="updateEducations()" #eduF="ngForm">
+          <label for="school">School</label>
+          <input
+            type="text"
+            id="school" 
+            name="school" 
+            class="form-control" 
+            rows="6"
+            ngModel
+          >
+
+          <br>
+
+          <label for="gradyear">Year</label>
+          <input
+            type="number"
+            id="gradyear" 
+            name="gradyyear" 
+            class="form-control" 
+            rows="6" 
+            ngModel
+          >
+
+          <br>
+
+          <div class="radio" *ngFor="let edutype of edutypes">
+            <label>
+            <input
+              type="radio"
+              id="edutype"
+              name="edutype"
+              [ngModel]="edutypes[0]"
+              [value]="edutype"
+            >
+              {{edutype}}
+            </label>
+          </div>
+
+          <br>
+          <button class="btn btn-success" type="submit" style="width:125px">Add Education</button>
+        </form>        
+        
+        <!-- *********************************************** -->
         <br>
         <hr>  
         <h4><strong>Certifications</strong></h4>
@@ -52,6 +151,7 @@
               <button class="btn btn-danger" (click)="deleteCert(i)" style="float: right">Remove</button>
             </td>
         </tr>
+        <br>
         </div>
         </tbody>
         </table>
@@ -84,33 +184,193 @@
           <button class="btn btn-success" type="submit" style="width:125px">Add Certificate</button>
         </form>
 
+        <!-- *********************************************** -->
         <br>
-        <hr>
+        <hr>  
+        <h4><strong>Experience</strong></h4>
 
-        <h4><strong>Skills</strong></h4>
-        <p>{{yourskills}}</p>
+        <table>
+        <tbody>
+        <div *ngFor="let exp of explist; let i = index">
+          <tr>
+            <td>
+              {{exp.title}}&emsp;
+            </td>
+            <td>
+              {{exp.company}}&emsp;
+            </td>
+            <td>
+              {{exp.startyear}}&emsp;
+            </td>
+            <td>
+              {{exp.endyear}}&emsp;
+            </td>
+            <td>
+              <button class="btn btn-danger" (click)="deleteExperience(i)" style="float: right">Remove</button>
+            </td>
+          </tr>
+          <br>
+        </div>
+        </tbody>
+        </table>
+
         <br>
 
-        <label>Add New Skill</label>
+        <label>Add New Experience</label>
+        <form (ngSubmit)="updateExpList()" #expF="ngForm">
+          <label for="explist">Title</label>
+          <input
+            type="text"
+            id="title" 
+            name="title" 
+            class="form-control" 
+            rows="6"
+            ngModel
+          >
 
-        <form (ngSubmit)="addSkill()" #addSkillF="ngForm">
-            <div class="radio" *ngFor="let skill of skills">
-            <label>
-              <input
-                type="radio"
-                id="newskill"
-                name="newskill"
-                [ngModel]="skills[0]"
-                [value]="skill">
-                {{skill}}
-              </label>
-            </div>
+          <br>
 
-            <button class="btn btn-success" type="submit" style="width:125px">Add SKill</button>
+          <label for="company">Company</label>
+          <input
+          type="text"
+          id="company" 
+          name="company" 
+          class="form-control" 
+          rows="6" 
+          ngModel
+          >
+
+          <br>
+
+          <label for="startyear">Start Year</label>
+          <input
+          type="text"
+          id="startyear" 
+          name="startyear" 
+          class="form-control" 
+          rows="6" 
+          ngModel
+          >
+
+          <br>
+
+          <label for="endyear">End Year</label>
+          <input
+          type="text"
+          id="endyear" 
+          name="endyear" 
+          class="form-control" 
+          rows="6" 
+          ngModel
+          >
+
+          <br>
+
+          <button class="btn btn-success" type="submit" style="width:125px">Add Experience</button>
+        </form>
+
+        <!-- *********************************************** -->
+        <br>
+        <hr>  
+        <h4><strong>Projects</strong></h4>
+
+        <table>
+        <tbody>
+        <div *ngFor="let project of projects; let i = index">
+          <tr>
+            <td>
+              {{project.title}}&emsp;
+            </td>
+            <td>
+              {{project.startdate}}&emsp;
+            </td>
+            <td>
+              {{project.enddate}}&emsp;
+            </td>
+            <td>
+              {{project.size}}&emsp;
+            </td>
+            <td>
+              {{project.description}}&emsp;
+            </td>
+            <td>
+              <button class="btn btn-danger" (click)="deleteProject(i)" style="float: right">Remove</button>
+            </td>
+          </tr>
+          <br>
+        </div>
+        </tbody>
+        </table>
+
+        <br>
+
+        <label>Add New Project</label>
+        <form (ngSubmit)="updateProjects()" #projectF="ngForm">
+          <label for="projects">Title</label>
+          <input
+            type="text"
+            id="title" 
+            name="title" 
+            class="form-control" 
+            rows="6"
+            ngModel
+          >
+
+          <br>
+
+          <label for="startdate">Start Date</label>
+          <input
+          type="text"
+          id="startdate" 
+          name="startdate" 
+          class="form-control" 
+          rows="6" 
+          ngModel
+          >
+
+          <br>
+
+          <label for="enddate">End Date</label>
+          <input
+          type="text"
+          id="enddate" 
+          name="enddate" 
+          class="form-control" 
+          rows="6" 
+          ngModel
+          >
+
+          <br>
+
+          <label for="groupsize">Group Size</label>
+          <input
+          type="text"
+          id="groupsize" 
+          name="groupsize" 
+          class="form-control" 
+          rows="6" 
+          ngModel
+          >
+
+          <br>
+
+          <label for="description">Description</label>
+          <textarea  
+            id="description" 
+            name="description" 
+            class="form-control" 
+            rows="6" 
+            style="resize: none"
+            ngModel
+          ></textarea>
+
+          <br>
+
+          <button class="btn btn-success" type="submit" style="width:125px">Add Project</button>
         </form>
 
         <br>
-
+        
       </div>
     </div>
 
