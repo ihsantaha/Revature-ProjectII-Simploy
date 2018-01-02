@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { JobTable } from './../JobTable';
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
@@ -23,7 +24,7 @@ export class ViewsubmittedjobsComponent implements OnInit {
   role:number;
   tableHold: JobTable[] = [];
 
-  constructor(private httpClient:HttpClient) { }
+  constructor(private httpClient:HttpClient, private router: Router) { }
 
   ngOnInit() 
   {
@@ -54,7 +55,7 @@ export class ViewsubmittedjobsComponent implements OnInit {
           for (var j = 0; j < data[i].skills.length; j++){
             tableData.skills += data[i].skills[j].title + " "
           }}
-          //console.log(tableData);
+          console.log(tableData.jobId);
           this.tableHold[i] = tableData;
         }
       }
@@ -62,14 +63,15 @@ export class ViewsubmittedjobsComponent implements OnInit {
   }
 
   delete(id) {
-    // let json = {
-    //   jobId : id
-    // };
-    // this.httpClient.post('localhost:8088/Job/delete', json ).subscribe(
-    //   (data: any[]) => {
-    //     console.log('job deleted');
-    //   }
-    // );
+    let json = {
+      jobId : id
+    };
+    this.httpClient.post('http://localhost:8088/Job/delete', json ).subscribe(
+      (data: any[]) => {
+        console.log('job deleted');
+        window.location.reload();
+      }
+    );
   }
 
 }
