@@ -54,7 +54,7 @@ public class Job {
 	@JoinColumn(name = "userId")
 	private User user;
 
-	@ManyToMany(fetch = FetchType.LAZY, cascade = { CascadeType.PERSIST, CascadeType.MERGE })
+	@ManyToMany(fetch = FetchType.EAGER, cascade = { CascadeType.PERSIST, CascadeType.MERGE })
 	@JoinTable(name = "job_skills", joinColumns = { @JoinColumn(name = "jobId") }, inverseJoinColumns = {
 			@JoinColumn(name = "skillId") })
 	private List<Skill> skills=new ArrayList<>();
