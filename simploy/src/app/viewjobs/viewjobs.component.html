@@ -13,29 +13,34 @@
       <table datatable class="row-border hover">
         <thead>
           <tr>
-            <th>First name</th>
-            <th>Last name</th>
-            <th>Email</th>
+            <th>Company</th>
+            <th>Job Title</th>
+            <th>Location</th>
             <th>Skills</th>
+            <th>Post Date</th>
             <th>Details</th>
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let userdata of tableData">
+          <tr *ngFor="let jobdata of tableData">
             <td>
-              {{userdata["email"]}}
+              {{jobdata["company"]}}
             </td>
             <td>
-              {{userdata["first"]}}
+              {{jobdata["title"]}}
             </td>
             <td>
-              {{userdata["last"]}}
+              {{jobdata["location"]}}
             </td>
             <td>
-              {{userdata["skills"]}}
+              {{jobdata["skills"]}}
             </td>
             <td>
-              <button class="btn btn-success" (click)='getUserData(userdata["id"],userdata["first"],userdata["last"],userdata["email"],userdata["phone"],userdata["skills"])'>
+              {{jobdata["postDate"]}}
+            </td>
+            <td>
+              <button class="btn btn-success" (click)='getJobData(jobdata["company"],jobdata["title"],
+              jobdata["location"],jobdata["description"],jobdata["postDate"],jobdata["skills"],jobdata["user"])'>
                 View Details
               </button>
             </td>
@@ -47,23 +52,26 @@
     <br />
     <br />
     <br />
-
+    
     <div *ngIf="viewJob">
       <div class="jumbotron detail-outer-box">
-        <h2 class="text-center">Title</h2>
+        <h2 class="text-center">Job Information:</h2>
         <br>
         <div Class="detail-inner-box">
-          <h3>Name: {{firstname}} {{lastname}}</h3>
-          <h3>Email: {{email}}</h3>
-          <h3>Phone: {{phone}}</h3>
-         
+          <h3>{{title}} in {{location}}</h3>
+          <h3>Company: {{company}}</h3>
+          <h3>Description : {{description}}</h3>
+          <div *ngIf="skillDatab">
           <ul>
-            <h3>Skills</h3>
+            <h3 >Skills</h3>
             <li *ngFor="let skillData of skills">
               <h3>{{skillData}}</h3>
             </li>
           </ul>
-
+        </div>
+          <br />
+          <hr>
+          <footer>Contact Information:<br> Name- {{user.firstName}} {{user.lastName}} <br> Email- {{user.email}} <br> Phone - {{user.pnumber}} </footer>
         </div>
       </div>
     </div>
