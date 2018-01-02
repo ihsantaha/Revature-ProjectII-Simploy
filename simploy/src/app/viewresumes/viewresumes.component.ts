@@ -27,6 +27,8 @@ export class ViewresumesComponent implements OnInit
     this.getRealData();
     this.getProjectData();
     this.getCertData();
+    this.getEduData();
+    this.getExpData();
   }
   certData:any[];
   getCertData()
@@ -95,11 +97,73 @@ getRealData()
     (data:any[])=>
     {
           this.RealData =data;
-          console.log(this.RealData[0].skills[0].title);
+          //console.log(this.RealData[0].skills[0].title);
           console.log(this.RealData[0].resId);
           console.log("yay");
     }
   )
+}
+eduData:any[];
+getEduData()
+  {
+    this.http.get("http://localhost:8088/Education")
+    .subscribe(
+      (data:any[])=>
+      {
+          this.eduData=data;
+          console.log(this.eduData[0].resume.resId);
+      }
+    ) 
+  }
+  eduDataelement:any[];
+  eduDataArray:any[];
+  findbyIdEdu(id:number)
+  {
+    var i;
+    this.eduDataelement=[];
+    var length;
+    this.eduDataArray=[];
+  for(i=0;i<this.eduData.length;i++)
+  {
+    if(id==this.eduData[i].resume.resId)
+    {
+        this.eduDataelement=this.eduData[i];
+        this.eduDataArray.push(this.eduDataelement);
+        console.log(this.eduDataArray[0]);
+    }
+  }
+}
+
+
+expData:any[];
+getExpData()
+  {
+    this.http.get("http://localhost:8088/Experience")
+    .subscribe(
+      (data:any[])=>
+      {
+          this.expData=data;
+          console.log(this.expData[0].resume.resId);
+      }
+    ) 
+  }
+  expDataelement:any[];
+  expDataArray:any[];
+  findbyIdExp(id:number)
+  {
+    var i;
+    this.expDataelement=[];
+    var length;
+    this.expDataArray=[];
+  for(i=0;i<this.expData.length;i++)
+  {
+    if(id==this.expData[i].resume.resId)
+    {
+        this.expDataelement=this.expData[i];
+        this.expDataArray.push(this.expDataelement);
+        console.log(this.expDataArray[0]);
+    }
+  }
 }
 getUserData(id:number,phone:string,email:string,first:string,last:string,skills:any[],user_id:number,role:number)
 {
@@ -122,6 +186,8 @@ getUserData(id:number,phone:string,email:string,first:string,last:string,skills:
     this.skillsarray=[];
     this.findbyIdProject(id);
     this.findbyIdCert(id);
+    this.findbyIdEdu(id);
+    this.findbyIdExp(id);
     for(i=0;i<this.RealData.length;i++)
     {
       console.log(this.RealData[i].resId+" "+user_id)
