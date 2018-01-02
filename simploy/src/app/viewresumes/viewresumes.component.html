@@ -1,1 +1,101 @@
-<app-navbar></app-navbar>
+<div [ngStyle]="{'background' : 'url(../assets/images/signin-header.gif)'}">
+    <app-navbar></app-navbar>
+    <div class="container">
+        <div class="row">
+            <div class="text-center">
+              <h1>Resume Postings</h1>
+            </div>
+          </div>
+    <table datatable class="row-border hover">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>email</th>
+            <th>phone</th>
+            <th>View Details</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let userdata of RealData">
+            <!--use click to get the data-->
+            <td>
+               {{userdata.user.id}}
+              </td>
+              <td>
+                {{userdata.user.firstName}}
+              </td>
+              <td>
+                {{userdata.user.lastName}}
+              </td>
+              <td>
+                {{userdata.user.email}}
+              </td>
+              <td>
+                {{userdata.user.pnumber}}
+              </td>
+              <td>
+                  <button class="btn btn-success" (click)='getUserData(userdata.user.id,userdata.user.pnumber,userdata.user.email,userdata.user.firstName,userdata.user.lastName,userdata.skills,userdata.resId,userdata.role)'>
+                    View Details
+                  </button>
+              </td>
+          </tr>
+        </tbody>
+      </table>
+     </div>
+      <br>
+      <br>
+      <br>
+      <div class="container" *ngIf="viewJob">
+        <div class="jumbotron detail-outer-box">
+            <h2 class="text-center">User Selected</h2>
+            <br>
+    
+            <div Class="detail-inner-box">
+            <h2>{{title|uppercase}}</h2>
+            <h3>{{first}} {{last}}</h3>
+            Contact Information
+            <ul>
+              <li>
+                phone:{{phone}}
+              </li>
+              <li>
+                email:{{email}}
+              </li>
+            </ul>
+            skills
+            <ul *ngFor="let skillData of skillsarray">
+              <li>
+                  {{skillData}}
+              </li>
+            </ul>
+            <br>
+            Projects
+            <ul *ngFor="let p of ProjectDataArray">
+              <li>
+                  {{p.startDate}}
+              </li>
+              <li>
+                  {{p.endDate}}
+              </li>
+              <li>
+                  {{p.title}}
+              </li>
+              <li>
+                  {{p.description}}
+              </li>
+              <li>
+                  {{p.groupSize}}
+              </li>
+            </ul>
+            Certifications
+            <ul *ngFor="let c of certDataArray">
+                <li>
+                    {{c.title}} {{c.gotYear}}
+                </li>
+              </ul>
+    </div>
+    </div>
+    </div>
+    </div>
