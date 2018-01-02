@@ -40,7 +40,7 @@ export class ViewsubmittedjobsComponent implements OnInit {
     //   {
     //       this.tableData = data;
     //   }
-    )
+    //)
   }
 
   delete() {
