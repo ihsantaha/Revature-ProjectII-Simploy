@@ -61,7 +61,7 @@ description:any;
 (click)='getJobData(jobdata["company"],jobdata["title"],
               jobdata["location"],jobdata["desciption"],jobdata["postDate"],jobdata["skills"])'>
   */
-  getJobData(company:any,title:any,location:any,description:any,postDate:any,skills1:string)
+  getJobData(company:any,title:any,location:any,description:any,postDate:any,skills1:string, user1:User)
   {
     /*
     this.id = id;
@@ -81,12 +81,15 @@ description:any;
     this.location=location;
     this.description = description;
     this.postDate = postDate;
+    console.log(user1);
+    this.user=user1;
     if(typeof skills1== "string"){
     skills1=skills1.trim();
     this.skills=skills1.split(" ");
     }else{
       this.skills=[];
     }
+    
   }
   
 }

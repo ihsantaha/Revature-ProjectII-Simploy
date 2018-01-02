@@ -39,9 +39,11 @@
               {{jobdata["postDate"]}}
             </td>
             <td>
-
+                <div *ngIf="viewResume">
+                  {{jobdata["user"]}}
+                  </div>
               <button class="btn btn-success" (click)='getJobData(jobdata["company"],jobdata["title"],
-              jobdata["location"],jobdata["description"],jobdata["postDate"],jobdata["skills"])'>
+              jobdata["location"],jobdata["description"],jobdata["postDate"],jobdata["skills"],jobdata["user"])'>
                 View Details
               </button>
             </td>
@@ -53,7 +55,7 @@
     <br />
     <br />
     <br />
-
+    
     <div *ngIf="viewJob">
       <div class="jumbotron detail-outer-box">
         <h2 class="text-center">Title</h2>
@@ -69,7 +71,9 @@
               <h3>{{skillData}}</h3>
             </li>
           </ul>
-          <footer>{{user}}</footer>
+          <br />
+          <hr>
+          <footer>Contact Information:<br> Name- {{user.firstName}} {{user.lastName}} <br> Email- {{user.email}} <br> Phone - {{user.pnumber}} </footer>
         </div>
       </div>
     </div>
