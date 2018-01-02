@@ -39,9 +39,6 @@
               {{jobdata["postDate"]}}
             </td>
             <td>
-                <div *ngIf="viewResume">
-                  {{jobdata["user"]}}
-                  </div>
               <button class="btn btn-success" (click)='getJobData(jobdata["company"],jobdata["title"],
               jobdata["location"],jobdata["description"],jobdata["postDate"],jobdata["skills"],jobdata["user"])'>
                 View Details
@@ -64,13 +61,14 @@
           <h3>{{title}} in {{location}}</h3>
           <h3>Company: {{company}}</h3>
           <h3>Description : {{description}}</h3>
-         
+          <div *ngIf="skillDatab">
           <ul>
-            <h3>Skills</h3>
+            <h3 >Skills</h3>
             <li *ngFor="let skillData of skills">
               <h3>{{skillData}}</h3>
             </li>
           </ul>
+        </div>
           <br />
           <hr>
           <footer>Contact Information:<br> Name- {{user.firstName}} {{user.lastName}} <br> Email- {{user.email}} <br> Phone - {{user.pnumber}} </footer>

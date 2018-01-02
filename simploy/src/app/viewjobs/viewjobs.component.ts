@@ -15,6 +15,7 @@ export class ViewjobsComponent implements OnInit
   tableData:JobTable[];
   viewResume:boolean=false;
   viewJob:boolean = false;
+  skillDatab:boolean=false;
   user:User;
 
   
@@ -75,6 +76,7 @@ description:any;
       this.viewJob=true;
     }
     */
+    this.skillDatab=true;
     this.viewJob=true;
     this.company = company;
     this.title=title;
@@ -87,6 +89,7 @@ description:any;
     skills1=skills1.trim();
     this.skills=skills1.split(" ");
     }else{
+      this.skillDatab=false;
       this.skills=[];
     }
     
