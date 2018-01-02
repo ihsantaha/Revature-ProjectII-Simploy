@@ -4,8 +4,10 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { MatCheckboxModule, MatTableModule } from '@angular/material';
 
-
+import { DataTablesModule } from 'angular-datatables';
 import { AppComponent } from './app.component';
 import { SigninComponent } from './signin/signin.component';
 import { LoginComponent } from './login/login.component';
@@ -25,7 +27,7 @@ import { SimployinfoComponent } from './simployinfo/simployinfo.component';
 import { SkillsComponent } from './skills/skills.component';
 
 const routes: Routes = [
-  { path: '', component: SigninComponent},
+  { path: 'login', component: SigninComponent},
   { path: 'navbar', component: NavbarComponent},
   { path: 'editjob', component: EditjobComponent},
   { path: 'editprofile', component: EditprofileComponent},
@@ -65,7 +67,11 @@ const routes: Routes = [
     BrowserModule,
     FormsModule,
     HttpClientModule,
-    RouterModule.forRoot(routes)
+    RouterModule.forRoot(routes),
+    NgbModule.forRoot(),
+    MatCheckboxModule,
+    MatTableModule,
+    DataTablesModule
   ],
   providers: [LoginService],
   bootstrap: [AppComponent]

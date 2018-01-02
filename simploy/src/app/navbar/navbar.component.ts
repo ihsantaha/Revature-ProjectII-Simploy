@@ -1,5 +1,6 @@
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
+import { User } from '../user';
 
 @Component({
   selector: 'app-navbar',
@@ -7,14 +8,18 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit {
+  user: User = JSON.parse(localStorage.getItem('user'));
+  isEmployer: boolean = this.user.role == 1;
+  isJobSeeker: boolean = this.user.role == 0;
+
 
   constructor(private router: Router) { }
 
   ngOnInit() {
   }
 
-  logout(){
-    
+  logout() {
+    localStorage.removeItem('user');
   }
 
 }

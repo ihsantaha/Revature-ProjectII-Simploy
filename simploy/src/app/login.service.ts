@@ -1,23 +1,51 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { BehaviorSubject } from 'rxjs';
 import { User } from './user';
 
 @Injectable()
 export class LoginService {
+  currentUser: BehaviorSubject<User> = new BehaviorSubject(null);
 
-  currentUser: User;
   constructor(private http: HttpClient) { }
 
   login(email: string, password: string) {
-    this.http.post('http://localhost:8086/User/login', {
+    this.http.post('http://localhost:8088/User/login', {
       email: email,
       password: password
     })
-    .subscribe(
+      .subscribe(
       (data: User) => {
-        console.log(data);
-        alert(data.firstName);
+        if (data == null)
+          this.currentUser.next(data);
+        else
+          this.currentUser.next(data);
+          //added user to local storage - MW
+          localStorage.setItem('user', JSON.stringify(data));
       }
-    );
+      );
   }
+
+  register(user: User) {
+
+    // Mock Data
+    if (user.email == 'test@t')
+      return user;
+    else
+      return null;
+    
+    // Preview Data
+    // this.http.post('http://localhost:8086/User/register', {
+    //   email: email
+    // })
+    //   .subscribe(
+    //   (data: User) => {
+    //     if (data == null)
+    //       this.currentUser.next(data);
+    //     else
+    //       this.currentUser.next(data);
+    //   }
+    //   );
+  }
+
 }
