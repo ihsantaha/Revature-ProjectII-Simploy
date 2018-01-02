@@ -27,7 +27,7 @@ import { SimployinfoComponent } from './simployinfo/simployinfo.component';
 import { SkillsComponent } from './skills/skills.component';
 
 const routes: Routes = [
-  { path: '', component: SigninComponent},
+  { path: 'login', component: SigninComponent},
   { path: 'navbar', component: NavbarComponent},
   { path: 'editjob', component: EditjobComponent},
   { path: 'editprofile', component: EditprofileComponent},

@@ -1,26 +1,37 @@
-<form (submit)="submitJob($event)">
-  <div class="input">
-      <label>Company</label>
-      <input type="text">
-  </div>
-  <div class="input">
-      <label>Description</label>
-      <input type="text">
-  </div>
-  <div class="input">
-    <label>Location</label>
-    <input type="text">
-  </div>
-  <div class="input">
-    <label>Title</label>
-    <input type="password">
-  </div>
-  <div class="input">
-    <label>Website</label>
-    <input type="number">
-  </div>
-  <div class="input">
+<form *ngIf="toAddJob" (submit)="submitJob($event)">
+    <label>Company</label><br>
+    <input type="text"><br>
+    <label>Description</label><br>
+    <input type="text"><br>
+    <label>Location</label><br>
+    <input type="text"><br>
+    <label>Title</label><br>
+    <input type="text"><br>
+    <label>Website</label><br>
+    <input type="text"><br>
     <input type="submit" value="Add Job">
-    <input (click)="backToViewJobs()" type="button" value="Cancel">
-  </div>
+    <input (click)="backToProfile()" type="button" value="Cancel"><br><br>
+</form>
+
+<form *ngIf="toAddSkills" (ngSubmit)="addSkill()" #addSkillF="ngForm">
+    <label>Skills</label>
+    <p>{{yourskills}}</p>
+    <br>
+
+    <label>Add New Skill to Job</label>
+    
+    <div class="radio" *ngFor="let skill of skills">
+    <label>
+      <input
+        type="radio"
+        id="newskill"
+        name="newskill"
+        [ngModel]="skills[0]"
+        [value]="skill">
+        {{skill}}
+      </label>
+    </div>
+
+    <button class="btn btn-success" type="submit">Add SKill</button>
+    <button (click)="backToProfile()" class="btn btn-success">Done</button>
 </form>
