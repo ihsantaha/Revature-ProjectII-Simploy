@@ -56,44 +56,56 @@
             <div Class="detail-inner-box">
           <h2>{{title|uppercase}}</h2>
             <h3>{{first|uppercase}} {{last|uppercase}}</h3>
-            <i>Contact Information
+            <i>  <b>Contact Information</b>
             <ul>
-              <li>
                 phone:{{phone}}
-              </li>
-              <li>
+<br>
                 email:{{email}}
-              </li>
-            </ul></i>    
-            skills
+            </ul>
+<b>          Education</b>  
+            <ul *ngFor="let e of eduDataArray">
+                  {{e.gradYear}}
+                  {{e.school}}
+                  {{e.type}}
+                  {{e.gradYear}}
+            </ul>
+          </i>    
+          <br>
+           <b> skills</b>
             <ul *ngFor="let skillData of skillsarray">
               <li>
                   {{skillData}}
               </li>
             </ul>
             <br>
-            Projects
+        <b>Projects</b>    
             <ul *ngFor="let p of ProjectDataArray">
-              <li>
-         <h4>{{p.title}}</h4>
-            </li>
-              <li>
+         <h4>{{p.title}}</h4>  
                   {{p.startDate}}-{{p.endDate}}
-              </li>
-              <li>
+            <br>
                   {{p.description}}
-              </li>
-              <li>
+            <br>
                   {{p.groupSize}}
-              </li>
+            <br>
             </ul>
-            Certifications
+            <br>
+          <b>Certifications</b>
             <ul *ngFor="let c of certDataArray">
-                <li>
                     {{c.title}} {{c.gotYear}}
-                </li>
+                    <br>
               </ul>
-    </div>
+              <br>
+          <b>History</b>
+              <ul *ngFor="let exp of expDataArray">
+                      {{exp.title}} 
+                      <br>
+                      {{exp.company}}
+                      <br>
+                        {{exp.startYear}}-{{exp.endYear}}
+                        <br>
+                        <br>
+                      </ul>
+            </div>
     </div>
     </div>
     </div>
