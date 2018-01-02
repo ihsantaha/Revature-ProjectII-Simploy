@@ -6,3 +6,12 @@
     padding: 10px;
 }
 
+input.ng-invalid.ng-touched, input.ng-invalid.ng-dirty{
+    border: solid 2px rgb(125,50,50);
+    background-color: rgb(255, 253, 253);
+}
+
+.invalidInput {
+    color:rgb(125,50,50);
+    font-weight: bold;
+}

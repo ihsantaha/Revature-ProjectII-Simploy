@@ -14,6 +14,7 @@ import { User } from '../user';
 export class SubmitjobComponent implements OnInit {
   @ViewChild('summaryF') summaryForm: NgForm;
   @ViewChild('addSkillF') addSkillForm: NgForm;
+  @ViewChild('jobF') jobForm: NgForm;
 
   selectedSkill = '';
 
@@ -26,44 +27,48 @@ export class SubmitjobComponent implements OnInit {
   toAddSkills: boolean = false;
 
   constructor(private router: Router,
-              private httpClient: HttpClient) { }
+    private httpClient: HttpClient) { }
 
   ngOnInit() {
   }
 
   backToProfile() {
-    this.router.navigate(['./profile']);
+    this.jobForm.reset();
   }
 
   submitJob(e) {
-    e.preventDefault();
 
-    this.toAddJob = false;
-    this.toAddSkills = true;
-    let Company = e.target.elements[0].value;
-    let Description = e.target.elements[1].value;
-    let LOCATION = e.target.elements[2].value;
-    let Title = e.target.elements[3].value;
-    let Website = e.target.elements[4].value;
-    let currentTime= new Date();
-    let date = currentTime.getMonth + '/' + currentTime.getDate + '/' + currentTime.getFullYear;
-    let user: User = JSON.parse(localStorage.getItem('user'));
-    let json = {
-      description: Description,
-      title: Title,
-      location: LOCATION,
-      company: Company,
-      website: Website,
-      postDate: date,
-      user: {
-        id: user.id
-      }
-    };
-    this.httpClient.post('http://localhost:8088/Job', json).subscribe(
-      (data: Job) => {
-        this.job = data;
-      }
-    );
+    if (this.jobForm.form.valid) {
+      e.preventDefault();
+
+      this.toAddJob = false;
+      this.toAddSkills = true;
+      let Company = e.target.elements[0].value;
+      let Description = e.target.elements[1].value;
+      let LOCATION = e.target.elements[2].value;
+      let Title = e.target.elements[3].value;
+      let Website = e.target.elements[4].value;
+      let currentTime = new Date();
+      let date = currentTime.getMonth + '/' + currentTime.getDate + '/' + currentTime.getFullYear;
+      let user: User = JSON.parse(localStorage.getItem('user'));
+      let json = {
+        description: Description,
+        title: Title,
+        location: LOCATION,
+        company: Company,
+        website: Website,
+        postDate: date,
+        user: {
+          id: user.id
+        }
+      };
+      this.httpClient.post('http://localhost:8088/Job', json).subscribe(
+        (data: Job) => {
+          this.job = data;
+        }
+      );
+    }
+
   }
 
   addSkill() {
