@@ -58,13 +58,19 @@
             <h3>{{first|uppercase}} {{last|uppercase}}</h3>
             <i>Contact Information
             <ul>
-              <li>
                 phone:{{phone}}
-              </li>
-              <li>
+<br>
                 email:{{email}}
-              </li>
-            </ul></i>    
+
+            </ul>
+            Education
+            <ul *ngFor="let e of eduDataArray">
+                  {{e.school}}
+                  {{e.type}}
+                  {{e.gradYear}}
+                  <br>
+            </ul>
+          </i>    
             skills
             <ul *ngFor="let skillData of skillsarray">
               <li>
@@ -74,26 +80,31 @@
             <br>
             Projects
             <ul *ngFor="let p of ProjectDataArray">
-              <li>
-         <h4>{{p.title}}</h4>
-            </li>
-              <li>
+         <h4>{{p.title}}</h4>  
                   {{p.startDate}}-{{p.endDate}}
-              </li>
-              <li>
+            <br>
                   {{p.description}}
-              </li>
-              <li>
+            <br>
                   {{p.groupSize}}
-              </li>
+            <br>
             </ul>
+            <br>
             Certifications
             <ul *ngFor="let c of certDataArray">
-                <li>
                     {{c.title}} {{c.gotYear}}
-                </li>
+                    <br>
               </ul>
-    </div>
+              <br>
+              Experience
+              <ul *ngFor="let exp of expDataArray">
+                      {{exp.title}} 
+                      <br>
+                      {{exp.company}}
+                      <br>
+                        {{exp.startYear}}-{{exp.endYear}}
+                      <br>
+                </ul>
+            </div>
     </div>
     </div>
     </div>
