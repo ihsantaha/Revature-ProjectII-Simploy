@@ -57,6 +57,7 @@ export class ViewsubmittedjobsComponent implements OnInit {
           }}
           console.log(tableData.jobId);
           this.tableHold[i] = tableData;
+          
         }
       }
     )
