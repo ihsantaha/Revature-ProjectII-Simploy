@@ -1,37 +1,76 @@
-<form *ngIf="toAddJob" (submit)="submitJob($event)">
-    <label>Company</label><br>
-    <input type="text"><br>
-    <label>Description</label><br>
-    <input type="text"><br>
-    <label>Location</label><br>
-    <input type="text"><br>
-    <label>Title</label><br>
-    <input type="text"><br>
-    <label>Website</label><br>
-    <input type="text"><br>
-    <input type="submit" value="Add Job">
-    <input (click)="backToProfile()" type="button" value="Cancel"><br><br>
-</form>
+<div [ngStyle]="{'background' : 'url(../assets/images/signin-header.gif)'}">
+  <app-navbar></app-navbar>
+  <br>
 
-<form *ngIf="toAddSkills" (ngSubmit)="addSkill()" #addSkillF="ngForm">
-    <label>Skills</label>
-    <p>{{yourskills}}</p>
-    <br>
+  <div class="container">
 
-    <label>Add New Skill to Job</label>
-    
-    <div class="radio" *ngFor="let skill of skills">
-    <label>
-      <input
-        type="radio"
-        id="newskill"
-        name="newskill"
-        [ngModel]="skills[0]"
-        [value]="skill">
-        {{skill}}
-      </label>
+    <div class="row">
+      <div class="text-center">
+        <h1>Your Job Postings</h1>
+      </div>
     </div>
 
-    <button class="btn btn-success" type="submit">Add SKill</button>
-    <button (click)="backToProfile()" class="btn btn-success">Done</button>
-</form>
+    <div class="row">
+      <div class="col-xs-8 col-xs-offset-2 col-sm-6 col-sm-offset-3 simploy-outer-box">
+        <div style="width: 80%;">
+
+          <h4><strong>Add New Job</strong></h4>
+          <br>
+
+          <form *ngIf="toAddJob" (submit)="submitJob($event)">
+            <label>Company</label>
+            <br>
+            <input class="form-control" type="text">
+            <br>
+            <label>Description</label>
+            <br>
+            <input class="form-control" type="text">
+            <br>
+            <label>Location</label>
+            <br>
+            <input class="form-control" type="text">
+            <br>
+            <label>Title</label>
+            <br>
+            <input class="form-control" type="text">
+            <br>
+            <label>Website</label>
+            <br>
+            <input class="form-control" type="text">
+            <br>
+            <button class="btn btn-success" type="submit" style="width:125px">Add Job</button>
+            <button class="btn btn-danger" (click)="backToProfile()" type="button" style="width:125px; float: right">Cancel</button>
+            <br>
+            <br>
+          </form>
+
+          <form *ngIf="toAddSkills" (ngSubmit)="addSkill()" #addSkillF="ngForm">
+            <label>Skills</label>
+            <p>{{yourskills}}</p>
+            <br>
+
+            <label>Add New Skill to Job</label>
+
+            <div class="radio" *ngFor="let skill of skills">
+              <label>
+                <input type="radio" id="newskill" name="newskill" [ngModel]="skills[0]" [value]="skill"> {{skill}}
+              </label>
+            </div>
+            <br>
+            <button class="btn btn-success" type="submit" style="width: 125px">Add SKill</button>&emsp;
+            <button (click)="backToProfile()" class="btn btn-warning" style="width: 125px">Done</button>
+          </form>
+
+          <br>
+          <br>
+
+        </div>
+      </div>
+
+    </div>
+
+    <br>
+    <br>
+    <br>
+
+  </div>
