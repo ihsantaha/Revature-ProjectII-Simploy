@@ -1,0 +1,82 @@
+<div [ngStyle]="{'background' : 'url(../assets/images/signin-header.gif)'}">
+  <app-navbar></app-navbar>
+
+  <div class="container">
+
+    <div class="row">
+      <div class="text-center">
+        <h1>Job Postings</h1>
+      </div>
+    </div>
+
+    <div class="simploy-tableData simploy-shadow">
+      <table datatable class="row-border hover">
+        <thead>
+          <tr>
+            <th></th>
+            <th>Company</th>
+            <th>Job Title</th>
+            <th>Location</th>
+            <th>Skills</th>
+            <th>Post Date</th>
+            <th>Details</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let jobdata of tableHold">
+            <td>
+              {{jobdata["company"]}}
+            </td>
+            <td>
+              {{jobdata["title"]}}
+            </td>
+            <td>
+              {{jobdata["location"]}}
+            </td>
+            <td>
+              {{jobdata["skills"]}}
+            </td>
+            <td>
+              {{jobdata["postDate"]}}
+            </td>
+            <td>
+              <button class="btn btn-danger" (click)='delete(jobdata["jobId"])'>
+                Delete
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <br />
+    <br />
+    <br />
+
+    <div *ngIf="viewJob">
+      <div class="jumbotron detail-outer-box">
+        <h2 class="text-center">Title</h2>
+        <br>
+        <div Class="detail-inner-box">
+          <h3>Name: {{firstname}} {{lastname}}</h3>
+          <h3>Email: {{email}}</h3>
+          <h3>Phone: {{phone}}</h3>
+         
+          <ul>
+            <h3>Skills</h3>
+            <li *ngFor="let skillData of skills">
+              <h3>{{skillData}}</h3>
+            </li>
+          </ul>
+
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <br />
+  <br />
+  <br />
+
+</div>
