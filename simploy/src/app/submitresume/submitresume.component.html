@@ -28,7 +28,8 @@
             class="form-control" 
             rows="6" 
             style="resize: none"
-            ngModel
+            [(ngModel)]="description"
+            value = {{resume.description}}
           ></textarea>
           <br>
           <button class="btn btn-success" type="submit" style="width:125px">Update</button>
@@ -39,7 +40,22 @@
         <hr>
         <h4><strong>Skills</strong></h4>
  
-        <p>{{yourskills}}</p>
+        <table>
+            <tbody>
+            <div *ngFor="let skill of yourskills; let w = index">
+              <tr>
+                <td>
+                  {{skill.title}}&emsp;
+                </td>         
+                <td>
+                  <button class="btn btn-danger" (click)="deleteSkill(w)" style="float: right">Remove</button>
+                </td>
+            </tr>
+            <br>
+            </div>
+            </tbody>
+            </table>
+    
         <br>
  
         <label>Add New Skill</label>
@@ -59,7 +75,7 @@
           </div>
  
           <button class="btn btn-success" type="submit" style="width:125px">Add SKill</button>
-        </form>
+         </form>
  
         <!-- *********************************************** -->
         <br>
@@ -74,10 +90,10 @@
               {{edu.school}}&emsp;
             </td>
             <td>
-              {{edu.gradyear}}&emsp;
+              {{edu.gradYear}}&emsp;
             </td>
             <td>
-              {{edu.edutype}}&emsp;
+              {{edu.type}}&emsp;
             </td>            
             <td>
               <button class="btn btn-danger" (click)="deleteEducation(i)" style="float: right">Remove</button>
@@ -103,11 +119,11 @@
 
           <br>
 
-          <label for="gradyear">Year</label>
+          <label for="gradyear">Graduation Year (est)</label>
           <input
             type="number"
             id="gradyear" 
-            name="gradyyear" 
+            name="gradyear" 
             class="form-control" 
             rows="6" 
             ngModel
@@ -127,7 +143,7 @@
               {{edutype}}
             </label>
           </div>
-
+          
           <br>
           <button class="btn btn-success" type="submit" style="width:125px">Add Education</button>
         </form>        
@@ -145,7 +161,7 @@
               {{certif.title}}&emsp;
             </td>
             <td>
-              {{certif.year}}&emsp;
+              {{certif.gotYear}}&emsp;
             </td>
             <td>
               <button class="btn btn-danger" (click)="deleteCert(i)" style="float: right">Remove</button>
@@ -171,11 +187,11 @@
 
           <br>
 
-          <label for="year">Year</label>
+          <label for="gotYear">Year</label>
           <input
           type="number"
-          id="year" 
-          name="year" 
+          id="gotYear" 
+          name="gotYear" 
           class="form-control" 
           rows="6" 
           ngModel
@@ -200,10 +216,10 @@
               {{exp.company}}&emsp;
             </td>
             <td>
-              {{exp.startyear}}&emsp;
+              {{exp.startYear}}&emsp;
             </td>
             <td>
-              {{exp.endyear}}&emsp;
+              {{exp.endYear}}&emsp;
             </td>
             <td>
               <button class="btn btn-danger" (click)="deleteExperience(i)" style="float: right">Remove</button>
@@ -282,13 +298,13 @@
               {{project.title}}&emsp;
             </td>
             <td>
-              {{project.startdate}}&emsp;
+              {{project.startDate}}&emsp;
             </td>
             <td>
-              {{project.enddate}}&emsp;
+              {{project.endDate}}&emsp;
             </td>
             <td>
-              {{project.size}}&emsp;
+              {{project.groupSize}}&emsp;
             </td>
             <td>
               {{project.description}}&emsp;
@@ -318,11 +334,11 @@
 
           <br>
 
-          <label for="startdate">Start Date</label>
+          <label for="startDate">Start Date</label>
           <input
           type="text"
-          id="startdate" 
-          name="startdate" 
+          id="startDate" 
+          name="startDate" 
           class="form-control" 
           rows="6" 
           ngModel
@@ -330,11 +346,11 @@
 
           <br>
 
-          <label for="enddate">End Date</label>
+          <label for="endDate">End Date</label>
           <input
           type="text"
-          id="enddate" 
-          name="enddate" 
+          id="endDate" 
+          name="endDate" 
           class="form-control" 
           rows="6" 
           ngModel
@@ -342,11 +358,11 @@
 
           <br>
 
-          <label for="groupsize">Group Size</label>
+          <label for="groupSize">Group Size</label>
           <input
           type="text"
-          id="groupsize" 
-          name="groupsize" 
+          id="groupSize" 
+          name="groupSize" 
           class="form-control" 
           rows="6" 
           ngModel
