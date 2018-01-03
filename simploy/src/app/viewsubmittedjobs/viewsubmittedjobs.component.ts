@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { LoginService } from './../login.service';
 import { JobTable } from './../JobTable';
 import { Component, OnInit, ViewChild } from '@angular/core';
@@ -7,7 +8,7 @@ import { User } from '../user';
 import { Job } from '../job';
 import { DataTableDirective } from 'angular-datatables';
 import { Subject } from 'rxjs/Subject';
-import { LoginService } from '../login.service';
+
 
 @Component({
   selector: 'app-viewsubmittedjobs',
@@ -27,13 +28,15 @@ export class ViewsubmittedjobsComponent implements OnInit {
   phone:any;
   skills:any[];
   role:number;
-  tableHold: JobTable[] = JSON.parse(localStorage.getItem('Jobs'));
+  tableHold: JobTable[];
 
   constructor(private httpClient:HttpClient, 
               private router: Router,
               private loginService: LoginService) { }
 
   ngOnInit() {
+    this.loginService.getTableDataJobPoster();
+    this.tableHold = JSON.parse(localStorage.getItem('Jobs'));
   }
 
   // getTableData()
@@ -71,13 +74,12 @@ export class ViewsubmittedjobsComponent implements OnInit {
     let json = {
       jobId : id
     };
-    this.httpClient.post('localhost:8088/Job/delete', json ).subscribe(
+    this.httpClient.post('http://localhost:8088/Job/delete', json ).subscribe(
       (data: any[]) => {
         console.log('job deleted');
+        this.loginService.login(this.user.email, this.user.password);
       }
     );
-    this.loginService.getTableDataJobPoster();
-    this.tableHold = JSON.parse(localStorage.getItem('Jobs'));
   }
 
 }
