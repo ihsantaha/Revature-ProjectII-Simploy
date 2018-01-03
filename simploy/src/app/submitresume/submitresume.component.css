@@ -5,3 +5,21 @@
     border-radius: 5px;
     padding: 10px;
 }
+
+input.ng-invalid.ng-touched, input.ng-invalid.ng-dirty{
+    border: solid 2px rgb(125,50,50);
+    background-color: rgb(255, 253, 253);
+}
+
+.invalidInput {
+    color:rgb(125,50,50);
+    font-weight: bold;
+}
+
+.custom-width {
+    width: 125px;
+}
+
+.text-muted {
+    color: rgb(150, 175, 165) !important; 
+}
