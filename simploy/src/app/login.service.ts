@@ -56,6 +56,8 @@ export class LoginService {
          if (data.skills.length > 0) {
              tableData.skills = data.skills;
          }
+         else 
+         tableData.skills=[];
          localStorage.setItem('resume', JSON.stringify(tableData));
        }
        )

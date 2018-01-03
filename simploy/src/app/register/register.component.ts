@@ -52,7 +52,7 @@ export class RegisterComponent implements OnInit {
     // this.validInput = true;
   }
 
-  register() {
+ register() {
 
     if (this.registerForm.form.value.role == 'Employee')
       this.role = 0;
@@ -103,27 +103,29 @@ export class RegisterComponent implements OnInit {
       console.log(json);
       this.httpClient.post('http://localhost:8088/User/', json).subscribe(
         (data: User) => {
+          if (data==null)
+          this.validInput = false;
+        else
+          this.validInput = true;
+
           localStorage.setItem('user', JSON.stringify(data));
           data=user;
-          if (data==null)
-            this.validInput = false;
-          else
-            this.validInput = true;
-        }
-      );
-      this.httpClient.post('http://localhost:8088/User/',
-      {
-        "description": "",
-        "user": {
-            "id": user.id
+          this.httpClient.post('http://localhost:8088/User/',
+          {
+            "description": "",
+            "user": {
+                "id": user.id
+            }
+            
         }
         
-    }
-    
-    ).subscribe(
-        (data: ResumeOracle) => {
-          localStorage.setItem('resume', JSON.stringify(data));
-          this.router.navigate(['/profile']);
+        ).subscribe(
+            (data: ResumeOracle) => {
+              localStorage.setItem('resume', JSON.stringify(data));
+              this.router.navigate(['/profile']);
+            }
+          );
+
         }
       );
   
@@ -133,11 +135,11 @@ export class RegisterComponent implements OnInit {
       if (this.validInput == false) {
         this.registerForm.form.markAsUntouched();
       }
-    }
+    } 
 
 
-  }
+  
 
-}
+
 
 }
