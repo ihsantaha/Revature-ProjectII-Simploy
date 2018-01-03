@@ -139,7 +139,7 @@ export class SubmitresumeComponent implements OnInit {
   initProject() {
     const req = this.http.post("http://localhost:8088/Project/resid",
       {
-        "resId": this.resume.resId
+        "resId": this.resume.resId  
       })
       .subscribe(
       (data: Project[]) => {
@@ -262,7 +262,6 @@ export class SubmitresumeComponent implements OnInit {
       }
       );
   }
-
 
 
   deleteSkill(w) {
