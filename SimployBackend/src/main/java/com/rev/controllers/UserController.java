@@ -1,5 +1,6 @@
 package com.rev.controllers;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +12,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.rev.domain.Resume;
+import com.rev.domain.Skill;
 import com.rev.domain.User;
+import com.rev.service.ResumeService;
 import com.rev.service.UserService;
 
 @CrossOrigin()
@@ -21,6 +25,7 @@ public class UserController {
 
 	@Autowired
 	UserService service;
+	ResumeService rservice;
 
 	static {
 		System.out.println("in rest conroller");
@@ -37,7 +42,6 @@ public class UserController {
 	public User addFC(@RequestBody User u){
 		User check=service.findUserByEmail(u.getEmail());
 		if(check==null) {
-			System.out.println("test");
 			return service.addUser(u);
 		}else
 			return null;
