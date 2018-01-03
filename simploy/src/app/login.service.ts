@@ -22,56 +22,50 @@ export class LoginService {
     })
       .subscribe(
       (data1: User) => {
-        if (data1 == null)
+        if (data1 == null){
           this.currentUser.next(data1);
-        else {
+        } else {
           this.currentUser.next(data1);
-          //added user to local storage - MW
+          // added user to local storage - MW
           localStorage.setItem('user', JSON.stringify(data1));
           this.user1.id = data1.id;
-          if (data1.role == 0){
+          if (data1.role == 0) {
             this.getTableDataJobSearcher();
-            this.getResume();
-          } else{
-            this.getTableDataJobPoster()
+            // this.getResume();
+          } else {
+            this.getTableDataJobPoster();
           }
         }
       }
       );
   }
 
+  // getResume() {
+  //   this.http.post('http://localhost:8088/Resume/uid', this.user1)
+  //     .subscribe(
+  //     (data: ResumeOracle) => {
+  //       let tableData: ResumeOracle = new ResumeOracle;
 
+  //       if (data == null){
+  //         localStorage.setItem('resume', JSON.stringify(tableData));
+  //         return;
 
-  getResume() {
-    this.http.post('http://localhost:8088/Resume/uid', this.user1)
-      .subscribe(
-      (data: ResumeOracle) => {
-        let tableData: ResumeOracle = new ResumeOracle;
-
-        if (data == null){
-          localStorage.setItem('resume', JSON.stringify(tableData));
-          return;
-
-        }
-        tableData.user = data.user;
-        tableData.resId = data.resId;
-        tableData.description = data.description;
-        if (data.skills.length > 0) {
-            tableData.skills = data.skills;
-        }
-        localStorage.setItem('resume', JSON.stringify(tableData));
-      }
-      )
-  }
-
-
-
-
+  //       }
+  //       tableData.user = data.user;
+  //       tableData.resId = data.resId;
+  //       tableData.description = data.description;
+  //       if (data.skills.length > 0) {
+  //           tableData.skills = data.skills;
+  //       }
+  //       localStorage.setItem('resume', JSON.stringify(tableData));
+  //     }
+  //     )
+  // }
 
   getTableDataJobPoster() {
     this.http.post('http://localhost:8088/Job/uidjobs',
     {
-      "id":this.user1.id
+      "id" : this.user1.id
     }
   )
       .subscribe(
@@ -92,17 +86,17 @@ export class LoginService {
               tableData.skills += data[i].skills[j].title + " "
             }
           }
-          //console.log(tableData);
+          console.log('in service populating row ' + i);
+          console.log(tableData);
           this.tableHold[i] = tableData;
 
         }
+        console.log('In getTableDataJobSearcher: ');
         localStorage.setItem('Jobs', JSON.stringify(this.tableHold));
         console.log(this.tableHold);
       }
       )
   }
-
-
 
   getTableDataJobSearcher() {
     this.http.get('http://localhost:8088/Job')
@@ -124,16 +118,14 @@ export class LoginService {
               tableData.skills += data[i].skills[j].title + " "
             }
           }
-          //console.log(tableData);
+          console.log(tableData);
           this.tableHold[i] = tableData;
 
         }
         localStorage.setItem('JobsTable', JSON.stringify(this.tableHold));
-        //console.log(this.tableHold);
       }
       )
   }
-
 
   register(user: User) {
 

@@ -1,9 +1,15 @@
+import { Router } from '@angular/router';
+import { LoginService } from './../login.service';
 import { JobTable } from './../JobTable';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { User } from '../user';
 import { Job } from '../job';
+import { DataTableDirective } from 'angular-datatables';
+import { Subject } from 'rxjs/Subject';
+
+
 @Component({
   selector: 'app-viewsubmittedjobs',
   templateUrl: './viewsubmittedjobs.component.html',
@@ -13,6 +19,7 @@ export class ViewsubmittedjobsComponent implements OnInit {
 
   viewResume:boolean=false;
   viewJob:boolean = false;
+  user: User = JSON.parse(localStorage.getItem('user'));
 
   id:number;
   email:any;
@@ -21,13 +28,15 @@ export class ViewsubmittedjobsComponent implements OnInit {
   phone:any;
   skills:any[];
   role:number;
-  tableHold: JobTable[] = [];
+  tableHold: JobTable[]=[];
 
-  constructor(private httpClient:HttpClient) { }
+  constructor(private httpClient:HttpClient, 
+              private router: Router,
+              private loginService: LoginService) { }
 
-  ngOnInit() 
-  {
+  ngOnInit() {
     this.getTableData();
+    //this.tableHold = JSON.parse(localStorage.getItem('Jobs'));
   }
 
   getTableData()
@@ -54,7 +63,7 @@ export class ViewsubmittedjobsComponent implements OnInit {
           for (var j = 0; j < data[i].skills.length; j++){
             tableData.skills += data[i].skills[j].title + " "
           }}
-          //console.log(tableData);
+          console.log(tableData.jobId);
           this.tableHold[i] = tableData;
         }
       }
@@ -62,14 +71,16 @@ export class ViewsubmittedjobsComponent implements OnInit {
   }
 
   delete(id) {
-    // let json = {
-    //   jobId : id
-    // };
-    // this.httpClient.post('localhost:8088/Job/delete', json ).subscribe(
-    //   (data: any[]) => {
-    //     console.log('job deleted');
-    //   }
-    // );
+    let json = {
+      jobId : id
+    };
+    this.httpClient.post('http://localhost:8088/Job/delete', json ).subscribe(
+      (data: any[]) => {
+        console.log('job deleted');
+        this.loginService.login(this.user.email, this.user.password);
+        window.location.reload();
+      }
+    );
   }
 
 }
