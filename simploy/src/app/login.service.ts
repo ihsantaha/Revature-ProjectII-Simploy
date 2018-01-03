@@ -10,6 +10,7 @@ export class LoginService {
   currentUser: BehaviorSubject<User> = new BehaviorSubject(null);
 
   tableHold:JobTable[]=[];
+  user: User;
   
   constructor(private http: HttpClient) { }
 
@@ -20,14 +21,17 @@ export class LoginService {
     })
       .subscribe(
       (data1: User) => {
-        if (data1 == null)
+        if (data1 == null) {
           this.currentUser.next(data1);
-        else{
+        } else {
           this.currentUser.next(data1);
           //added user to local storage - MW
           localStorage.setItem('user', JSON.stringify(data1));
+          this.user = data1;
           if(data1.role== 0)
           this.getTableDataJobSearcher();
+        } else {
+          this.getTableDataJobPoster();
         }
       }
       );
@@ -66,7 +70,38 @@ export class LoginService {
     )
   }
 
-
+  getTableDataJobPoster() {
+    this.http.post('http://localhost:8088/Job/uidjobs',
+    {
+      "id":this.user.id
+    }
+  )
+      .subscribe(
+      (data: Job[]) => {
+        for (var i = 0; i < data.length; i++) {
+          let tableData: JobTable = new JobTable;
+          tableData.company = data[i].company;
+          tableData.jobId = data[i].jobId;
+          tableData.description = data[i].description;
+          tableData.postDate = data[i].postDate;
+          tableData.title = data[i].title;
+          tableData.user = data[i].user;
+          tableData.location = data[i].location;
+          if (data[i].skills.length > 0) {
+            tableData.skills = "";
+            for (var j = 0; j < data[i].skills.length; j++) {
+              tableData.skills += data[i].skills[j].title + " "
+            }
+          }
+          //console.log(tableData);
+          this.tableHold[i] = tableData;
+ 
+        }
+        localStorage.setItem('Jobs', JSON.stringify(this.tableHold));
+        console.log(this.tableHold);
+      }
+      )
+  }
   register(user: User) {
 
     // Mock Data
