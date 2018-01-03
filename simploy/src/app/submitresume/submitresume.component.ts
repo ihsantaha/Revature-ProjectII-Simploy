@@ -54,11 +54,11 @@ export class SubmitresumeComponent implements OnInit {
     this.resume = JSON.parse(localStorage.getItem('resume'));
     console.log(this.resume);
     this.description = this.resume.description;
-    this.initSkill();
     this.initCertifications();
     this.initEducation();
     this.initExperience();
     this.initProject();
+    this.initSkill();
   }
 
   initSkill() {
@@ -139,7 +139,7 @@ export class SubmitresumeComponent implements OnInit {
   initProject() {
     const req = this.http.post("http://localhost:8088/Project/resid",
       {
-        "resId": this.resume.resId
+        "resId": this.resume.resId  
       })
       .subscribe(
       (data: Project[]) => {
@@ -264,27 +264,28 @@ export class SubmitresumeComponent implements OnInit {
   }
 
 
-
   deleteSkill(w) {
     let skillw: Skill[] = new Array<Skill>();
     skillw = (this.yourskills.splice(w, 1));
+    console.log(skillw);
 
     const req = this.http.post("http://localhost:8088/Resume/deleteskill",
-      {
-        "skills": [
-          {
-            "skillId": skillw[0].skillId,
-            "title": skillw[0].title
-
-          }
-        ],
-        "resId": this.resume.resId
-
-      }
+    {
+      "skills" :[
+        {
+          "skillId":skillw[0].skillId,
+          "title":skillw[0].title
+          
+        }
+      ],
+      "resId": this.resume.resId
+        
+    }
     )
       .subscribe(
       (res: ResumeOracle) => {
-        //console.log("deleted " + skillw[0].title)
+        localStorage.removeItem("resume");
+        localStorage.setItem('resume', JSON.stringify(res));
       },
       err => {
         console.log("Error occured");

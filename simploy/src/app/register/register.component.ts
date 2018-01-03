@@ -5,7 +5,7 @@ import { NgForm } from '@angular/forms';
 
 import { LoginService } from '../login.service';
 import { User } from '../user';
-import { Resume } from '../Resume';
+import { ResumeOracle } from '../ResumeOracle';
 
 @Component({
   selector: 'app-register',
@@ -13,7 +13,7 @@ import { Resume } from '../Resume';
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit {
-  @ViewChild('registerF') registerForm: NgForm;
+  @ViewChild('registerF') registerForm: NgForm; 
 
   user: User = new User();
 
@@ -71,7 +71,7 @@ export class RegisterComponent implements OnInit {
     }
     else {
       pnumber = '(' + pnumber.substring(0,3) + ') ' + pnumber.substring(3,6) + '-' + pnumber.substring(6,10);
-      console.log(pnumber);
+      
       this.validNumber = true;
 
       this.user.firstName = this.firstname;
@@ -79,16 +79,17 @@ export class RegisterComponent implements OnInit {
       this.user.email = this.email;
       this.user.phoneNumber = pnumber;
       this.user.password = this.password;
-
+      console.log("the user is ");
+      console.log(this.user);
       // Mock Data
-      if (this.loginService.register(this.user) != null) {
-        this.validInput = true;
-        console.log(this.validInput);
-      }
-      else {
-        this.validInput = false;
-        console.log(this.validInput);
-      }
+      // if (this.loginService.register(this.user) != null) {
+      //   this.validInput = true;
+      //   console.log(this.validInput);
+      // }
+      // else {
+      //   this.validInput = false;
+      //   console.log(this.validInput);
+      // }
 
       let json = {
         firstName: this.user.firstName,
@@ -98,32 +99,37 @@ export class RegisterComponent implements OnInit {
         password: this.user.password,
         role: this.role
       };
-
+      let user:User;
       console.log(json);
       this.httpClient.post('http://localhost:8088/User/', json).subscribe(
-        (data: any) => {
+        (data: User) => {
           localStorage.setItem('user', JSON.stringify(data));
-          this.user=data;
-          let jsonRes={
-            'description':'',
-            'user':{
-              'id':this.user.id
-            }
-          };
-          this.httpClient.post('http://localhost:8088/Resumes',jsonRes).subscribe(
-            (resdata: any) => {
-              let res:Resume=JSON.parse(resdata);
-              let jsonSkill = {
-                'skills':[],
-                'resId': res.resid
-              }
-              this.httpClient.post('http://localhost:8088/Resumes/addskill',jsonSkill).subscribe();
-            }
-          );
+          data=user;
+          if (data==null)
+            this.validInput = false;
+          else
+            this.validInput = true;
+        }
+      );
+      this.httpClient.post('http://localhost:8088/User/',
+      {
+        "description": "",
+        "user": {
+            "id": user.id
+        }
+        
+    }
+    
+    ).subscribe(
+        (data: ResumeOracle) => {
+          localStorage.setItem('resume', JSON.stringify(data));
           this.router.navigate(['/profile']);
         }
       );
-
+  
+  
+  
+    }
       if (this.validInput == false) {
         this.registerForm.form.markAsUntouched();
       }
@@ -131,5 +137,7 @@ export class RegisterComponent implements OnInit {
 
 
   }
+
+}
 
 }
