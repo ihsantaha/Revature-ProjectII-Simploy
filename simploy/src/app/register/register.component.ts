@@ -128,8 +128,5 @@ export class RegisterComponent implements OnInit {
         this.registerForm.form.markAsUntouched();
       }
     }
-
-
   }
-
 }
