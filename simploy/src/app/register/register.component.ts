@@ -5,6 +5,7 @@ import { NgForm } from '@angular/forms';
 
 import { LoginService } from '../login.service';
 import { User } from '../user';
+import { Resume } from '../Resume';
 
 @Component({
   selector: 'app-register',
@@ -102,6 +103,23 @@ export class RegisterComponent implements OnInit {
       this.httpClient.post('http://localhost:8088/User/', json).subscribe(
         (data: any) => {
           localStorage.setItem('user', JSON.stringify(data));
+          this.user=data;
+          let jsonRes={
+            'description':'',
+            'user':{
+              'id':this.user.id
+            }
+          };
+          this.httpClient.post('http://localhost:8088/Resumes',jsonRes).subscribe(
+            (resdata: any) => {
+              let res:Resume=JSON.parse(resdata);
+              let jsonSkill = {
+                'skills':[],
+                'resId': res.resid
+              }
+              this.httpClient.post('http://localhost:8088/Resumes/addskill',jsonSkill).subscribe();
+            }
+          );
           this.router.navigate(['/profile']);
         }
       );

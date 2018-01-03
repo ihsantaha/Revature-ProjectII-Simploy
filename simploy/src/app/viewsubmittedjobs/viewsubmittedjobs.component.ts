@@ -28,47 +28,47 @@ export class ViewsubmittedjobsComponent implements OnInit {
   phone:any;
   skills:any[];
   role:number;
-  tableHold: JobTable[];
+  tableHold: JobTable[]=[];
 
   constructor(private httpClient:HttpClient, 
               private router: Router,
               private loginService: LoginService) { }
 
   ngOnInit() {
-    this.loginService.getTableDataJobPoster();
-    this.tableHold = JSON.parse(localStorage.getItem('Jobs'));
+    this.getTableData();
+    //this.tableHold = JSON.parse(localStorage.getItem('Jobs'));
   }
 
-  // getTableData()
-  // {
-  //   let user: User = JSON.parse(localStorage.getItem('user'));
-  //   let json = {
-  //     id: user.id
-  //   };
-  //   this.httpClient.post('http://localhost:8088/Job/uidjobs', json)
-  //   .subscribe(
-  //     (data: Job[] ) =>
-  //     {
-  //       for (var i = 0; i < data.length; i++){
-  //         let tableData:JobTable= new JobTable;
-  //         tableData.company=data[i].company;
-  //         tableData.jobId=data[i].jobId;
-  //         tableData.description=data[i].description;
-  //         tableData.postDate=data[i].postDate;
-  //         tableData.title=data[i].title;
-  //         tableData.user=data[i].user;
-  //         tableData.location=data[i].location;
-  //         if(data[i].skills.length > 0 ){
-  //           tableData.skills = '';
-  //         for (var j = 0; j < data[i].skills.length; j++){
-  //           tableData.skills += data[i].skills[j].title + " "
-  //         }}
-  //         console.log(tableData.jobId);
-  //         this.tableHold[i] = tableData;
-  //       }
-  //     }
-  //   )
-  // }
+  getTableData()
+  {
+    let user: User = JSON.parse(localStorage.getItem('user'));
+    let json = {
+      id: user.id
+    };
+    this.httpClient.post('http://localhost:8088/Job/uidjobs', json)
+    .subscribe(
+      (data: Job[] ) =>
+      {
+        for (var i = 0; i < data.length; i++){
+          let tableData:JobTable= new JobTable;
+          tableData.company=data[i].company;
+          tableData.jobId=data[i].jobId;
+          tableData.description=data[i].description;
+          tableData.postDate=data[i].postDate;
+          tableData.title=data[i].title;
+          tableData.user=data[i].user;
+          tableData.location=data[i].location;
+          if(data[i].skills.length > 0 ){
+            tableData.skills = '';
+          for (var j = 0; j < data[i].skills.length; j++){
+            tableData.skills += data[i].skills[j].title + " "
+          }}
+          console.log(tableData.jobId);
+          this.tableHold[i] = tableData;
+        }
+      }
+    )
+  }
 
   delete(id) {
     let json = {
@@ -78,6 +78,7 @@ export class ViewsubmittedjobsComponent implements OnInit {
       (data: any[]) => {
         console.log('job deleted');
         this.loginService.login(this.user.email, this.user.password);
+        window.location.reload();
       }
     );
   }
