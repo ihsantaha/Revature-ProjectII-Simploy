@@ -28,7 +28,8 @@
             class="form-control" 
             rows="6" 
             style="resize: none"
-            ngModel
+            [(ngModel)]="description"
+            value = {{resume.description}}
           ></textarea>
           <br>
           <button class="btn btn-success" type="submit" style="width:125px">Update</button>

@@ -4,6 +4,10 @@ import { CertificateObj } from '../certificate';
 import { Project } from '../project';
 import { Education } from '../education';
 import { Experiecne } from '../experience';
+import { User } from '../user';
+import { Resume } from '../Resume';
+import { ResumeOracle } from '../ResumeOracle';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-submitresume',
@@ -11,6 +15,7 @@ import { Experiecne } from '../experience';
   styleUrls: ['./submitresume.component.css']
 })
 export class SubmitresumeComponent implements OnInit {
+  [x: string]: any;
   @ViewChild('summaryF') summaryForm: NgForm;
   @ViewChild('addSkillF') addSkillForm: NgForm;
   @ViewChild('eduF') educationForm: NgForm;
@@ -22,7 +27,7 @@ export class SubmitresumeComponent implements OnInit {
   selectedSkill = '';
 
   skills: string[] = ['Java', 'Angular', 'SQL', 'C++', 'Agile', 'AJAX'];
-  yourskills: string = "Java Spring Agile";
+  yourskills: string = "";
 
   edutypes: string[] = ['Bachelors', 'Masters', 'Associates'];
   educations: Education[] = [];
@@ -36,23 +41,108 @@ export class SubmitresumeComponent implements OnInit {
 
   projects: Project[] = [];
   project: Project = new Project();
-
-  constructor() { }
-
+  user:User;
+  resume:ResumeOracle;
+  description:string;
+  constructor(private http: HttpClient) { }
   ngOnInit() {
+    this.user=JSON.parse(localStorage.getItem('user'));
+    this.resume=JSON.parse(localStorage.getItem('resume'));
+    console.log(this.resume);
+    this.description=this.resume.description;
+    if (this.resume.skills.length > 0) {
+      for (var j = 0; j < this.resume.skills.length; j++) {
+        this.yourskills += this.resume.skills[j].title + " "
+      }
+    }
+
   }
 
   updateSummary() {
-    this.summary = this.summaryForm.value.description;
-  }
+    //this.summary = this.summaryForm.value.description;
+    console.log(this.description);
+    this.resume.description=this.description;
+    console.log(this.description);
+    console.log(this.user.id);
+    console.log(this.resume.description);
+    const req = this.http.post("http://localhost:8088/Resume/", 
+    {
+      "user": {
+        "id": this.resume.user.id
+        },
+      "description":this.resume.description,
+      "resId":this.resume.resId
+  })
+        .subscribe(
+          res => {
+            console.log(res);
+             localStorage.removeItem("resume");
+             localStorage.setItem('resume',JSON.stringify(res));
+          },
+          err => {
+            console.log("Error occured");
+          }
+        );
+        }
+
+
 
   addSkill() {
     if (!this.yourskills.includes(this.addSkillForm.value.newskill)) {
       this.yourskills += ' ' + this.addSkillForm.value.newskill;
+      let skillid:number;
+      if(this.addSkillForm.value.newskill=='Java')
+      {
+        skillid=1;
+      }
+      if(this.addSkillForm.value.newskill=='Angular')
+      {
+        skillid=2;
+      }
+      if(this.addSkillForm.value.newskill=='SQL')
+      {
+        skillid=3;
+      }
+      if(this.addSkillForm.value.newskill=='C++')
+      {
+        skillid=4;
+      }
+      if(this.addSkillForm.value.newskill=='Agile')
+      {
+        skillid=5;
+      }
+      if(this.addSkillForm.value.newskill=='AJAX')
+      {
+        skillid=6;
+      }
+      const req = this.http.post("http://localhost:8088/Resume/addskill", 
+      {
+        "skills" :[
+          {
+            "skillId":skillid,
+            "title":this.addSkillForm.value.newskill
+            
+          }],
+        "resId":this.resume.resId
+    })
+          .subscribe(
+            res => {
+              console.log(res);
+               localStorage.removeItem("resume");
+               localStorage.setItem('resume',JSON.stringify(res));
+            },
+            err => {
+              console.log("Error occured");
+            }
+          );
     }
   }
 
-
+ /////////////////////////////doesn't grab year correctly, this is where you left off 
+ // need to add in all functionality below, preload in educations into an array and have them displayed 
+ // the educations currently operates in an arrayt fashion just like above, use the functionality of the button to make it delete 
+ //add in functionality to remove skills with a button as well 
+ // enjoy the movie son. 
   updateEducations() {
     console.log(this.educationForm.form);
     let edu:Education = new Education();
@@ -61,6 +151,28 @@ export class SubmitresumeComponent implements OnInit {
     edu.edutype = this.educationForm.form.value.edutype;
 
     this.educations.push(edu);
+    const req = this.http.post("http://localhost:8088/Education",     
+    {
+      "school":this.educationForm.form.value.school,
+      "type": this.educationForm.form.value.edutype,
+      "gradYear": parseInt(this.educationForm.form.value.gradyear,10),
+      "resume": {
+          "resId": this.resume.resId
+      }
+  })
+        .subscribe(
+          res => {
+            console.log(res);
+             localStorage.removeItem("Educations");
+             localStorage.setItem('Educations',JSON.stringify(res));
+          },
+          err => {
+            console.log("Error occured");
+          }
+        );
+
+
+
     console.log(this.educations);
   }
 
