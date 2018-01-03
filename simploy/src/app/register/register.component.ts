@@ -135,5 +135,13 @@ export class RegisterComponent implements OnInit {
       if (this.validInput == false) {
         this.registerForm.form.markAsUntouched();
       }
+
     } 
+
+
+  
+
+
+
+  
 }
