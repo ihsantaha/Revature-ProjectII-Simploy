@@ -38,7 +38,7 @@ description:any;
   {
     this.http.get('http://localhost:8088/Job')
     .subscribe(
-      (data:Job[])=>
+      (data: Job[]) =>
       {
 
           for (var i = 0; i < data.length; i++){
@@ -76,23 +76,21 @@ description:any;
       this.viewJob=true;
     }
     */
-    this.skillDatab=true;
-    this.viewJob=true;
+    this.skillDatab = true;
+    this.viewJob = true;
     this.company = company;
-    this.title=title;
-    this.location=location;
+    this.title = title;
+    this.location = location;
     this.description = description;
     this.postDate = postDate;
     console.log(user1);
-    this.user=user1;
-    if(typeof skills1== "string"){
-    skills1=skills1.trim();
-    this.skills=skills1.split(" ");
-    }else{
-      this.skillDatab=false;
-      this.skills=[];
+    this.user = user1;
+    if (typeof skills1 == "string"){
+    skills1 = skills1.trim();
+    this.skills = skills1.split(" ");
+    }else {
+      this.skillDatab = false;
+      this.skills = [];
     }
-    
   }
-  
 }

@@ -1,10 +1,11 @@
+import { User } from './../user';
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
 import { ViewChild } from '@angular/core';
 import { Job } from '../job';
-import { User } from '../user';
+import { LoginService } from '../login.service';
 
 @Component({
   selector: 'app-submitjob',
@@ -26,14 +27,19 @@ export class SubmitjobComponent implements OnInit {
   toAddJob: boolean = true;
   toAddSkills: boolean = false;
 
+  user: User = JSON.parse(localStorage.getItem('user'));
+
   constructor(private router: Router,
-    private httpClient: HttpClient) { }
+              private httpClient: HttpClient,
+              private loginService: LoginService) { }
 
   ngOnInit() {
   }
 
   backToProfile() {
-    this.jobForm.reset();
+    //this.jobForm.reset();
+    this.loginService.login(this.user.email, this.user.password);
+    this.router.navigate(['/profile']);
   }
 
   submitJob(e) {
@@ -49,8 +55,9 @@ export class SubmitjobComponent implements OnInit {
       let Title = e.target.elements[3].value;
       let Website = e.target.elements[4].value;
       let currentTime = new Date();
-      let date = currentTime.getMonth + '/' + currentTime.getDate + '/' + currentTime.getFullYear;
+      let date = (currentTime.getMonth()+1).toString() + '/' + currentTime.getDate().toString() + '/' + currentTime.getFullYear().toString();
       let user: User = JSON.parse(localStorage.getItem('user'));
+      console.log(date);
       let json = {
         description: Description,
         title: Title,
@@ -101,4 +108,7 @@ export class SubmitjobComponent implements OnInit {
     }
   }
 
+done() {
+  this.loginService.login(this.user.email, this.user.password);
+}
 }
