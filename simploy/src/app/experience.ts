@@ -1,10 +1,12 @@
+import { ResumeOracle } from "./ResumeOracle";
+
 export class Experiecne {
-    expid: number;
-    resid: number;
+    expId: number;
+    resume: ResumeOracle;
     title: string;
     company: string;
-    startyear: string;
-    endyear: string;
+    startYear: string;
+    endYear: string;
 
     constructor() {}
 }

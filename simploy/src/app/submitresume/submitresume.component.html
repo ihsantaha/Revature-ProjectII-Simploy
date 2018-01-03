@@ -12,27 +12,29 @@
 
     <div class="row">
       <div class="col-xs-8 col-xs-offset-2 col-sm-6 col-sm-offset-3 simploy-outer-box">
+
         <div style="width: 100px;">
-        <h4><strong>Summary</strong></h4>
-        <p>
-          {{summary}}
-        </p>
-        <br>
-      </div>
+          <h4><strong>Summary</strong></h4>
+          <p>
+           {{summary}}
+          </p>
+          <br>
+        </div>
 
         <form (ngSubmit)="updateSummary()" #summaryF="ngForm">
-          <label for="description">Edit</label>
+          <label for="description">Edit <span class="text-muted">(500 chars max)</span></label>
           <textarea  
             id="description" 
             name="description" 
             class="form-control" 
-            rows="6" 
             style="resize: none"
             [(ngModel)]="description"
+            maxlength="500"
             value = {{resume.description}}
-          ></textarea>
+          >
+          </textarea>
           <br>
-          <button class="btn btn-success" type="submit" style="width:125px">Update</button>
+          <button class="btn btn-success custom-width" type="submit">Update</button>
         </form>
 
         <!-- *********************************************** -->
@@ -40,7 +42,15 @@
         <hr>
         <h4><strong>Skills</strong></h4>
  
-        <p>{{yourskills}}</p>
+
+            <div *ngFor="let skill of yourskills; let w = index" style="width:200px">
+                  {{skill.title}}
+                  <button class="btn btn-danger btn-small" (click)="deleteSkill(w)" style="float: right">Remove</button>
+                  <div style="clear:right"></div>
+                  <br>
+            </div>
+
+    
         <br>
  
         <label>Add New Skill</label>
@@ -59,7 +69,7 @@
             </label>
           </div>
  
-          <button class="btn btn-success" type="submit" style="width:125px">Add SKill</button>
+          <button class="btn btn-success custom-width" type="submit">Add SKill</button>
         </form>
  
         <!-- *********************************************** -->
@@ -68,69 +78,83 @@
         <h4><strong>Education</strong></h4>
 
         <table>
-        <tbody>
-        <div *ngFor="let edu of educations; let i = index">
-          <tr>
-            <td>
-              {{edu.school}}&emsp;
-            </td>
-            <td>
-              {{edu.gradyear}}&emsp;
-            </td>
-            <td>
-              {{edu.edutype}}&emsp;
-            </td>            
-            <td>
-              <button class="btn btn-danger" (click)="deleteEducation(i)" style="float: right">Remove</button>
-            </td>
-        </tr>
-        <br>
-        </div>
-        </tbody>
+          <tbody>
+            <div *ngFor="let edu of educations; let i = index">
+              <tr>
+                <td>
+                  {{edu.school}}&emsp;
+                </td>
+                <td>
+                  {{edu.gradYear}}&emsp;
+                </td>
+                <td>
+                  {{edu.type}}&emsp;
+                </td>            
+                <td>
+                  <button class="btn btn-danger" (click)="deleteEducation(i)" style="float: right">Remove</button>
+                </td>
+              </tr>
+              <br>
+            </div>
+          </tbody>
         </table>
 
         <br>
+
         <label>Add New Education</label>
         <form (ngSubmit)="updateEducations()" #eduF="ngForm">
-          <label for="school">School</label>
-          <input
-            type="text"
-            id="school" 
+          <label for name="school">School</label>
+          <input 
+            class="form-control"  
+            type="school"
             name="school" 
-            class="form-control" 
-            rows="6"
-            ngModel
+            [(ngModel)]="school"
+            ngModel 
+            required
+            #schoolField="ngModel"
           >
+          <span 
+            class="help-block invalidInput" 
+            *ngIf="!schoolField.valid && eduF.submitted">
+            Please enter a valid school
+          </span>
 
           <br>
 
-          <label for="gradyear">Year</label>
-          <input
+          <label for name="gradyear">Graduation Year (est)</label>
+          <input 
+            class="form-control"  
             type="number"
-            id="gradyear" 
-            name="gradyyear" 
-            class="form-control" 
-            rows="6" 
-            ngModel
+            name="gradyear" 
+            [(ngModel)]="gradyear"
+            ngModel 
+            required
+            #gradyearField="ngModel"
           >
+          <span 
+            class="help-block invalidInput" 
+            *ngIf="!gradyearField.valid && eduF.submitted">
+            Please enter a valid year
+          </span>
 
           <br>
 
+          <label>Education Type</label>
           <div class="radio" *ngFor="let edutype of edutypes">
             <label>
             <input
               type="radio"
               id="edutype"
               name="edutype"
-              [ngModel]="edutypes[0]"
+              [(ngModel)]="edutypes[0]"
               [value]="edutype"
             >
               {{edutype}}
             </label>
           </div>
-
+          
           <br>
-          <button class="btn btn-success" type="submit" style="width:125px">Add Education</button>
+          <button class="btn btn-success custom-width" type="submit">Add Education</button>
         </form>        
         
         <!-- *********************************************** -->
@@ -139,50 +163,62 @@
         <h4><strong>Certifications</strong></h4>
 
         <table>
-        <tbody>
-        <div *ngFor="let certif of certifs; let i = index">
-          <tr>
-            <td>
-              {{certif.title}}&emsp;
-            </td>
-            <td>
-              {{certif.year}}&emsp;
-            </td>
-            <td>
-              <button class="btn btn-danger" (click)="deleteCert(i)" style="float: right">Remove</button>
-            </td>
-        </tr>
-        <br>
-        </div>
-        </tbody>
+          <tbody>
+            <div *ngFor="let certif of certifs; let i = index">
+              <tr>
+                <td>
+                  {{certif.title}}&emsp;
+                </td>
+                <td>
+                  {{certif.gotYear}}&emsp;
+                </td>
+                <td>
+                  <button class="btn btn-danger" (click)="deleteCert(i)" style="float: right">Remove</button>
+                </td>
+              </tr>
+              <br>
+            </div>
+          </tbody>
         </table>
 
         <br>
         <label>Add New Certificate</label>
         <form (ngSubmit)="updateCertificates()" #certF="ngForm">
-          <label for="projects">Title</label>
+          <label for="title">Title</label>
           <input
             type="text"
             id="title" 
             name="title" 
             class="form-control" 
-            rows="6"
-            ngModel
-          >
-
+            [(ngModel)]="title"
+            ngModel 
+            required
+            #titleField="ngModel">
+          <span 
+            class="help-block invalidInput" 
+            *ngIf="!titleField.valid && certF.submitted">
+            Please enter a valid title
+          </span>
           <br>
 
-          <label for="year">Year</label>
+          <label for="gotYear">Year</label>
           <input
-          type="number"
-          id="year" 
-          name="year" 
-          class="form-control" 
-          rows="6" 
-          ngModel
-        >
+            type="number"
+            id="gotYear" 
+            name="gotYear" 
+            class="form-control" 
+            [(ngModel)]="gotyear"
+            ngModel 
+            required
+            #gotyearField="ngModel"
+          >
+          <span 
+            class="help-block invalidInput" 
+            *ngIf="!gotyearField.valid && certF.submitted">
+            Please enter a valid year
+          </span>
           <br>
-          <button class="btn btn-success" type="submit" style="width:125px">Add Certificate</button>
+          <button class="btn btn-success custom-width" type="submit">Add Certificate</button>
         </form>
 
         <!-- *********************************************** -->
@@ -191,28 +227,28 @@
         <h4><strong>Experience</strong></h4>
 
         <table>
-        <tbody>
-        <div *ngFor="let exp of explist; let i = index">
-          <tr>
-            <td>
-              {{exp.title}}&emsp;
-            </td>
-            <td>
-              {{exp.company}}&emsp;
-            </td>
-            <td>
-              {{exp.startyear}}&emsp;
-            </td>
-            <td>
-              {{exp.endyear}}&emsp;
-            </td>
-            <td>
-              <button class="btn btn-danger" (click)="deleteExperience(i)" style="float: right">Remove</button>
-            </td>
-          </tr>
-          <br>
-        </div>
-        </tbody>
+          <tbody>
+            <div *ngFor="let exp of explist; let i = index">
+              <tr>
+                <td>
+                  {{exp.title}}&emsp;
+                </td>
+                <td>
+                  {{exp.company}}&emsp;
+                </td>
+                <td>
+                  {{exp.startYear}}&emsp;
+                </td>
+                <td>
+                  {{exp.endYear}}&emsp;
+                </td>
+                <td>
+                  <button class="btn btn-danger" (click)="deleteExperience(i)" style="float: right">Remove</button>
+                </td>
+              </tr>
+              <br>
+            </div>
+          </tbody>
         </table>
 
         <br>
@@ -225,49 +261,78 @@
             id="title" 
             name="title" 
             class="form-control" 
-            rows="6"
-            ngModel
+            [(ngModel)]="title"
+            ngModel 
+            required
+            #titleField="ngModel"
           >
-
+          <span 
+            class="help-block invalidInput" 
+            *ngIf="!titleField.valid && expF.submitted">
+            Please enter a valid year
+          </span>
+        
           <br>
 
           <label for="company">Company</label>
           <input
-          type="text"
-          id="company" 
-          name="company" 
-          class="form-control" 
-          rows="6" 
-          ngModel
+            type="text"
+            id="company" 
+            name="company" 
+            class="form-control" 
+            [(ngModel)]="company"
+            ngModel 
+            required
+            #companyField="ngModel"
           >
+          <span 
+            class="help-block invalidInput" 
+            *ngIf="!companyField.valid && expF.submitted">
+            Please enter a valid company
+          </span>
 
           <br>
 
           <label for="startyear">Start Year</label>
           <input
-          type="text"
-          id="startyear" 
-          name="startyear" 
-          class="form-control" 
-          rows="6" 
-          ngModel
+            type="text"
+            id="startyear" 
+            name="startyear" 
+            class="form-control" 
+            [(ngModel)]="startyear"
+            ngModel 
+            required
+            #startyearField="ngModel"
           >
+          <span 
+            class="help-block invalidInput" 
+            *ngIf="!startyearField.valid && expF.submitted">
+            Please enter a valid start year
+          </span>
 
           <br>
 
           <label for="endyear">End Year</label>
           <input
-          type="text"
-          id="endyear" 
-          name="endyear" 
-          class="form-control" 
-          rows="6" 
-          ngModel
+            type="text"
+            id="endyear" 
+            name="endyear" 
+            class="form-control" 
+            rows="6" 
+            [(ngModel)]="endyear"
+            ngModel 
+            required
+            #endyearField="ngModel"
           >
+          <span 
+            class="help-block invalidInput" 
+            *ngIf="!endyearField.valid && expF.submitted">
+            Please enter a valid end year
+          </span>
 
           <br>
 
-          <button class="btn btn-success" type="submit" style="width:125px">Add Experience</button>
+          <button class="btn btn-success custom-width" type="submit">Add Experience</button>
         </form>
 
         <!-- *********************************************** -->
@@ -276,31 +341,31 @@
         <h4><strong>Projects</strong></h4>
 
         <table>
-        <tbody>
-        <div *ngFor="let project of projects; let i = index">
-          <tr>
-            <td>
-              {{project.title}}&emsp;
-            </td>
-            <td>
-              {{project.startdate}}&emsp;
-            </td>
-            <td>
-              {{project.enddate}}&emsp;
-            </td>
-            <td>
-              {{project.size}}&emsp;
-            </td>
-            <td>
-              {{project.description}}&emsp;
-            </td>
-            <td>
-              <button class="btn btn-danger" (click)="deleteProject(i)" style="float: right">Remove</button>
-            </td>
-          </tr>
-          <br>
-        </div>
-        </tbody>
+          <tbody>
+            <div *ngFor="let project of projects; let i = index">
+              <tr>
+                <td>
+                  {{project.title}}&emsp;
+                </td>
+                <td>
+                  {{project.startDate}}&emsp;
+                </td>
+                <td>
+                  {{project.endDate}}&emsp;
+                </td>
+                <td>
+                  {{project.groupSize}}&emsp;
+                </td>
+                <td>
+                  {{project.description}}&emsp;
+                </td>
+                <td>
+                  <button class="btn btn-danger" (click)="deleteProject(i)" style="float: right">Remove</button>
+                </td>
+              </tr>
+              <br>
+            </div>
+          </tbody>
         </table>
 
         <br>
@@ -313,61 +378,95 @@
             id="title" 
             name="title" 
             class="form-control" 
-            rows="6"
-            ngModel
+            [(ngModel)]="title"
+            ngModel 
+            required
+            #titleField="ngModel"
           >
+          <span 
+            class="help-block invalidInput" 
+            *ngIf="!titleField.valid && projectF.submitted">
+            Please enter a valid title
+          </span>
 
           <br>
 
-          <label for="startdate">Start Date</label>
+          <label for="startDate">Start Date</label>
           <input
-          type="text"
-          id="startdate" 
-          name="startdate" 
-          class="form-control" 
-          rows="6" 
-          ngModel
+            type="text"
+            id="startDate" 
+            name="startDate" 
+            class="form-control" 
+            [(ngModel)]="startDate"
+            ngModel 
+            required
+            #startDateField="ngModel"
           >
+          <span 
+            class="help-block invalidInput" 
+            *ngIf="!startDateField.valid && projectF.submitted">
+            Please enter a valid start date
+          </span>
 
           <br>
 
-          <label for="enddate">End Date</label>
+          <label for="endDate">End Date</label>
           <input
-          type="text"
-          id="enddate" 
-          name="enddate" 
-          class="form-control" 
-          rows="6" 
-          ngModel
+            type="text"
+            id="endDate" 
+            name="endDate" 
+            class="form-control" 
+            [(ngModel)]="endDate"
+            ngModel 
+            required
+            #endDateField="ngModel"
           >
+          <span 
+            class="help-block invalidInput" 
+            *ngIf="!endDateField.valid && projectF.submitted">
+            Please enter a valid end date
+          </span>
 
           <br>
 
-          <label for="groupsize">Group Size</label>
+          <label for="groupSize">Group Size</label>
           <input
-          type="text"
-          id="groupsize" 
-          name="groupsize" 
-          class="form-control" 
-          rows="6" 
-          ngModel
+            type="number"
+            id="groupSize" 
+            name="groupSize" 
+            class="form-control" 
+            [(ngModel)]="groupsize"
+            ngModel 
+            required
+            #groupsizeField="ngModel"
           >
-
+          <span 
+            class="help-block invalidInput" 
+            *ngIf="!groupsizeField.valid && projectF.submitted">
+            Please enter a valid group size
+          </span>
           <br>
 
-          <label for="description">Description</label>
+          <label for="description">Description <span class="text-muted">(500 chars max)</span></label>
           <textarea  
             id="description" 
             name="description" 
             class="form-control" 
-            rows="6" 
+            [(ngModel)]="description"
+            ngModel 
+            required
+            #descField="ngModel"
             style="resize: none"
-            ngModel
+            maxlength="500"
           ></textarea>
-
+          <span 
+            class="help-block invalidInput" 
+            *ngIf="!descField.valid && projectF.submitted">
+            Please enter a valid description
+          </span>
           <br>
 
-          <button class="btn btn-success" type="submit" style="width:125px">Add Project</button>
+          <button class="btn btn-success" type="submit">Add Project</button>
         </form>
 
         <br>

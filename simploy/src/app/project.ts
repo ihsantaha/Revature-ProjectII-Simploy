@@ -1,11 +1,13 @@
+import { ResumeOracle } from "./ResumeOracle";
+
 export class Project {
-    projid: number;
-    resid: number;
+    proId: number;
+    resume: ResumeOracle;
     description: string;
-    startdate: string;
-    enddate: string;
+    startDate: string;
+    endDate: string;
     title: string;
-    groupsize: number;
+    groupSize: number;
 
     constructor () {}
 }
