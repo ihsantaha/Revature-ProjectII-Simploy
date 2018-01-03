@@ -1,10 +1,14 @@
 import { LoginService } from './../login.service';
 import { JobTable } from './../JobTable';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { User } from '../user';
 import { Job } from '../job';
+import { DataTableDirective } from 'angular-datatables';
+import { Subject } from 'rxjs/Subject';
+import { LoginService } from '../login.service';
+
 @Component({
   selector: 'app-viewsubmittedjobs',
   templateUrl: './viewsubmittedjobs.component.html',
@@ -25,10 +29,12 @@ export class ViewsubmittedjobsComponent implements OnInit {
   role:number;
   tableHold: JobTable[] = JSON.parse(localStorage.getItem('Jobs'));
 
-  constructor(private httpClient: HttpClient,
+  constructor(private httpClient:HttpClient, 
+              private router: Router,
               private loginService: LoginService) { }
 
-  ngOnInit() {}
+  ngOnInit() {
+  }
 
   // getTableData()
   // {
@@ -54,7 +60,7 @@ export class ViewsubmittedjobsComponent implements OnInit {
   //         for (var j = 0; j < data[i].skills.length; j++){
   //           tableData.skills += data[i].skills[j].title + " "
   //         }}
-  //         //console.log(tableData);
+  //         console.log(tableData.jobId);
   //         this.tableHold[i] = tableData;
   //       }
   //     }

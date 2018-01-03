@@ -33,7 +33,8 @@ export class SubmitjobComponent implements OnInit {
   }
 
   backToProfile() {
-    this.jobForm.reset();
+    //this.jobForm.reset();
+    this.router.navigate(['/profile']);
   }
 
   submitJob(e) {
@@ -49,8 +50,9 @@ export class SubmitjobComponent implements OnInit {
       let Title = e.target.elements[3].value;
       let Website = e.target.elements[4].value;
       let currentTime = new Date();
-      let date = currentTime.getMonth + '/' + currentTime.getDate + '/' + currentTime.getFullYear;
+      let date = (currentTime.getMonth()+1).toString() + '/' + currentTime.getDate().toString() + '/' + currentTime.getFullYear().toString();
       let user: User = JSON.parse(localStorage.getItem('user'));
+      console.log(date);
       let json = {
         description: Description,
         title: Title,
