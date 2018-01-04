@@ -99,7 +99,6 @@ export class RegisterComponent implements OnInit {
         password: this.user.password,
         role: this.role
       };
-      let user:User;
       console.log(json);
       this.httpClient.post('http://localhost:8088/User/', json).subscribe(
         (data: User) => {
@@ -109,10 +108,13 @@ export class RegisterComponent implements OnInit {
           this.validInput = true;
           this.user=data;
         }
-
           localStorage.setItem('user', JSON.stringify(data));
-          data=user;
-          this.httpClient.post('http://localhost:8088/User/',
+          this.user=data;
+          console.log("this is user");
+          console.log(this.user);
+          if(this.user.role==0){
+
+          this.httpClient.post('http://localhost:8088/Resume/',
           {
             "description": "",
             "user": {
@@ -121,16 +123,18 @@ export class RegisterComponent implements OnInit {
             
         }
         
-        ).subscribe(
-            (data: ResumeOracle) => {
-              localStorage.setItem('resume', JSON.stringify(data));
+        ).subscribe(  
+            (data1: ResumeOracle) => {
+              console.log("this is resume");
+              console.log(data1);
+              localStorage.setItem('resume', JSON.stringify(data1));
               this.router.navigate(['/profile']);
             }
-          );
+          );}
 
         }
       );
-  
+    
   
   
     }
