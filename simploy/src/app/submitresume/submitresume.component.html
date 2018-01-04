@@ -193,19 +193,19 @@
         <br>
         <label>Add New Certificate</label>
         <form (ngSubmit)="updateCertificates()" #certF="ngForm">
-          <label for="title">Title</label>
+          <label for="ctitle">Title</label>
           <input
             type="text"
-            id="title" 
-            name="title" 
+            id="ctitle" 
+            name="ctitle" 
             class="form-control" 
-            [(ngModel)]="title"
+            [(ngModel)]="ctitle"
             ngModel 
             required
-            #titleField="ngModel">
+            #ctitleField="ngModel">
           <span 
             class="help-block invalidInput" 
-            *ngIf="!titleField.valid && certF.submitted">
+            *ngIf="!ctitleField.valid && certF.submitted">
             Please enter a valid title
           </span>
           <br>
@@ -267,17 +267,17 @@
           <label for="explist">Title</label>
           <input
             type="text"
-            id="title" 
-            name="title" 
+            id="etitle" 
+            name="etitle" 
             class="form-control" 
-            [(ngModel)]="title"
+            [(ngModel)]="etitle"
             ngModel 
             required
-            #titleField="ngModel"
+            #etitleField="ngModel"
           >
           <span 
             class="help-block invalidInput" 
-            *ngIf="!titleField.valid && expF.submitted">
+            *ngIf="!etitleField.valid && expF.submitted">
             Please enter a valid year
           </span>
         
@@ -456,12 +456,12 @@
           </span>
           <br>
 
-          <label for="description">Description <span class="text-muted">(500 chars max)</span></label>
+          <label for="description2">Description <span class="text-muted">(500 chars max)</span></label>
           <textarea  
-            id="description" 
-            name="description" 
+            id="description2" 
+            name="description2" 
             class="form-control" 
-            [(ngModel)]="description"
+            [(ngModel)]="description2"
             ngModel 
             required
             #descField="ngModel"

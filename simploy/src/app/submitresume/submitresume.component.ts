@@ -30,7 +30,7 @@ export class SubmitresumeComponent implements OnInit {
 
   summary = '';
   selectedSkill = '';
-
+  hold: Skill;
   skills: string[] = ['Java', 'Angular', 'SQL', 'C++', 'Agile', 'AJAX'];
   yourskills: Skill[] = [];
   edutypes: string[] = ['Bachelors', 'Masters', 'Associates'];
@@ -48,12 +48,15 @@ export class SubmitresumeComponent implements OnInit {
   user: User;
   resume: ResumeOracle;
   description: string;
+  description2: string;
+  
   constructor(private http: HttpClient) { }
   ngOnInit() {
     this.user = JSON.parse(localStorage.getItem('user'));
     this.resume = JSON.parse(localStorage.getItem('resume'));
     console.log(this.resume);
     this.description = this.resume.description;
+    this.summary = this.resume.description;
     this.initCertifications();
     this.initEducation();
     this.initExperience();
@@ -174,6 +177,7 @@ export class SubmitresumeComponent implements OnInit {
       res => {
         localStorage.removeItem("resume");
         localStorage.setItem('resume', JSON.stringify(res));
+        this.summary=this.resume.description;
       },
       err => {
         console.log("Error occured");
@@ -192,33 +196,32 @@ export class SubmitresumeComponent implements OnInit {
     }
 
     if (exist == false) {
-      let hold: Skill = new Skill;
-      hold.title = this.addSkillForm.value.newskill;
+      this.hold = new Skill;
+      this.hold.title = this.addSkillForm.value.newskill;
 
       if (this.addSkillForm.value.newskill == 'Java') {
-        hold.skillId = 1;
+        this.hold.skillId = 1;
       }
       if (this.addSkillForm.value.newskill == 'Angular') {
-        hold.skillId = 2;
+        this.hold.skillId = 2;
       }
       if (this.addSkillForm.value.newskill == 'SQL') {
-        hold.skillId = 3;
+        this.hold.skillId = 3;
       }
       if (this.addSkillForm.value.newskill == 'C++') {
-        hold.skillId = 4;
+        this.hold.skillId = 4;
       }
       if (this.addSkillForm.value.newskill == 'Agile') {
-        hold.skillId = 5;
+        this.hold.skillId = 5;
       }
       if (this.addSkillForm.value.newskill == 'AJAX') {
-        hold.skillId = 6;
+        this.hold.skillId = 6;
       }
-      this.yourskills.push(hold);
       const req = this.http.post("http://localhost:8088/Resume/addskill",
         {
           "skills": [
             {
-              "skillId": hold.skillId,
+              "skillId": this.hold.skillId,
               "title": this.addSkillForm.value.newskill
 
             }],
@@ -226,6 +229,7 @@ export class SubmitresumeComponent implements OnInit {
         })
         .subscribe(
         res => {
+          this.yourskills.push(this.hold);
           localStorage.removeItem("resume");
           localStorage.setItem('resume', JSON.stringify(res));
         },
@@ -322,7 +326,7 @@ export class SubmitresumeComponent implements OnInit {
 
     const req = this.http.post("http://localhost:8088/Certification",
     {
-      "title": this.certForm.value.title,
+      "title": this.certForm.value.ctitle,
       "gotYear": this.certForm.value.gotYear,
       "resume": {
         "resId": this.resume.resId
@@ -364,7 +368,7 @@ export class SubmitresumeComponent implements OnInit {
     const req = this.http.post("http://localhost:8088/Experience",
     {
       "company": this.expForm.form.value.company,
-      "title": this.expForm.form.value.title,
+      "title": this.expForm.form.value.etitle,
       "startYear":this.expForm.form.value.startyear,
       "endYear": this.expForm.form.value.endyear,
       "resume": {
@@ -407,7 +411,7 @@ export class SubmitresumeComponent implements OnInit {
 
     const req = this.http.post("http://localhost:8088/Project",
     {
-      "description": this.projectForm.form.value.description,
+      "description": this.projectForm.form.value.description2,
       "startDate": this.projectForm.form.value.startDate,
       "endDate":this.projectForm.form.value.endDate,
       "title": this.projectForm.form.value.title,

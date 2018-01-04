@@ -37,7 +37,7 @@
               {{userdata.skills}}
             </td>
             <td>
-              <button class="btn btn-success" (click)='getUserData(userdata.user.id,userdata.user.pnumber,userdata.user.email,userdata.user.firstName,userdata.user.lastName,userdata.skills,userdata.resId,userdata.role)'>
+              <button class="btn btn-success" (click)='getUserData(userdata.resId,userdata.user.pnumber,userdata.user.email,userdata.user.firstName,userdata.user.lastName,userdata.skills,userdata.resId,userdata.role)'>
                 View Details
               </button>
             </td>
@@ -112,7 +112,7 @@
                   <strong>Name:</strong>&emsp;
                 </td>
                 <td>
-                  {{user.firstName}} {{user.lastName}}
+                  {{first}} {{last}}
                 </td>
               </tr>
               <tr>

@@ -128,9 +128,10 @@ export class RegisterComponent implements OnInit {
               console.log("this is resume");
               console.log(data1);
               localStorage.setItem('resume', JSON.stringify(data1));
-              this.router.navigate(['/profile']);
+              this.loginService.login(this.user.email, this.user.password);
             }
           );}
+          this.loginService.login(this.user.email, this.user.password);
 
         }
       );

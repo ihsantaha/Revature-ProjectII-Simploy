@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ResumeOracle } from '../ResumeOracle';
 import { ResumeTable } from '../ResumeTable';
+import { Project } from '../project';
 @Component({
   selector: 'app-viewresumes',
   templateUrl: './viewresumes.component.html',
@@ -9,7 +10,8 @@ import { ResumeTable } from '../ResumeTable';
 })
 export class ViewresumesComponent implements OnInit 
 {   
-  ProjectData:any[];
+  ProjectData:Project[];
+  ProjectDataArray:Project[]=new Array();
   RealData:ResumeTable[];
   viewResume:boolean=false;
   viewJob:boolean = false;
@@ -41,8 +43,8 @@ export class ViewresumesComponent implements OnInit
       (data:any[])=>
       {
           this.certData=data;
-          console.log(this.certData[0].resume.resId);
-          console.log("yay");
+         // console.log(this.certData[0].resume.resId);
+          //console.log("yay");
       }
     ) 
   }
@@ -50,6 +52,7 @@ export class ViewresumesComponent implements OnInit
   certDataArray:any[];
   findbyIdCert(id:number)
   {
+    this.certDataArray=[];
     var i;
     this.certDataelement=[];
     var length;
@@ -60,7 +63,7 @@ export class ViewresumesComponent implements OnInit
     {
         this.certDataelement=this.certData[i];
         this.certDataArray.push(this.certDataelement);
-        console.log(this.certDataArray[0]);
+       // console.log(this.certDataArray[0]);
     }
   }
 }
@@ -68,35 +71,30 @@ export class ViewresumesComponent implements OnInit
   {
     this.http.get("http://localhost:8088/Project")
     .subscribe(
-      (data:any[])=>
+      (data:Project[])=>
       {
           this.ProjectData=data;
-          console.log(this.ProjectData[0].resume.resId);
-          console.log("yay");
+          //console.log(this.ProjectData);
       }
     ) 
   }
-  ProjectDataArray:any[]=new Array();
+
   findbyIdProject(id:number)
   {
-    var i;
-    this.projectDataelement=[];
-    var length;
-    this.ProjectDataArray=[];
-  for(i=0;i<this.ProjectData.length;i++)
+  this.ProjectDataArray=[];
+  for(var i=0;i<this.ProjectData.length;i++)
   {
     if(id==this.ProjectData[i].resume.resId)
     {
-        this.projectDataelement=this.ProjectData[i];
-        this.ProjectDataArray.push(this.projectDataelement);
-        console.log(this.ProjectDataArray[0]);
+        this.ProjectDataArray.push(this.ProjectData[i]);
     }
   }
 }
 getRealData()
 {
   this.RealData=JSON.parse(localStorage.getItem('ResumeTable'));
-  console.log(this.RealData);
+ //this.RealData[0].resId
+  //console.log(this.RealData);
 
 }
 eduData:any[];
@@ -107,7 +105,6 @@ getEduData()
       (data:any[])=>
       {
           this.eduData=data;
-          console.log(this.eduData[0].resume.resId);
       }
     ) 
   }
@@ -115,6 +112,7 @@ getEduData()
   eduDataArray:any[];
   findbyIdEdu(id:number)
   {
+    this.eduDataArray=[];
     var i;
     this.eduDataelement=[];
     var length;
@@ -125,7 +123,6 @@ getEduData()
     {
         this.eduDataelement=this.eduData[i];
         this.eduDataArray.push(this.eduDataelement);
-        console.log(this.eduDataArray[0]);
     }
   }
 }
@@ -139,7 +136,6 @@ getExpData()
       (data:any[])=>
       {
           this.expData=data;
-          console.log(this.expData[0].resume.resId);
       }
     ) 
   }
@@ -147,6 +143,7 @@ getExpData()
   expDataArray:any[];
   findbyIdExp(id:number)
   {
+    this.expDataArray=[];
     var i;
     this.expDataelement=[];
     var length;
@@ -157,7 +154,7 @@ getExpData()
     {
         this.expDataelement=this.expData[i];
         this.expDataArray.push(this.expDataelement);
-        console.log(this.expDataArray[0]);
+
     }
   }
 }
@@ -176,9 +173,12 @@ getUserData(id:number,phone:string,email:string,first:string,last:string,skills:
     this.last=last;
     this.email = email;
     this.phone = phone;
-    this.skills=skills.trim().split(" ");
-    console.log("skills" + skills);
-    console.log(this.skills[0]);
+    if(skills){
+      this.skills=skills.trim().split(" ");
+      }
+      else{
+        this.skills=[];
+      }
     var i=0;
     var j;
     this.skillsarray=[];
