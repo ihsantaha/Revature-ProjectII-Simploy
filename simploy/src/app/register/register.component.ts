@@ -15,7 +15,7 @@ import { ResumeOracle } from '../ResumeOracle';
 export class RegisterComponent implements OnInit {
   @ViewChild('registerF') registerForm: NgForm; 
 
-  user: User = new User();
+  user: User=new User();
 
   firstname: string = '';
   lastname: string = '';
@@ -105,8 +105,10 @@ export class RegisterComponent implements OnInit {
         (data: User) => {
           if (data==null)
           this.validInput = false;
-        else
+        else{
           this.validInput = true;
+          this.user=data;
+        }
 
           localStorage.setItem('user', JSON.stringify(data));
           data=user;
@@ -114,7 +116,7 @@ export class RegisterComponent implements OnInit {
           {
             "description": "",
             "user": {
-                "id": user.id
+                "id": this.user.id
             }
             
         }
