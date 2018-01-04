@@ -1,6 +1,5 @@
 <div [ngStyle]="{'background' : 'url(../assets/images/signin-header.gif)'}">
   <app-navbar></app-navbar>
-  <br>
 
   <div class="container">
 
@@ -11,7 +10,7 @@
     </div>
 
     <div class="row">
-      <div class="col-xs-8 col-xs-offset-2 col-sm-6 col-sm-offset-3 simploy-outer-box">
+      <div class="col-xs-12  col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3 simploy-outer-box">
         <div style="width: 100px;">
         <h4><strong>Summary</strong></h4>
         <p>
@@ -40,22 +39,22 @@
         <hr>
         <h4><strong>Skills</strong></h4>
  
-        <table>
-            <tbody>
-            <div *ngFor="let skill of yourskills; let w = index">
-              <tr>
-                <td>
-                  {{skill.title}}&emsp;
-                </td>         
-                <td>
-                  <button class="btn btn-danger" (click)="deleteSkill(w)" style="float: right">Remove</button>
-                </td>
-            </tr>
-            <br>
+
+        <div *ngFor="let skill of yourskills; let w = index">
+      
+          <div class="row">
+            <div class="col-xs-8">
+              {{skill.title}}
             </div>
-            </tbody>
-            </table>
-    
+
+            <div class="col-xs-4">
+              <button class="btn btn-danger" (click)="deleteSkill(w)">Remove</button>
+            </div>
+
+            </div>
+            <hr style="opacity: .25 !important">
+          </div>
+                 
         <br>
  
         <label>Add New Skill</label>
@@ -82,27 +81,29 @@
         <hr>  
         <h4><strong>Education</strong></h4>
 
-        <table>
-        <tbody>
+
         <div *ngFor="let edu of educations; let i = index">
-          <tr>
-            <td>
-              {{edu.school}}&emsp;
-            </td>
-            <td>
-              {{edu.gradYear}}&emsp;
-            </td>
-            <td>
+
+          <div class="row">
+            <div class="col-xs-6">
+              {{edu.school}}
+            </div>
+            
+            <div class="col-xs-2">
+              {{edu.gradYear}}
+            </div>
+
+            <div class="col-xs-2">
               {{edu.type}}&emsp;
-            </td>            
-            <td>
+            </div>
+
+            <div class="col-xs-2">
               <button class="btn btn-danger" (click)="deleteEducation(i)" style="float: right">Remove</button>
-            </td>
-        </tr>
-        <br>
+            </div>
+
+          </div>
+          <hr style="opacity: .25 !important">
         </div>
-        </tbody>
-        </table>
 
         <br>
         <label>Add New Education</label>

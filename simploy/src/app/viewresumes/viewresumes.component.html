@@ -1,13 +1,13 @@
 <div [ngStyle]="{'background' : 'url(../assets/images/signin-header.gif)'}">
-    <app-navbar></app-navbar>
-    <div class="container">
-        <div class="row">
-            <div class="text-center">
-              <h1>Resume Postings</h1>
-            </div>
-          </div>
-      <div class="simploy-tableData simploy-shadow">    
-    <table datatable class="row-border hover">
+  <app-navbar></app-navbar>
+  <div class="container">
+    <div class="row">
+      <div class="text-center">
+        <h1>Resume Postings</h1>
+      </div>
+    </div>
+    <div class="simploy-tableData simploy-shadow">
+      <table datatable class="row-border hover">
         <thead>
           <tr>
             <th>First Name</th>
@@ -22,90 +22,123 @@
           <tr *ngFor="let userdata of RealData">
             <!--use click to get the data-->
             <td>
-               {{userdata.user.firstName}}
-              </td>
-              <td>
-                {{userdata.user.lastName}}
-              </td>
-              <td>
-                {{userdata.user.email}}
-              </td>
-              <td>
-                {{userdata.user.pnumber}}
-              </td>
-              <td>
-                {{userdata.skills}}
-              </td>
-              <td>
-                  <button class="btn btn-success" (click)='getUserData(userdata.user.id,userdata.user.pnumber,userdata.user.email,userdata.user.firstName,userdata.user.lastName,userdata.skills,userdata.resId,userdata.role)'>
-                    View Details
-                  </button>
-              </td>
+              {{userdata.user.firstName}}
+            </td>
+            <td>
+              {{userdata.user.lastName}}
+            </td>
+            <td>
+              {{userdata.user.email}}
+            </td>
+            <td>
+              {{userdata.user.pnumber}}
+            </td>
+            <td>
+              {{userdata.skills}}
+            </td>
+            <td>
+              <button class="btn btn-success" (click)='getUserData(userdata.user.id,userdata.user.pnumber,userdata.user.email,userdata.user.firstName,userdata.user.lastName,userdata.skills,userdata.resId,userdata.role)'>
+                View Details
+              </button>
+            </td>
           </tr>
         </tbody>
       </table>
-      </div>
-     </div>
+    </div>
+  </div>
+  <br>
+  <br>
+  <br>
+  <div class="container" *ngIf="viewJob">
+    <div class="jumbotron detail-outer-box">
+      <h2 class="text-center">Jobseeker Info</h2>
       <br>
-      <br>
-      <br>
-      <div class="container" *ngIf="viewJob">
-        <div class="jumbotron detail-outer-box">
-            <h2 class="text-center">User Selected</h2>
+      <div Class="detail-inner-box">
+        <br>
+        <h4><strong>Name: </strong>{{first}} {{last}}</h4>
+        <br>
+        <strong>Education</strong>
+        <ul *ngFor="let e of eduDataArray">
+          <li>
+            {{e.gradYear}} {{e.school}} {{e.type}} {{e.gradYear}}
+          </li>
+        </ul>
+        <br>
+        <strong> Skills</strong>
+        <ul *ngFor="let skillData of skillsarray">
+          <li>
+            {{skillData}}
+          </li>
+        </ul>
+        <br>
+        <b>Projects</b>
+        <ul *ngFor="let p of ProjectDataArray">
+          <li>
+            Title: {{p.title}}
+            <br> Date: {{p.startDate}}-{{p.endDate}}
+            <br> Description:{{p.description}}
+            <br> Group Size: {{p.groupSize}}
             <br>
-            <div Class="detail-inner-box">
-          <h2>{{title|uppercase}}</h2>
-            <h3>{{first|uppercase}} {{last|uppercase}}</h3>
-            <i>  <b>Contact Information</b>
-            <ul>
-                phone:{{phone}}
-<br>
-                email:{{email}}
-            </ul>
-<b>          Education</b>  
-            <ul *ngFor="let e of eduDataArray">
-                  {{e.gradYear}}
-                  {{e.school}}
-                  {{e.type}}
-                  {{e.gradYear}}
-            </ul>
-          </i>    
+          </li>
+        </ul>
+        <br>
+        <b>Certifications</b>
+        <ul *ngFor="let c of certDataArray">
+          <li>
+            {{c.title}} {{c.gotYear}}
+          </li>
           <br>
-           <b> skills</b>
-            <ul *ngFor="let skillData of skillsarray">
-              <li>
-                  {{skillData}}
-              </li>
-            </ul>
-            <br>
-        <b>Projects</b>    
-            <ul *ngFor="let p of ProjectDataArray">
-         <h4>{{p.title}}</h4>  
-                  {{p.startDate}}-{{p.endDate}}
-            <br>
-                  {{p.description}}
-            <br>
-                  {{p.groupSize}}
-            <br>
-            </ul>
-            <br>
-          <b>Certifications</b>
-            <ul *ngFor="let c of certDataArray">
-                    {{c.title}} {{c.gotYear}}
-                    <br>
-              </ul>
-              <br>
-          <b>History</b>
-              <ul *ngFor="let exp of expDataArray">
-                      {{exp.title}} 
-                      <br>
-                      {{exp.company}}
-                      <br>
-                        {{exp.startYear}}-{{exp.endYear}}
-                        <br>
-                        <br>
-                      </ul>
-            </div>
+        </ul>
+        <br>
+        <strong>History</strong>
+        <ul *ngFor="let exp of expDataArray">
+          {{exp.title}}
+          <br> {{exp.company}}
+          <br> {{exp.startYear}}-{{exp.endYear}}
+          <br>
+          <br>
+        </ul>
+
+        <hr>
+
+        <footer>
+          <h4>
+            <strong>Contact Information:</strong>
+          </h4>
+          <table>
+            <tbody>
+              <tr>
+                <td>
+                  <strong>Name:</strong>&emsp;
+                </td>
+                <td>
+                  {{user.firstName}} {{user.lastName}}
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <strong>Email:</strong>
+                </td>
+                <td>
+                  {{email}}
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <strong> Phone:</strong>
+                </td>
+                <td>
+                  {{phone}}
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </footer>
+
+        <br />
+
+      </div>
+      <br>
     </div>
-    </div>
-    </div>
+  </div>
+</div>

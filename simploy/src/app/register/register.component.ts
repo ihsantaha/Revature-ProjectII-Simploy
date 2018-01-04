@@ -25,7 +25,7 @@ export class RegisterComponent implements OnInit {
   role: number;
 
   confirmpass: string = '';
-  roles: string[] = ['Employee', 'Employer'];
+  roles: string[] = ['Job Seeker', 'Employer'];
   
   validInput: boolean;
   validNumber: boolean;
@@ -54,7 +54,7 @@ export class RegisterComponent implements OnInit {
 
  register() {
 
-    if (this.registerForm.form.value.role == 'Employee')
+    if (this.registerForm.form.value.role == 'Job Seeker')
       this.role = 0;
     else
       this.role = 1;
