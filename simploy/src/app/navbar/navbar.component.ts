@@ -16,10 +16,15 @@ export class NavbarComponent implements OnInit {
   constructor(private router: Router) { }
 
   ngOnInit() {
+    console.log('in navbar');
+    console.log(this.user);
   }
 
   logout() {
     localStorage.removeItem('user');
+    localStorage.removeItem('resume');
+    localStorage.removeItem('JobsTable');
+    localStorage.removeItem('Jobs');
   }
 
 }

@@ -4,13 +4,15 @@ import { BehaviorSubject } from 'rxjs';
 import { User } from './user';
 import { Job } from './job';
 import { JobTable } from './JobTable';
+import { Resume } from './Resume';
+import { ResumeOracle } from './ResumeOracle';
 
 @Injectable()
 export class LoginService {
   currentUser: BehaviorSubject<User> = new BehaviorSubject(null);
 
-  tableHold:JobTable[]=[];
-  
+  tableHold: JobTable[] = [];
+  user1: User = new User;
   constructor(private http: HttpClient) { }
 
   login(email: string, password: string) {
@@ -20,52 +22,107 @@ export class LoginService {
     })
       .subscribe(
       (data1: User) => {
-        if (data1 == null)
+        if (data1 == null){
           this.currentUser.next(data1);
-        else{
+        } else {
           this.currentUser.next(data1);
-          //added user to local storage - MW
           localStorage.setItem('user', JSON.stringify(data1));
-          if(data1.role== 0)
-          this.getTableDataJobSearcher();
+          this.user1.id = data1.id;
+          if (data1.role == 0) {
+            this.getTableDataJobSearcher();
+           this.getResume();
+          } else {
+            this.getTableDataJobPoster();
+          }
         }
       }
       );
   }
 
+   getResume() {
+     this.http.post('http://localhost:8088/Resume/uid', this.user1)
+       .subscribe(
+       (data: ResumeOracle) => {
+         let tableData: ResumeOracle = new ResumeOracle;
 
-  
-  getTableDataJobSearcher()
-  {
-    this.http.get('http://localhost:8088/Job')
-    .subscribe(
-      (data:Job[])=>
-      {
+         if (data == null){
+           localStorage.setItem('resume', JSON.stringify(tableData));
+           return;
 
-          for (var i = 0; i < data.length; i++){
-            let tableData:JobTable= new JobTable;
-            tableData.company=data[i].company;
-            tableData.jobId=data[i].jobId;
-            tableData.description=data[i].description;
-            tableData.postDate=data[i].postDate;
-            tableData.title=data[i].title;
-            tableData.user=data[i].user;
-            tableData.location=data[i].location;
-            if(data[i].skills.length > 0){
-              tableData.skills="";
-            for (var j = 0; j < data[i].skills.length; j++){
+         }
+         tableData.user = data.user;
+         tableData.resId = data.resId;
+         tableData.description = data.description;
+         if (data.skills.length > 0) {
+             tableData.skills = data.skills;
+         }
+         else 
+         tableData.skills=[];
+         localStorage.setItem('resume', JSON.stringify(tableData));
+       }
+       )
+   }
+
+  getTableDataJobPoster() {
+    this.http.post('http://localhost:8088/Job/uidjobs',
+    {
+      "id" : this.user1.id
+    }
+  )
+      .subscribe(
+      (data: Job[]) => {
+
+        for (var i = 0; i < data.length; i++) {
+          let tableData: JobTable = new JobTable;
+          tableData.company = data[i].company;
+          tableData.jobId = data[i].jobId;
+          tableData.description = data[i].description;
+          tableData.postDate = data[i].postDate;
+          tableData.title = data[i].title;
+          tableData.user = data[i].user;
+          tableData.location = data[i].location;
+          if (data[i].skills.length > 0) {
+            tableData.skills = "";
+            for (var j = 0; j < data[i].skills.length; j++) {
               tableData.skills += data[i].skills[j].title + " "
-            }}
-            //console.log(tableData);
-            this.tableHold[i]=tableData;
-          
+            }
           }
-          localStorage.setItem('JobsTable', JSON.stringify(this.tableHold));
-          //console.log(this.tableHold);
+          this.tableHold[i] = tableData;
+
+        }
+        localStorage.setItem('Jobs', JSON.stringify(this.tableHold));
+        console.log(this.tableHold);
       }
-    )
+      )
   }
 
+  getTableDataJobSearcher() {
+    this.http.get('http://localhost:8088/Job')
+      .subscribe(
+      (data: Job[]) => {
+
+        for (var i = 0; i < data.length; i++) {
+          let tableData: JobTable = new JobTable;
+          tableData.company = data[i].company;
+          tableData.jobId = data[i].jobId;
+          tableData.description = data[i].description;
+          tableData.postDate = data[i].postDate;
+          tableData.title = data[i].title;
+          tableData.user = data[i].user;
+          tableData.location = data[i].location;
+          if (data[i].skills.length > 0) {
+            tableData.skills = "";
+            for (var j = 0; j < data[i].skills.length; j++) {
+              tableData.skills += data[i].skills[j].title + " "
+            }
+          }
+          this.tableHold[i] = tableData;
+
+        }
+        localStorage.setItem('JobsTable', JSON.stringify(this.tableHold));
+      }
+      )
+  }
 
   register(user: User) {
 
@@ -74,7 +131,7 @@ export class LoginService {
       return user;
     else
       return null;
-    
+
     // Preview Data
     // this.http.post('http://localhost:8086/User/register', {
     //   email: email

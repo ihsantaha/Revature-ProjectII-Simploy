@@ -5,6 +5,7 @@ import { NgForm } from '@angular/forms';
 
 import { LoginService } from '../login.service';
 import { User } from '../user';
+import { ResumeOracle } from '../ResumeOracle';
 
 @Component({
   selector: 'app-register',
@@ -25,13 +26,13 @@ export class RegisterComponent implements OnInit {
 
   confirmpass: string = '';
   roles: string[] = ['Employee', 'Employer'];
-  
+
   validInput: boolean;
   validNumber: boolean;
 
-  constructor(private loginService: LoginService, 
-              private router: Router,
-              private httpClient: HttpClient) { }
+  constructor(private loginService: LoginService,
+    private router: Router,
+    private httpClient: HttpClient) { }
 
   ngOnInit() {
 
@@ -60,7 +61,7 @@ export class RegisterComponent implements OnInit {
 
     let pnumber: string;
 
-    if (this.phonenumber != undefined) 
+    if (this.phonenumber != undefined)
       pnumber = this.phonenumber.toString();
     else
       pnumber = '';
@@ -69,8 +70,8 @@ export class RegisterComponent implements OnInit {
       this.validNumber = false;
     }
     else {
-      pnumber = '(' + pnumber.substring(0,3) + ') ' + pnumber.substring(3,6) + '-' + pnumber.substring(6,10);
-      console.log(pnumber);
+      pnumber = '(' + pnumber.substring(0, 3) + ') ' + pnumber.substring(3, 6) + '-' + pnumber.substring(6, 10);
+
       this.validNumber = true;
 
       this.user.firstName = this.firstname;
@@ -78,16 +79,17 @@ export class RegisterComponent implements OnInit {
       this.user.email = this.email;
       this.user.phoneNumber = pnumber;
       this.user.password = this.password;
-
+      console.log("the user is ");
+      console.log(this.user);
       // Mock Data
-      if (this.loginService.register(this.user) != null) {
-        this.validInput = true;
-        console.log(this.validInput);
-      }
-      else {
-        this.validInput = false;
-        console.log(this.validInput);
-      }
+      // if (this.loginService.register(this.user) != null) {
+      //   this.validInput = true;
+      //   console.log(this.validInput);
+      // }
+      // else {
+      //   this.validInput = false;
+      //   console.log(this.validInput);
+      // }
 
       let json = {
         firstName: this.user.firstName,
@@ -97,21 +99,51 @@ export class RegisterComponent implements OnInit {
         password: this.user.password,
         role: this.role
       };
-
+      let user: User;
       console.log(json);
       this.httpClient.post('http://localhost:8088/User/', json).subscribe(
-        (data: any) => {
+        (data: User) => {
+          if (data == null) {
+            this.validInput = false;
+          }
+          else {
+            this.validInput = true;
+            this.user = data;
+          }
+
           localStorage.setItem('user', JSON.stringify(data));
-          this.router.navigate(['/profile']);
+          this.httpClient.post('http://localhost:8088/User/',
+            {
+              "description": "",
+              "user": {
+                "id": this.user.id
+              }
+
+            }
+
+          ).subscribe(
+            (data: ResumeOracle) => {
+              localStorage.setItem('resume', JSON.stringify(data));
+              this.router.navigate(['/profile']);
+            }
+            );
+
         }
       );
 
-      if (this.validInput == false) {
-        this.registerForm.form.markAsUntouched();
-      }
+
+
+    }
+    if (this.validInput == false) {
+      this.registerForm.form.markAsUntouched();
     }
 
-
   }
+
+
+
+
+
+
 
 }
