@@ -35,7 +35,8 @@ export class ProfileComponent implements OnInit {
         firstName: FIRSTNAME,
         lastName: LASTNAME,
         email: EMAIL,
-        pnumber: PNUMBER,
+        //pnumber: PNUMBER,
+        pnumber:  '(' + PNUMBER.substring(0, 3) + ') ' + PNUMBER.substring(3, 6) + '-' + PNUMBER.substring(6, 10),
         password: PASSWORD,
         role: this.user.role,
         id: this.user.id

@@ -58,20 +58,86 @@
         <h2 class="text-center">Job Information:</h2>
         <br>
         <div Class="detail-inner-box">
-          <h3>{{title}} in {{location}}</h3>
-          <h3>Company: {{company}}</h3>
-          <h3>Description : {{description}}</h3>
+          <table style="font-size: 20px">
+            <br>
+            <tbody>
+              <tr>
+                <td>
+                  <strong>Title:</strong>
+                </td>
+                <td>
+                    {{title}}
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <strong>Company:</strong>
+                </td>
+                <td>
+                    {{company}}
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <strong>Location:</strong>  
+                </td>
+                <td>
+                    {{location}}
+                </td>
+              </tr>
+              <tr>
+                  <td>
+                    <strong>Description:&emsp;</strong>  
+                  </td>
+                  <td>
+                      {{description}}
+                  </td>
+                </tr>
+
+            </tbody>
+          </table>
+
           <div *ngIf="skillDatab">
+          <strong style="font-size: 18px">Skills</strong>
           <ul>
-            <h3 >Skills</h3>
             <li *ngFor="let skillData of skills">
-              <h3>{{skillData}}</h3>
+              {{skillData}}
             </li>
           </ul>
         </div>
         
           <hr>
-          <footer>Contact Information:<br> Name- {{user.firstName}} {{user.lastName}} <br> Email- {{user.email}} <br> Phone - {{user.pnumber}} </footer>
+          <footer>
+            <h4><strong>Contact Information:</strong></h4>
+            <table>
+              <tbody>
+                <tr>
+                  <td>
+                      <strong>Name:</strong>&emsp;
+                  </td>
+                  <td>
+                      {{user.firstName}} {{user.lastName}}
+                  </td>
+                </tr>
+                <tr>
+                    <td>
+                        <strong>Email:</strong>
+                    </td>
+                    <td>
+                        {{user.email}}
+                    </td>
+                  </tr>
+                  <tr>
+                      <td>
+                         <strong> Phone:</strong>
+                      </td>
+                      <td>
+                          {{user.pnumber}}
+                      </td>
+                    </tr>
+              </tbody>
+            </table>
+          </footer>
           <br />
         </div>
       </div>
