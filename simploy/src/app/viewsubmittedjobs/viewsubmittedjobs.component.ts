@@ -77,8 +77,9 @@ export class ViewsubmittedjobsComponent implements OnInit {
     this.httpClient.post('http://localhost:8088/Job/delete', json ).subscribe(
       (data: any[]) => {
         console.log('job deleted');
-        this.loginService.login(this.user.email, this.user.password);
-        window.location.reload();
+        //this.loginService.login(this.user.email, this.user.password);
+        this.getTableData();
+        //window.location.reload();
       }
     );
   }
