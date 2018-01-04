@@ -6,5 +6,4 @@ export class ResumeTable {
     description:string;
     skills : string;
     constructor () {};
- 
- }
+}
