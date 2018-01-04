@@ -137,16 +137,16 @@ getEduData()
 
 expData:any[];
 getExpData()
-  {
+{
     this.http.get("http://localhost:8088/Experience")
     .subscribe(
-      (data:any[])=>
-      {
+    (data:any[])=>
+    {
           this.expData=data;
           console.log(this.expData[0].resume.resId);
-      }
-    ) 
-  }
+    }
+  ) 
+}
   expDataelement:any[];
   expDataArray:any[];
   findbyIdExp(id:number)
@@ -165,6 +165,7 @@ getExpData()
     }
   }
 }
+skillstring:string;
 getUserData(id:number,phone:string,email:string,first:string,last:string,skills:any[],user_id:number,role:number)
 {
     if (role == 1) 
@@ -188,6 +189,7 @@ getUserData(id:number,phone:string,email:string,first:string,last:string,skills:
     this.findbyIdCert(id);
     this.findbyIdEdu(id);
     this.findbyIdExp(id);
+    this.skillsarray=[];
     for(i=0;i<this.RealData.length;i++)
     {
       console.log(this.RealData[i].resId+" "+user_id)
@@ -196,11 +198,14 @@ getUserData(id:number,phone:string,email:string,first:string,last:string,skills:
         j=0;
         while(j<this.skills.length)
         {
-          console.log(this.RealData[i].skills[j])
+          console.log(this.RealData[i].skills[j].title)
           this.skillsarray.push(this.RealData[i].skills[j].title);
           j=j+1;
+          console.log(this.skillsarray[0]);
         }
       }
     }
+    this.skillstring=this.skillsarray.join(" ")
+    console.log(this.skillstring);
   }
 }
