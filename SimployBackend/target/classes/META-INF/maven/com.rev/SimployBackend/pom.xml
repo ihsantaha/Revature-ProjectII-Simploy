@@ -16,6 +16,41 @@
 					<target>1.8</target>
 				</configuration>
 			</plugin>
+			<plugin>
+               <groupId>br.com.ingenieux</groupId>
+               <artifactId>beanstalk-maven-plugin</artifactId>
+               <version>1.5.0</version>
+               <configuration>
+                   <applicationName>spring-boot-aws-elasticbeanstalk-example</applicationName>
+                   <s3Bucket>spring-boot-aws-example</s3Bucket>
+                   <s3Key>{X}</s3Key><!-- CHANGE {X} to the name of your .jar file (include the file extension) -->
+                   <cnamePrefix>spring-boot-aws-elasticbeanstalk-example-dev</cnamePrefix>
+                   <environmentName>dev</environmentName>
+                   <environmentRef>dev</environmentRef>
+                   <solutionStack>64bit Amazon Linux 2016.09 v2.4.0 running Java 8</solutionStack>
+               </configuration>
+           </plugin>
+           <plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-assembly-plugin</artifactId>
+				<version>2.4.1</version>
+				<configuration>
+					<!-- get all project dependencies -->
+					<descriptorRefs>
+						<descriptorRef>jar-with-dependencies</descriptorRef>
+					</descriptorRefs>
+				</configuration>
+				<executions>
+				  <execution>
+					<id>make-assembly</id>
+                                        <!-- bind to the packaging phase -->
+					<phase>package</phase>
+					<goals>
+						<goal>single</goal>
+					</goals>
+				  </execution>
+				</executions>
+			</plugin>
 		</plugins>
 	</build>
 	<parent>

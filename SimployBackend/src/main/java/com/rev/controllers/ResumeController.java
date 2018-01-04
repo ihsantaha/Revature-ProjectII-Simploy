@@ -39,7 +39,9 @@ public class ResumeController {
 	@RequestMapping(method=RequestMethod.POST)
 	public Resume addFC(@RequestBody Resume r){
 		List<Skill> here=new ArrayList<>(); 
-        r.setSkills(here);
+
+		r.setSkills(here);
+
 		return service.addResume(r);
 	}
 	

@@ -18,6 +18,7 @@ public class ResumeServiceImpl implements ResumeService {
 	private ResumeRepository resRepo;
 
 	public Resume addResume(Resume r) {
+		System.out.println("SERVICE: "+r.toString());
 		return resRepo.save(r);
 	}
 
