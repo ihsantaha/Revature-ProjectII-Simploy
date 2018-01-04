@@ -13,7 +13,7 @@ import { ResumeOracle } from '../ResumeOracle';
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit {
-  @ViewChild('registerF') registerForm: NgForm; 
+  @ViewChild('registerF') registerForm: NgForm;
 
   user: User = new User();
 
@@ -26,13 +26,13 @@ export class RegisterComponent implements OnInit {
 
   confirmpass: string = '';
   roles: string[] = ['Employee', 'Employer'];
-  
+
   validInput: boolean;
   validNumber: boolean;
 
-  constructor(private loginService: LoginService, 
-              private router: Router,
-              private httpClient: HttpClient) { }
+  constructor(private loginService: LoginService,
+    private router: Router,
+    private httpClient: HttpClient) { }
 
   ngOnInit() {
 
@@ -52,7 +52,7 @@ export class RegisterComponent implements OnInit {
     // this.validInput = true;
   }
 
- register() {
+  register() {
 
     if (this.registerForm.form.value.role == 'Employee')
       this.role = 0;
@@ -61,7 +61,7 @@ export class RegisterComponent implements OnInit {
 
     let pnumber: string;
 
-    if (this.phonenumber != undefined) 
+    if (this.phonenumber != undefined)
       pnumber = this.phonenumber.toString();
     else
       pnumber = '';
@@ -70,8 +70,8 @@ export class RegisterComponent implements OnInit {
       this.validNumber = false;
     }
     else {
-      pnumber = '(' + pnumber.substring(0,3) + ') ' + pnumber.substring(3,6) + '-' + pnumber.substring(6,10);
-      
+      pnumber = '(' + pnumber.substring(0, 3) + ') ' + pnumber.substring(3, 6) + '-' + pnumber.substring(6, 10);
+
       this.validNumber = true;
 
       this.user.firstName = this.firstname;
@@ -99,46 +99,50 @@ export class RegisterComponent implements OnInit {
         password: this.user.password,
         role: this.role
       };
-      let user:User;
+      let user: User;
       console.log(json);
       this.httpClient.post('http://localhost:8088/User/', json).subscribe(
         (data: User) => {
-          if (data==null)
-          this.validInput = false;
-        else
-          this.validInput = true;
+          if (data == null) {
+            this.validInput = false;
+          }
+          else {
+            this.validInput = true;
+            this.user = data;
+          }
 
           localStorage.setItem('user', JSON.stringify(data));
-          data=user;
           this.httpClient.post('http://localhost:8088/User/',
-          {
-            "description": "",
-            "user": {
-                "id": user.id
+            {
+              "description": "",
+              "user": {
+                "id": this.user.id
+              }
+
             }
-            
-        }
-        
-        ).subscribe(
+
+          ).subscribe(
             (data: ResumeOracle) => {
               localStorage.setItem('resume', JSON.stringify(data));
               this.router.navigate(['/profile']);
             }
-          );
+            );
 
         }
       );
-  
-  
-  
+
+
+
     }
-      if (this.validInput == false) {
-        this.registerForm.form.markAsUntouched();
-      }
-    } 
+    if (this.validInput == false) {
+      this.registerForm.form.markAsUntouched();
+    }
+
+  }
 
 
-  
+
+
 
 
 

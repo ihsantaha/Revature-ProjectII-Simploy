@@ -133,16 +133,16 @@ getEduData()
 
 expData:any[];
 getExpData()
-  {
+{
     this.http.get("http://localhost:8088/Experience")
     .subscribe(
-      (data:any[])=>
-      {
+    (data:any[])=>
+    {
           this.expData=data;
           console.log(this.expData[0].resume.resId);
-      }
-    ) 
-  }
+    }
+  ) 
+}
   expDataelement:any[];
   expDataArray:any[];
   findbyIdExp(id:number)
@@ -186,6 +186,7 @@ getUserData(id:number,phone:string,email:string,first:string,last:string,skills:
     this.findbyIdCert(id);
     this.findbyIdEdu(id);
     this.findbyIdExp(id);
+    this.skillsarray=[];
     for(i=0;i<this.RealData.length;i++)
     {
       //console.log(this.RealData[i].resId+" "+user_id)
@@ -197,5 +198,7 @@ getUserData(id:number,phone:string,email:string,first:string,last:string,skills:
         }
       }
     }
+    this.skillstring=this.skillsarray.join(" ")
+    console.log(this.skillstring);
   }
 }

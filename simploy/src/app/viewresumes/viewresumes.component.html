@@ -31,6 +31,9 @@
                 {{userdata.user.email}}
               </td>
               <td>
+                  <p *ngFor="let i of userdata.skills">{{i.title}}</p>
+                  </td>
+              <td>
                 {{userdata.user.pnumber}}
               </td>
               <td>
