@@ -11,7 +11,7 @@
     </div>
 
     <div class="row">
-      <div class="col-xs-8 col-xs-offset-2 col-sm-6 col-sm-offset-3 simploy-outer-box">
+      <div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-6 col-md-offset-3 simploy-outer-box">
 
         <div style="width: 100px;">
           <h4><strong>Summary</strong></h4>
@@ -43,14 +43,21 @@
         <h4><strong>Skills</strong></h4>
  
 
-            <div *ngFor="let skill of yourskills; let w = index" style="width:200px">
-                  {{skill.title}}
-                  <button class="btn btn-danger btn-small" (click)="deleteSkill(w)" style="float: right">Remove</button>
-                  <div style="clear:right"></div>
-                  <br>
+        <div *ngFor="let skill of yourskills; let w = index">
+      
+          <div class="row">
+            <div class="col-xs-8">
+              {{skill.title}}
             </div>
 
-    
+            <div class="col-xs-4">
+              <button class="btn btn-danger" (click)="deleteSkill(w)">Remove</button>
+            </div>
+
+            </div>
+            <hr style="opacity: .25 !important">
+          </div>
+                 
         <br>
  
         <label>Add New Skill</label>
@@ -77,27 +84,29 @@
         <hr>  
         <h4><strong>Education</strong></h4>
 
-        <table>
-          <tbody>
-            <div *ngFor="let edu of educations; let i = index">
-              <tr>
-                <td>
-                  {{edu.school}}&emsp;
-                </td>
-                <td>
-                  {{edu.gradYear}}&emsp;
-                </td>
-                <td>
-                  {{edu.type}}&emsp;
-                </td>            
-                <td>
-                  <button class="btn btn-danger" (click)="deleteEducation(i)" style="float: right">Remove</button>
-                </td>
-              </tr>
-              <br>
+
+        <div *ngFor="let edu of educations; let i = index">
+
+          <div class="row">
+            <div class="col-xs-6">
+              {{edu.school}}
             </div>
-          </tbody>
-        </table>
+            
+            <div class="col-xs-2">
+              {{edu.gradYear}}
+            </div>
+
+            <div class="col-xs-2">
+              {{edu.type}}&emsp;
+            </div>
+
+            <div class="col-xs-2">
+              <button class="btn btn-danger" (click)="deleteEducation(i)" style="float: right">Remove</button>
+            </div>
+
+          </div>
+          <hr style="opacity: .25 !important">
+        </div>
 
         <br>
 
