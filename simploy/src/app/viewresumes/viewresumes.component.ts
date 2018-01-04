@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { ResumeOracle } from '../ResumeOracle';
+import { ResumeTable } from '../ResumeTable';
 @Component({
   selector: 'app-viewresumes',
   templateUrl: './viewresumes.component.html',
@@ -8,7 +10,7 @@ import { HttpClient } from '@angular/common/http';
 export class ViewresumesComponent implements OnInit 
 {   
   ProjectData:any[];
-  RealData:any[];
+  RealData:ResumeTable[];
   viewResume:boolean=false;
   viewJob:boolean = false;
   constructor(private http:HttpClient) { }
@@ -18,12 +20,13 @@ export class ViewresumesComponent implements OnInit
   email:string;
   first:string;
   last:string;
-  skills:any[];
+  skills:string[];
   role:number;
   projectDataelement:any[];
   count =0;
   ngOnInit() 
   {
+
     this.getRealData();
     this.getProjectData();
     this.getCertData();
@@ -92,16 +95,9 @@ export class ViewresumesComponent implements OnInit
 }
 getRealData()
 {
-  this.http.get("http://localhost:8088/Resume")
-  .subscribe(
-    (data:any[])=>
-    {
-          this.RealData =data;
-          //console.log(this.RealData[0].skills[0].title);
-          console.log(this.RealData[0].resId);
-          console.log("yay");
-    }
-  )
+  this.RealData=JSON.parse(localStorage.getItem('ResumeTable'));
+  console.log(this.RealData);
+
 }
 eduData:any[];
 getEduData()
@@ -165,7 +161,7 @@ getExpData()
     }
   }
 }
-getUserData(id:number,phone:string,email:string,first:string,last:string,skills:any[],user_id:number,role:number)
+getUserData(id:number,phone:string,email:string,first:string,last:string,skills:string,user_id:number,role:number)
 {
     if (role == 1) 
     {
@@ -180,7 +176,9 @@ getUserData(id:number,phone:string,email:string,first:string,last:string,skills:
     this.last=last;
     this.email = email;
     this.phone = phone;
-    this.skills=skills;
+    this.skills=skills.trim().split(" ");
+    console.log("skills" + skills);
+    console.log(this.skills[0]);
     var i=0;
     var j;
     this.skillsarray=[];
@@ -190,15 +188,12 @@ getUserData(id:number,phone:string,email:string,first:string,last:string,skills:
     this.findbyIdExp(id);
     for(i=0;i<this.RealData.length;i++)
     {
-      console.log(this.RealData[i].resId+" "+user_id)
+      //console.log(this.RealData[i].resId+" "+user_id)
       if(this.RealData[i].resId==user_id)
       {
-        j=0;
-        while(j<this.skills.length)
+        for(let i = 0 ; i < this.skills.length; i++)
         {
-          console.log(this.RealData[i].skills[j])
-          this.skillsarray.push(this.RealData[i].skills[j].title);
-          j=j+1;
+          this.skillsarray.push(this.skills[i]);
         }
       }
     }

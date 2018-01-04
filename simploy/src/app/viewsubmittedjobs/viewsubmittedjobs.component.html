@@ -10,7 +10,7 @@
     </div>
 
     <div class="simploy-tableData simploy-shadow">
-      <table datatable class="row-border hover">
+      <table class="row-border hover">
         <thead>
           <tr>
             <th>Company</th>
@@ -22,7 +22,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let jobdata of tableHold">
+          <tr *ngFor="let jobdata of tableHold; let w = index">
             <td>
               {{jobdata["company"]}}
             </td>
@@ -39,7 +39,7 @@
               {{jobdata["postDate"]}}
             </td>
             <td>
-              <button class="btn btn-danger" (click)='delete(jobdata["jobId"])'>
+              <button class="btn btn-danger" (click)='delete(w)'>
                 Delete
               </button>
               <br>

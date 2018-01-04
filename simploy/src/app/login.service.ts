@@ -6,12 +6,14 @@ import { Job } from './job';
 import { JobTable } from './JobTable';
 import { Resume } from './Resume';
 import { ResumeOracle } from './ResumeOracle';
+import { ResumeTable } from './ResumeTable';
 
 @Injectable()
 export class LoginService {
   currentUser: BehaviorSubject<User> = new BehaviorSubject(null);
 
   tableHold: JobTable[] = [];
+  tableHoldRes: ResumeTable[]= [];
   user1: User = new User;
   constructor(private http: HttpClient) { }
 
@@ -33,6 +35,7 @@ export class LoginService {
            this.getResume();
           } else {
             this.getTableDataJobPoster();
+            this.getGroupResume();
           }
         }
       }
@@ -91,10 +94,33 @@ export class LoginService {
 
         }
         localStorage.setItem('Jobs', JSON.stringify(this.tableHold));
-        console.log(this.tableHold);
       }
       )
   }
+
+  getGroupResume() {
+    this.http.get('http://localhost:8088/Resume')
+      .subscribe(
+      (data: ResumeOracle[]) => {
+      
+        for (let i = 0; i < data.length; i++) {
+          this.tableHoldRes[i]=new ResumeTable();
+          this.tableHoldRes[i].description = data[i].description;
+          this.tableHoldRes[i].resId = data[i].resId;
+          this.tableHoldRes[i].user = data[i].user;
+          if (data[i].skills.length > 0) {
+            this.tableHoldRes[i].skills='';
+            for (let j = 0; j < data[i].skills.length; j++){
+              this.tableHoldRes[i].skills+= data[i].skills[j].title+" ";
+            }
+        }
+        }
+        console.log(this.tableHoldRes);
+        localStorage.setItem('ResumeTable', JSON.stringify(this.tableHoldRes));
+      }
+      )
+  }
+
 
   getTableDataJobSearcher() {
     this.http.get('http://localhost:8088/Job')
@@ -116,6 +142,7 @@ export class LoginService {
               tableData.skills += data[i].skills[j].title + " "
             }
           }
+          console.log("skills" + tableData.skills);
           this.tableHold[i] = tableData;
 
         }
@@ -123,6 +150,8 @@ export class LoginService {
       }
       )
   }
+
+
 
   register(user: User) {
 

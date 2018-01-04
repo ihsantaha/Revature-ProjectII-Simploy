@@ -10,11 +10,11 @@
     <table datatable class="row-border hover">
         <thead>
           <tr>
-            <th>ID</th>
             <th>First Name</th>
             <th>Last Name</th>
-            <th>email</th>
-            <th>phone</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>Skills</th>
             <th>View Details</th>
           </tr>
         </thead>
@@ -22,10 +22,7 @@
           <tr *ngFor="let userdata of RealData">
             <!--use click to get the data-->
             <td>
-               {{userdata.user.id}}
-              </td>
-              <td>
-                {{userdata.user.firstName}}
+               {{userdata.user.firstName}}
               </td>
               <td>
                 {{userdata.user.lastName}}
@@ -35,6 +32,9 @@
               </td>
               <td>
                 {{userdata.user.pnumber}}
+              </td>
+              <td>
+                {{userdata.skills}}
               </td>
               <td>
                   <button class="btn btn-success" (click)='getUserData(userdata.user.id,userdata.user.pnumber,userdata.user.email,userdata.user.firstName,userdata.user.lastName,userdata.skills,userdata.resId,userdata.role)'>

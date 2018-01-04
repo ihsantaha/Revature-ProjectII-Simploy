@@ -70,17 +70,24 @@ export class ViewsubmittedjobsComponent implements OnInit {
     )
   }
 
-  delete(id) {
-    let json = {
-      jobId : id
-    };
-    this.httpClient.post('http://localhost:8088/Job/delete', json ).subscribe(
-      (data: any[]) => {
-        console.log('job deleted');
-        this.loginService.login(this.user.email, this.user.password);
-        window.location.reload();
+  delete(w) {
+let skillw: JobTable[] = new Array<JobTable>();
+    skillw = (this.tableHold.splice(w, 1));
+    console.log(skillw);
+
+    const req = this.httpClient.post("http://localhost:8088/Job/delete",
+    {
+      "jobId" : skillw[0].jobId
+    }
+    )
+      .subscribe(
+      (res: JobTable) => {
+        console.log("deleted " + res.jobId);
+      },
+      err => {
+        console.log("Error occured");
       }
-    );
+      );
   }
 
 }
