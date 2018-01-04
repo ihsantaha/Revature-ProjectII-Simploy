@@ -30,7 +30,7 @@
             </tr>
             <tr>
               <td><strong>Password:</strong></td>
-              <td>{{user.password}}</td>
+              <td>**********</td>
             </tr>
             <tr>
               <td><strong>Phone:</strong></td>
@@ -85,21 +85,6 @@
                 Please enter your first name
             </span>
           <br>
-          <label for name="phonenumber">Phone Number</label>
-          <input 
-              class="form-control"
-              type="number"
-              name="phonenumber"
-              [(ngModel)]="phonenumber"
-              ngModel 
-              required
-              #phoneField="ngModel">
-              <span 
-                  class="help-block invalidInput" 
-                  *ngIf="!phoneField.valid && profileF.submitted">
-                  Please enter a valid phonenumber
-              </span>
-          <br>
           <label>Password</label>
           <input 
             class="form-control"  
@@ -114,6 +99,21 @@
                 *ngIf="!passwordField.valid && profileF.submitted">
                 Please enter a valid password
             </span>
+          <br>
+          <label for name="phonenumber">Phone Number</label>
+          <input 
+              class="form-control"
+              type="number"
+              name="phonenumber"
+              [(ngModel)]="phonenumber"
+              ngModel 
+              required
+              #phoneField="ngModel">
+              <span 
+                  class="help-block invalidInput" 
+                  *ngIf="!phoneField.valid && profileF.submitted">
+                  Please enter a valid phonenumber
+              </span>
           <br>
 
           <button class="btn btn-success" type="submit">Update</button>
