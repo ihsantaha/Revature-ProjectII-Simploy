@@ -99,36 +99,42 @@ export class RegisterComponent implements OnInit {
         password: this.user.password,
         role: this.role
       };
-      let user:User;
       console.log(json);
       this.httpClient.post('http://localhost:8088/User/', json).subscribe(
         (data: User) => {
           if (data==null)
           this.validInput = false;
-        else
+          else
           this.validInput = true;
-
+          console.log("this is data");
+          console.log(data);
           localStorage.setItem('user', JSON.stringify(data));
-          data=user;
-          this.httpClient.post('http://localhost:8088/User/',
+          this.user=data;
+          console.log("this is user");
+          console.log(this.user);
+          if(this.user.role==0){
+
+          this.httpClient.post('http://localhost:8088/Resume/',
           {
             "description": "",
             "user": {
-                "id": user.id
+                "id": this.user.id
             }
             
         }
         
-        ).subscribe(
-            (data: ResumeOracle) => {
-              localStorage.setItem('resume', JSON.stringify(data));
+        ).subscribe(  
+            (data1: ResumeOracle) => {
+              console.log("this is resume");
+              console.log(data1);
+              localStorage.setItem('resume', JSON.stringify(data1));
               this.router.navigate(['/profile']);
             }
-          );
+          );}
 
         }
       );
-  
+    
   
   
     }
