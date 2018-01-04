@@ -79,7 +79,7 @@ export class ViewsubmittedjobsComponent implements OnInit {
         console.log('job deleted');
         //this.loginService.login(this.user.email, this.user.password);
         this.getTableData();
-        //window.location.reload();
+        window.location.reload();
       }
     );
   }
