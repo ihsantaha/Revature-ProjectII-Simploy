@@ -28,14 +28,15 @@ export class ProfileComponent implements OnInit {
       let EMAIL = e.target.elements[0].value;
       let FIRSTNAME = e.target.elements[1].value;
       let LASTNAME = e.target.elements[2].value;
-      let PASSWORD = e.target.elements[4].value;
-      let PNUMBER = e.target.elements[3].value;
+      let PASSWORD = e.target.elements[3].value;
+      let PNUMBER = e.target.elements[4].value;
 
       let json = {
         firstName: FIRSTNAME,
         lastName: LASTNAME,
         email: EMAIL,
-        pnumber: PNUMBER,
+        //pnumber: PNUMBER,
+        pnumber:  '(' + PNUMBER.substring(0, 3) + ') ' + PNUMBER.substring(3, 6) + '-' + PNUMBER.substring(6, 10),
         password: PASSWORD,
         role: this.user.role,
         id: this.user.id
