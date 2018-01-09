@@ -25,7 +25,7 @@ export class RegisterComponent implements OnInit {
   role: number;
 
   confirmpass: string = '';
-  roles: string[] = ['Employee', 'Employer'];
+  roles: string[] = ['Job Seeker', 'Employer'];
   
   validInput: boolean;
   validNumber: boolean;
@@ -54,7 +54,7 @@ export class RegisterComponent implements OnInit {
 
  register() {
 
-    if (this.registerForm.form.value.role == 'Employee')
+    if (this.registerForm.form.value.role == 'Job Seeker')
       this.role = 0;
     else
       this.role = 1;
@@ -128,9 +128,10 @@ export class RegisterComponent implements OnInit {
               console.log("this is resume");
               console.log(data1);
               localStorage.setItem('resume', JSON.stringify(data1));
-              this.router.navigate(['/profile']);
+              this.loginService.login(this.user.email, this.user.password);
             }
           );}
+          this.loginService.login(this.user.email, this.user.password);
 
         }
       );

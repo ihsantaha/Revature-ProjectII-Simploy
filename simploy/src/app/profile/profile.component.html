@@ -48,7 +48,8 @@
           ngModel 
           required
           email 
-          #emailField="ngModel">
+          #emailField="ngModel"
+          >
           <span 
             class="help-block invalidInput" 
             *ngIf="!emailField.valid && profileF.submitted">
@@ -63,7 +64,8 @@
             [(ngModel)]="firstname"
             ngModel
             required
-            #firstnameField="ngModel">
+            #firstnameField="ngModel"
+            >
             <span 
                 class="help-block invalidInput" 
                 *ngIf="!firstnameField.valid && profileF.submitted">
@@ -78,7 +80,8 @@
             [(ngModel)]="lastname"
             ngModel
             required
-            #lastnameField="ngModel">
+            #lastnameField="ngModel"
+            >
             <span 
                 class="help-block invalidInput" 
                 *ngIf="!lastnameField.valid && profileF.submitted">

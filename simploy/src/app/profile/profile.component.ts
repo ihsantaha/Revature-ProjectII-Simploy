@@ -13,11 +13,14 @@ export class ProfileComponent implements OnInit {
   validInput: Boolean;
 
   user: User = JSON.parse(localStorage.getItem('user'));
+  email:string=this.user.email;
+  firstname:string=this.user.firstName;
+  lastname:string=this.user.lastName;
+  
 
   constructor(private httpClient: HttpClient) { }
 
   ngOnInit() {
-    console.log(this.user);
   }
 
   updateUser(e) {
@@ -44,6 +47,7 @@ export class ProfileComponent implements OnInit {
       console.log(JSON.stringify(json));
       this.httpClient.post('http://localhost:8088/User/update', json).subscribe(
         (data: any) => {
+          localStorage.removeItem("user");
           localStorage.setItem('user', JSON.stringify(data));
           this.user = data;
         }
